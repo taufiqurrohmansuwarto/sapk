@@ -1,7 +1,6 @@
 import { Button, Group, Paper, Stack, Text, Title } from "@mantine/core";
 import { Col, Divider, Row, Space } from "antd";
 import { getProviders, signIn } from "next-auth/react";
-import Link from "next/link";
 import { Login } from "tabler-icons-react";
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
@@ -18,7 +17,6 @@ export default function SignIn({ providers }) {
             <Col>
                 <Paper p="xl" shadow="xl" style={{ width: 400 }} withBorder>
                     <Group position="apart">
-                        <img src="pemprov.png" alt="" style={{ width: 30 }} />
                         <img src="logobkd.jpg" alt="" style={{ width: 50 }} />
                     </Group>
                     <Group position="center">
@@ -58,7 +56,7 @@ export default function SignIn({ providers }) {
                         <Divider />
                     </Group>
                     <Text align="center" size="xs">
-                        @ Copyright BKD Provinsi Jawa Timur 2022
+                        2022 Sub Bidang Pengolahan Data
                     </Text>
                     <Text align="center" size="xs"></Text>
                 </Paper>

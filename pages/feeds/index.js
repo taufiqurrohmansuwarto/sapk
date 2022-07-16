@@ -1,20 +1,24 @@
 import { DownloadOutlined } from "@ant-design/icons";
+import { parsePhoneNumber } from "awesome-phonenumber";
 import { useDebouncedValue } from "@mantine/hooks";
 import {
+    Alert,
     Button,
     Card,
-    Divider,
     Descriptions,
+    Divider,
+    Form,
     Input,
     message,
     Skeleton,
-    Space,
-    Form
+    Space
 } from "antd";
 import FileSaver from "file-saver";
 import { isEmpty } from "lodash";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { StringDiff } from "react-string-diff";
+import ReactWhatsapp from "react-whatsapp";
 import {
     filePembetulanNama,
     informasiPembetulanNama
@@ -48,7 +52,20 @@ const DataUser = ({ data }) => {
 
         return (
             <>
-                <Descriptions title="User Info">
+                <Descriptions title="Informasi Pegawai SAPK">
+                    <Descriptions.Item label="Nama">
+                        {data?.nama_sapk}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="NIP Baru SAPK">
+                        {data?.nip_sapk}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Tanggal Lahir SAPK">
+                        {data?.tanggal_lahir_sapk}
+                    </Descriptions.Item>
+                </Descriptions>
+
+                <Divider />
+                <Descriptions title="Informasi Pegawai E-Master">
                     <Descriptions.Item label="Nama">
                         {data?.nama}
                     </Descriptions.Item>
@@ -56,7 +73,7 @@ const DataUser = ({ data }) => {
                         {data?.nip}
                     </Descriptions.Item>
                     <Descriptions.Item label="Tanggal Lahir">
-                        {data?.tanggal_lahir}
+                        {data?.tanggal_lahir?.replaceAll("/", "-")}
                     </Descriptions.Item>
                     <Descriptions.Item label="TMT CPNS">
                         {data?.tmt_pangkat_cpns}
@@ -68,15 +85,54 @@ const DataUser = ({ data }) => {
                         {data?.no_hp}
                     </Descriptions.Item>
                 </Descriptions>
-                <Button
-                    type="primary"
-                    loading={loading}
-                    disabled={loading}
-                    onClick={downloadHasil}
-                    icon={<DownloadOutlined />}
-                >
-                    Unduh File Pendukung
-                </Button>
+                <Divider />
+                <Alert
+                    description="Perbandingan nama, jika nama berwarna hitam artinya tidak masalah atau sama. Jika ada huruf berwarna hijau maka ada penambahan, jika berwarna merah ada pengurangan huruf"
+                    message="Perhatian"
+                    type="warning"
+                    showIcon
+                    style={{ marginBottom: 10 }}
+                />
+                <Descriptions title="Hasil Komparasi">
+                    <Descriptions.Item label="Nama">
+                        <StringDiff
+                            newValue={data?.nama}
+                            oldValue={data?.nama_sapk}
+                        />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="NIP">
+                        <StringDiff
+                            newValue={data?.nip}
+                            oldValue={data?.nip_sapk}
+                        />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Tanggal Lahir">
+                        <StringDiff
+                            newValue={data?.tanggal_lahir?.replaceAll("/", "-")}
+                            oldValue={data?.tanggal_lahir_sapk}
+                        />
+                    </Descriptions.Item>
+                </Descriptions>
+                <Space>
+                    <ReactWhatsapp
+                        number={`${parsePhoneNumber(
+                            data?.no_hp,
+                            "ID"
+                        ).getNumber()}`}
+                        message="Hallo kami dari BKD Provinsi Jawa Timur"
+                    >
+                        Call Pasien
+                    </ReactWhatsapp>
+                    <Button
+                        type="primary"
+                        loading={loading}
+                        disabled={loading}
+                        onClick={downloadHasil}
+                        icon={<DownloadOutlined />}
+                    >
+                        Unduh File Pendukung
+                    </Button>
+                </Space>
             </>
         );
     }
