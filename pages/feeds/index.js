@@ -34,7 +34,10 @@ const DataUser = ({ data }) => {
                     message.warn("isi nip nya bos");
                 } else {
                     const result = await filePembetulanNama(data?.nip);
-                    await FileSaver.saveAs(result);
+                    await FileSaver.saveAs(
+                        result,
+                        `${data?.nip}_${data?.nama}.zip`
+                    );
                 }
                 setLoading(false);
             } catch (error) {
