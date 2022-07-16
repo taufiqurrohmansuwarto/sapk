@@ -1,22 +1,17 @@
 import {
     FileOutlined,
-    InteractionOutlined,
     LogoutOutlined,
     ReadOutlined,
     RestOutlined,
-    UserOutlined,
     VerifiedOutlined
 } from "@ant-design/icons";
-import { Avatar, Dropdown, Menu, Space, Tooltip } from "antd";
+import { Avatar, Dropdown, Menu, Space } from "antd";
 import { uniqBy } from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import routes from "../routes/routes";
-import BadgeMail from "./BadgeMail";
-import BadgeNotificationForum from "./BadgeNotificationForum";
-import BadgeNotifications from "./BadgeNotifications";
 
 const ProLayout = dynamic(
     () => import("@ant-design/pro-layout").then((mod) => mod?.ProLayout),
@@ -35,11 +30,8 @@ const menuItemRender = (options, element) => {
     );
 };
 
-const menuUser = (gotoAccount) => (
+const menuUser = () => (
     <Menu>
-        <Menu.Item key="account" onClick={gotoAccount} icon={<UserOutlined />}>
-            Account
-        </Menu.Item>
         <Menu.Item key="logout" onClick={signOut} icon={<LogoutOutlined />}>
             Logout
         </Menu.Item>
@@ -47,31 +39,9 @@ const menuUser = (gotoAccount) => (
 );
 
 const rightContentRender = (user) => {
-    const router = useRouter();
-
-    const gotoNotificationPage = () => {
-        router.push(`/notifications/feedbacks`);
-    };
-
-    const gotoNotificationDiscussions = () => {
-        router.push(`/notifications/discussions`);
-    };
-
-    const gotoAccount = () => {
-        router.push(`/account/${user?.id}`);
-    };
-
-    const goMails = () => {
-        router.push("/mails/inbox");
-    };
-
-    const gotoAktivitas = () => {
-        router.push("/activities");
-    };
-
     return (
         <Space size="large">
-            <Dropdown overlay={menuUser(gotoAccount)}>
+            <Dropdown overlay={menuUser()}>
                 <Space align="center">
                     <Avatar
                         // shape="square"
@@ -132,13 +102,7 @@ const changeRoutes = (user) => {
             }
         ];
 
-        const masterFasilitatorRotes = [
-            {
-                path: "/fasilitator-master/sapk/dashboard",
-                name: " SAPK",
-                icon: <FileOutlined />
-            }
-        ];
+        const masterFasilitatorRotes = [];
 
         const adminRoutes = [
             {
@@ -195,7 +159,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
                     }
                 }
             }}
-            title={"SIASN BKD"}
+            title={"Percepatan"}
             fixedHeader
             selectedKeys={[active]}
             menuItemRender={menuItemRender}

@@ -8,7 +8,6 @@ import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import "semantic-ui-css/semantic.min.css";
-import Loading from "../src/components/Loading";
 import "./index.css";
 
 export default function MyApp({
@@ -68,7 +67,7 @@ function Auth({ children, roles, groups, isAdmin }) {
     const currentUserId = data?.user?.id;
 
     if (status === "loading") {
-        return <Loading />;
+        return <div>loading...</div>;
     }
 
     if (
