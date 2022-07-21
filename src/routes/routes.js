@@ -1,4 +1,4 @@
-import { IeOutlined, ShareAltOutlined } from "@ant-design/icons";
+import { BugOutlined, IeOutlined, ShareAltOutlined } from "@ant-design/icons";
 
 export default {
     routes: [
@@ -11,6 +11,11 @@ export default {
             path: "/daftar",
             name: " Daftar Pegawai",
             icon: <IeOutlined />
+        },
+        {
+            path: "/siasn-skk",
+            name: " Daftar Usulan SKK",
+            icon: <BugOutlined />
         }
     ]
 };

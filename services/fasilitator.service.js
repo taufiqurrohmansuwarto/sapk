@@ -68,3 +68,13 @@ export const updateData = ({ id, data }) => {
         .patch(`/request-pembetulan-nama/${id}`, data)
         .then((res) => res?.data);
 };
+
+// siasn layanan
+
+export const getListLayananSKK = () => {
+    return fetcher.get(`/skk`).then((res) => res?.data);
+};
+
+export const getListLayananSKKById = (id) => {
+    return fetcher.get(`/skk/${id}`).then((res) => res?.data);
+};

@@ -1,0 +1,142 @@
+[
+    {
+        "id": "1",
+        "nama": "Input Berkas"
+    },
+    {
+        "id": "2",
+        "nama": "Berkas Disimpan (Terverifikasi)"
+    },
+    {
+        "id": "3",
+        "nama": "Surat Usulan"
+    },
+    {
+        "id": "4",
+        "nama": "Approval Surat Usulan"
+    },
+    {
+        "id": "5",
+        "nama": "Perbaikan Dokumen"
+    },
+    {
+        "id": "6",
+        "nama": "Tidak Memenuhi Syarat"
+    },
+    {
+        "id": "7",
+        "nama": "Menunggu Cetak SK – Menyetujui"
+    },
+    {
+        "id": "8",
+        "nama": "Menunggu Cetak SK – Perbaikan Pertek"
+    },
+    {
+        "id": "9",
+        "nama": "Menunggu Cetak SK – Pembatalan Pertek"
+    },
+    {
+        "id": "10",
+        "nama": "Cetak SK"
+    },
+    {
+        "id": "11",
+        "nama": "Profil PNS telah diperbaharui"
+    },
+    {
+        "id": "12",
+        "nama": "Terima Usulan"
+    },
+    {
+        "id": "13",
+        "nama": "Validasi Usulan – Tidak Memenuhi Syarat"
+    },
+    {
+        "id": "14",
+        "nama": "Validasi Usulan – Perbaikan Dokumen"
+    },
+    {
+        "id": "15",
+        "nama": "Validasi Usulan – Disetujui"
+    },
+    {
+        "id": "16",
+        "nama": "Berkas Disetujui"
+    },
+    {
+        "id": "17",
+        "nama": "Menunggu Paraf – Paraf Pertek"
+    },
+    {
+        "id": "18",
+        "nama": "Menunggu Paraf – Gagal Paraf Pertek"
+    },
+    {
+        "id": "19",
+        "nama": "Sdh di paraf - Pertek"
+    },
+    {
+        "id": "20",
+        "nama": "Menunggu Tanda tangan- TTD Pertek"
+    },
+    {
+        "id": "21",
+        "nama": "Menunggu Tanda tangan- Gagal TTD Pertek"
+    },
+    {
+        "id": "22",
+        "nama": "Sdh di TTD - Pertek"
+    },
+    {
+        "id": "23",
+        "nama": "Surat Keluar"
+    },
+    {
+        "id": "24",
+        "nama": "Kirim Pertek Perbaikan"
+    },
+    {
+        "id": "25",
+        "nama": "Terima Usulan Penetapan – Pembatalan"
+    },
+    {
+        "id": "26",
+        "nama": "Pembatalan Pertek"
+    },
+    {
+        "id": "27",
+        "nama": "Menunggu SK – Paraf"
+    },
+    {
+        "id": "28",
+        "nama": "Setuju Paraf SK"
+    },
+    {
+        "id": "29",
+        "nama": "Tolak TTD SK"
+    },
+    {
+        "id": "30",
+        "nama": "Setuju TTD SK"
+    },
+    {
+        "id": "31",
+        "nama": "Telah Update di Profile PNS"
+    },
+    {
+        "id": "32",
+        "nama": "Pembuatan SK Berhasil"
+    },
+    {
+        "id": "33",
+        "nama": "Menunggu Layanan"
+    },
+    {
+        "id": "34",
+        "nama": "Perbaikan Dokumen - Menunggu Approval"
+    },
+    {
+        "id": "55",
+        "nama": "Approval Tingkat Provinsi"
+    }
+]
