@@ -4,7 +4,7 @@ export default {
     routes: [
         {
             path: "/feeds",
-            name: " Berbagi",
+            name: " Menu Tempur",
             icon: <ShareAltOutlined />
         }
     ]

@@ -82,3 +82,31 @@ module.exports.pembetulanNama = async (req, res) => {
         res.status(400).json({ code: 400, message: "Internal Server Error" });
     }
 };
+
+// add more endpoint and double check from sapk data utama
+module.exports.informasiPembetulanNama = async (req, res) => {
+    try {
+        const fetcher = req?.fetcher;
+        const { employeeNumber } = req?.query;
+        const result = await fetcher.get(
+            `/sapk/${employeeNumber}/perbaikan-nama`
+        );
+
+        const dataUtamaSapk = await fetcher.get(
+            `/sapk/${employeeNumber}/data-utama-sapk`
+        );
+        const dataSapk = dataUtamaSapk?.data;
+
+        const currentData = {
+            ...result?.data,
+            nama_sapk: dataSapk?.nama,
+            tanggal_lahir_sapk: dataSapk?.tglLahir,
+            nip_sapk: dataSapk?.nipBaru
+        };
+
+        res.json(currentData);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};

@@ -39,3 +39,9 @@ export const filePembetulanNama = (nip) => {
         })
         .then((res) => res?.data);
 };
+
+export const informasiPembetulanNama = (nip) => {
+    return fetcher
+        .get(`/pembetulan-nama/${nip}/information`)
+        .then((res) => res?.data);
+};
