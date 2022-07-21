@@ -45,3 +45,26 @@ export const informasiPembetulanNama = (nip) => {
         .get(`/pembetulan-nama/${nip}/information`)
         .then((res) => res?.data);
 };
+
+// list daftar pegawai
+export const listDaftarPegawai = () => {
+    return fetcher.get(`/request-pembetulan-nama`).then((res) => res?.data);
+};
+
+export const tambahkanData = (data) => {
+    return fetcher
+        .post(`/request-pembetulan-nama`, data)
+        .then((res) => res?.data);
+};
+
+export const hapusData = (id) => {
+    return fetcher
+        .delete(`/request-pembetulan-nama/${id}`)
+        .then((res) => res?.data);
+};
+
+export const updateData = ({ id, data }) => {
+    return fetcher
+        .patch(`/request-pembetulan-nama/${id}`, data)
+        .then((res) => res?.data);
+};

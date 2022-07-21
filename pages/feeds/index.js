@@ -10,21 +10,105 @@ import {
     Form,
     Input,
     message,
+    Modal,
     Skeleton,
     Space
 } from "antd";
 import FileSaver from "file-saver";
 import { isEmpty } from "lodash";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { StringDiff } from "react-string-diff";
 import ReactWhatsapp from "react-whatsapp";
 import {
     filePembetulanNama,
-    informasiPembetulanNama
+    informasiPembetulanNama,
+    tambahkanData
 } from "../../services/fasilitator.service";
 import Layout from "../../src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
+
+const TombolTambahkan = ({ data }) => {
+    const [visible, setVisible] = useState(false);
+    const { mutate: create, isLoading } = useMutation(
+        (data) => tambahkanData(data),
+        {
+            onError: (error) => {
+                alert(error?.response?.data?.message);
+                console.log(error);
+            },
+            onSuccess: () => {
+                message.success("hahaha");
+                setVisible(false);
+            }
+        }
+    );
+
+    const [form] = Form.useForm();
+
+    const handleCancel = () => setVisible(false);
+    const showModal = () => setVisible(true);
+
+    const handleTambahData = async () => {
+        // those properties are, nip, nama_master, nama_sapk, pembetulan
+        try {
+            const data = await form.validateFields();
+            const data_post = {
+                nama_master: data?.nama,
+                nip: data?.nip,
+                nama_sapk: data?.nama_sapk,
+                pembetulan: data?.pembetulan
+            };
+            create(data_post);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    return (
+        <div>
+            <Modal
+                visible={visible}
+                onCancel={handleCancel}
+                title="Form Pembetulan Nama"
+                centered
+                onOk={handleTambahData}
+                confirmLoading={isLoading}
+                destroyOnClose
+            >
+                <Form
+                    form={form}
+                    layout="vertical"
+                    initialValues={{ ...data, pembetulan: data?.nama }}
+                >
+                    <Form.Item name="nip" label="NIP">
+                        <Input readOnly />
+                    </Form.Item>
+                    <Form.Item name="nama" label="Nama Master">
+                        <Input readOnly />
+                    </Form.Item>
+                    <Form.Item name="nama_sapk" label="Nama SAPK">
+                        <Input readOnly />
+                    </Form.Item>
+                    <Form.Item
+                        help="Bisa diedit kalau sekiranya salah"
+                        name="pembetulan"
+                        label="Nama Seharusnya"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Nama Seharusnya harus diisi"
+                            }
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                </Form>
+            </Modal>
+            <Button onClick={showModal}>Tambahkan</Button>
+        </div>
+    );
+};
 
 const DataUser = ({ data }) => {
     if (isEmpty(data)) {
@@ -132,6 +216,7 @@ const DataUser = ({ data }) => {
                     >
                         Unduh File Pendukung
                     </Button>
+                    <TombolTambahkan data={data} />
                 </Space>
             </>
         );
@@ -175,8 +260,8 @@ const Feeds = () => {
 };
 
 Feeds.Auth = {
-    roles: ["USER", "FASILITATOR", "ADMIN"],
-    groups: ["PTTPK", "MASTER"]
+    roles: ["FASILITATOR", "ADMIN"],
+    groups: ["MASTER"]
 };
 
 Feeds.getLayout = function getLayout(page) {

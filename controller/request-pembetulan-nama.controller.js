@@ -4,10 +4,28 @@ const post = async (req, res) => {
     try {
         const data = req?.body;
         const { customId } = req?.user;
-        await prisma.request_perbaikan_nama.create({
-            data: { diusulkan_oleh: customId, ...data }
+
+        // before entri you must check first
+
+        const nip = data?.nip;
+
+        const result = await prisma.request_perbaikan_nama.findFirst({
+            where: {
+                nip
+            }
         });
-        res.json({ code: 200, message: "success" });
+
+        if (!result) {
+            await prisma.request_perbaikan_nama.create({
+                data: { diusulkan_oleh: customId, ...data }
+            });
+            res.json({ code: 200, message: "success" });
+        } else {
+            res.status(400).json({
+                code: 400,
+                message: `Pegawai sudah dientri oleh ${result?.diusulkan_oleh}`
+            });
+        }
     } catch (error) {
         console.log(error);
         res.json({ code: 400, message: "Internal Server Error" });
@@ -18,6 +36,9 @@ const index = async (req, res) => {
     try {
         // wkwkw gausha paging tot
         const result = await prisma.request_perbaikan_nama.findMany({
+            include: {
+                user: true
+            },
             where: {
                 diusulkan_oleh: req?.user?.customId
             },

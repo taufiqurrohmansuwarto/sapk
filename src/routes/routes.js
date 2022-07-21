@@ -1,11 +1,16 @@
-import { ShareAltOutlined } from "@ant-design/icons";
+import { IeOutlined, ShareAltOutlined } from "@ant-design/icons";
 
 export default {
     routes: [
         {
             path: "/feeds",
-            name: " Menu Tempur",
+            name: " Cari NIP",
             icon: <ShareAltOutlined />
+        },
+        {
+            path: "/daftar",
+            name: " Daftar Pegawai",
+            icon: <IeOutlined />
         }
     ]
 };
