@@ -3,8 +3,9 @@ import { StringDiff } from "react-string-diff";
 import Layout from "../../src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
 import { useQuery } from "react-query";
-import { Table, Tag } from "antd";
+import { Button, Table, Tag } from "antd";
 import moment from "moment";
+import { useRouter } from "next/router";
 
 const dataRefUsulan = require("../../utils/ref-usulan.json");
 
@@ -14,9 +15,15 @@ const statusUsulan = (id) => {
 };
 
 const SIASNSkk = () => {
+    const router = useRouter();
+
     const { data, isLoading } = useQuery(["data-skk"], () =>
         getListLayananSKK()
     );
+
+    const getDetail = (id) => {
+        router.push(`/siasn-skk/${id}/detail-layanan`);
+    };
 
     const columns = [
         { title: "NIP", dataIndex: "nip", key: "nip" },
@@ -61,13 +68,22 @@ const SIASNSkk = () => {
             render: (row) => (
                 <div>{moment(row?.tgl_usulan).format("DD-MM-YYYY")}</div>
             )
+        },
+        {
+            title: "Detail",
+            key: "detail",
+            render: (row) => {
+                return (
+                    <Button onClick={() => getDetail(row?.id)}>Detail</Button>
+                );
+            }
         }
     ];
 
     return (
         <PageContainer style={{ minHeight: "92vh" }}>
             <Table
-                dataSource={data}
+                dataSource={data?.data}
                 rowKey={(row) => row?.id}
                 loading={isLoading}
                 columns={columns}

@@ -14,7 +14,6 @@ export default function MyApp({
     Component,
     pageProps: { session, ...pageProps }
 }) {
-    // useScrollRestoration(router);
     const [queryClient] = useState(() => new QueryClient());
     const getLayout = Component.getLayout || ((page) => page);
 

@@ -19,9 +19,7 @@ function getBasePath() {
 }
 
 module.exports = withAntdLess({
-    experimental: {
-        scrollRestoration: true
-    },
+    experimental: {},
     basePath: "/sapk",
     publicRuntimeConfig: {
         basePath: getBasePath()
