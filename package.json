@@ -30,7 +30,7 @@
         "lodash": "^4.17.21",
         "minio": "^7.0.26",
         "next": "^12.1.6",
-        "next-auth": "^4.9.0",
+        "next-auth": "^4.10.2",
         "next-connect": "^0.12.2",
         "next-plugin-antd-less": "^1.8.0",
         "next-transpile-modules": "^9.0.0",
@@ -38,13 +38,12 @@
         "query-string": "^7.1.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-query": "^3.39.0",
+        "react-query": "^4.0.0",
         "react-string-diff": "^0.2.0",
         "react-whatsapp": "^0.3.0",
         "semantic-ui-css": "^2.4.1",
         "semantic-ui-react": "^2.1.2",
-        "tabler-icons-react": "^1.47.0",
-        "tree-flatter": "^1.0.2"
+        "tabler-icons-react": "^1.47.0"
     },
     "devDependencies": {
         "babel-plugin-import": "^1.13.3"
