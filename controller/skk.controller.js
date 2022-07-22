@@ -4,7 +4,6 @@ const index = async (req, res) => {
         const result = await fetcher.get(`/siasn/skk/usulan`);
         res.json(result?.data);
     } catch (error) {
-        console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
     }
 };
@@ -23,7 +22,6 @@ const indexById = async (req, res) => {
             res.json(null);
         }
     } catch (error) {
-        console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
     }
 };

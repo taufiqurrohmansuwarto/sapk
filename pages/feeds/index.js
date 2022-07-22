@@ -17,7 +17,7 @@ import {
 import FileSaver from "file-saver";
 import { isEmpty } from "lodash";
 import { useState } from "react";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { StringDiff } from "react-string-diff";
 import ReactWhatsapp from "react-whatsapp";
 import {

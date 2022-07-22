@@ -1,11 +1,11 @@
-import { getListLayananSKK } from "../../services/fasilitator.service";
-import { StringDiff } from "react-string-diff";
-import Layout from "../../src/components/Layout";
-import PageContainer from "../../src/components/PageContainer";
-import { useQuery } from "react-query";
 import { Button, Table, Tag } from "antd";
 import moment from "moment";
 import { useRouter } from "next/router";
+import { StringDiff } from "react-string-diff";
+import { getListLayananSKK } from "../../services/fasilitator.service";
+import Layout from "../../src/components/Layout";
+import PageContainer from "../../src/components/PageContainer";
+import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 
 const dataRefUsulan = require("../../utils/ref-usulan.json");
 
@@ -17,8 +17,12 @@ const statusUsulan = (id) => {
 const SIASNSkk = () => {
     const router = useRouter();
 
-    const { data, isLoading } = useQuery(["data-skk"], () =>
-        getListLayananSKK()
+    const { data, isLoading } = useQuery(
+        ["data-skk"],
+        () => getListLayananSKK(),
+        {
+            refetchOnWindowFocus: false
+        }
     );
 
     const getDetail = (id) => {
@@ -85,8 +89,8 @@ const SIASNSkk = () => {
             <Table
                 dataSource={data?.data}
                 rowKey={(row) => row?.id}
-                loading={isLoading}
                 columns={columns}
+                loading={isLoading}
             />
         </PageContainer>
     );
@@ -99,6 +103,18 @@ SIASNSkk.Auth = {
 
 SIASNSkk.getLayout = function getLayout(page) {
     return <Layout>{page}</Layout>;
+};
+
+export const getServerSideProps = async (ctx) => {
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery(["data-skk"], () => getListLayananSKK());
+
+    return {
+        props: {
+            dehydrate: dehydrate(queryClient)
+        }
+    };
 };
 
 export default SIASNSkk;

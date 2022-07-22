@@ -2,10 +2,9 @@ import {
     hapusData,
     listDaftarPegawai
 } from "../../services/fasilitator.service";
-import { useMutation } from "react-query";
 import Layout from "../../src/components/Layout";
 import { Button, message } from "antd";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import PageContainer from "../../src/components/PageContainer";
 import { Table } from "antd";
 import moment from "moment";

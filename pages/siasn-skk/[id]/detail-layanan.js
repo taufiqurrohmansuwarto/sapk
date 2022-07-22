@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getListLayananSKKById } from "../../../services/fasilitator.service";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
@@ -30,6 +30,16 @@ DetailLayananSKK.Auth = {
 
 DetailLayananSKK.getLayout = function getLayout(page) {
     return <Layout>{page}</Layout>;
+};
+
+export const getServerSideProps = async (ctx) => {
+    const id = ctx?.params?.id;
+
+    return {
+        props: {
+            data: null
+        }
+    };
 };
 
 export default DetailLayananSKK;

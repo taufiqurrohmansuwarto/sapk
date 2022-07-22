@@ -6,7 +6,11 @@ import "antd/dist/antd.css";
 import id from "antd/lib/locale/id_ID";
 import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { useState } from "react";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import {
+    Hydrate,
+    QueryClient,
+    QueryClientProvider
+} from "@tanstack/react-query";
 import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 
