@@ -224,13 +224,13 @@ const DataUser = ({ data }) => {
 };
 
 const Feeds = () => {
-    const [nip, setNip] = useState();
-    const [debounceValue] = useDebouncedValue(nip, 500);
-    const { data, isLoading, refetch } = useQuery(
+    const [nip, setNip] = useState("");
+    const [debounceValue] = useDebouncedValue(nip, 1000);
+    const { data, isFetching } = useQuery(
         ["user-perbaikan-nama", debounceValue],
         () => informasiPembetulanNama(debounceValue),
         {
-            enabled: !!debounceValue
+            enabled: Boolean(debounceValue)
         }
     );
 
@@ -250,7 +250,7 @@ const Feeds = () => {
                         />
                     </Form.Item>
                     <Divider />
-                    <Skeleton loading={isLoading}>
+                    <Skeleton loading={isFetching}>
                         <DataUser data={data} />
                     </Skeleton>
                 </Card>
