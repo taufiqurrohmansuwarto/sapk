@@ -81,8 +81,13 @@ export const getListLayananSKKById = (id) => {
 
 // motherfucker sapk
 export const rwJabatanSapk = (nip) => {
-    console.log(nip);
     return fetcher
         .get(`/data-sapk/${nip}/data-rw-jabatan`)
+        .then((res) => res?.data);
+};
+
+export const masterRwJabatan = (nip) => {
+    return fetcher
+        .get(`/data-master/${nip}/data-rw-jabatan`)
         .then((res) => res?.data);
 };

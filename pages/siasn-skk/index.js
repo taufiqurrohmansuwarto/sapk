@@ -105,16 +105,4 @@ SIASNSkk.getLayout = function getLayout(page) {
     return <Layout>{page}</Layout>;
 };
 
-export const getServerSideProps = async (ctx) => {
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery(["data-skk"], () => getListLayananSKK());
-
-    return {
-        props: {
-            dehydrate: dehydrate(queryClient)
-        }
-    };
-};
-
 export default SIASNSkk;

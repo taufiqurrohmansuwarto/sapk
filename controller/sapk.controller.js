@@ -1,4 +1,5 @@
 import axios from "axios";
+import { orderBy } from "lodash";
 const https = require("https");
 const AdmZip = require("adm-zip");
 const stream = require("stream");
@@ -116,7 +117,17 @@ module.exports.rwJabatanSapk = async (req, res) => {
         const fetcher = req?.fetcher;
         const { nip } = req?.query;
         const result = await fetcher.get(`/sapk/${nip}/data-rw-jabatan-sapk`);
-        res.json(result?.data);
+        const sorting = orderBy(
+            result?.data,
+            [
+                (obj) => {
+                    const [day, month, year] = obj?.tmtJabatan.split("-");
+                    return new Date(year, month - 1, day);
+                }
+            ],
+            ["asc"]
+        );
+        res.json(sorting);
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
