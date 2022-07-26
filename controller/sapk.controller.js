@@ -110,3 +110,15 @@ module.exports.informasiPembetulanNama = async (req, res) => {
         res.status(400).json({ code: 400, message: "Internal Server Error" });
     }
 };
+
+module.exports.rwJabatanSapk = async (req, res) => {
+    try {
+        const fetcher = req?.fetcher;
+        const { nip } = req?.query;
+        const result = await fetcher.get(`/sapk/${nip}/data-rw-jabatan-sapk`);
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
