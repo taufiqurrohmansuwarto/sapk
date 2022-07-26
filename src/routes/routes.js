@@ -1,4 +1,9 @@
-import { BugOutlined, IeOutlined, ShareAltOutlined } from "@ant-design/icons";
+import {
+    BugOutlined,
+    IeOutlined,
+    ShareAltOutlined,
+    UpOutlined
+} from "@ant-design/icons";
 
 export default {
     routes: [
@@ -16,6 +21,11 @@ export default {
             path: "/siasn-skk",
             name: " Daftar Usulan SKK",
             icon: <BugOutlined />
+        },
+        {
+            path: "/data-sapk",
+            name: " Data SAPK",
+            icon: <UpOutlined />
         }
     ]
 };

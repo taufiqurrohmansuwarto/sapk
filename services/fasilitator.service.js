@@ -78,3 +78,11 @@ export const getListLayananSKK = () => {
 export const getListLayananSKKById = (id) => {
     return fetcher.get(`/skk/${id}`).then((res) => res?.data);
 };
+
+// motherfucker sapk
+export const rwJabatanSapk = (nip) => {
+    console.log(nip);
+    return fetcher
+        .get(`/data-sapk/${nip}/data-rw-jabatan`)
+        .then((res) => res?.data);
+};

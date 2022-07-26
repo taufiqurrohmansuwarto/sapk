@@ -116,7 +116,7 @@ module.exports.rwJabatanSapk = async (req, res) => {
         const fetcher = req?.fetcher;
         const { nip } = req?.query;
         const result = await fetcher.get(`/sapk/${nip}/data-rw-jabatan-sapk`);
-        res.json(result);
+        res.json(result?.data);
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
