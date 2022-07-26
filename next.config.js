@@ -20,6 +20,7 @@ function getBasePath() {
 
 module.exports = withAntdLess({
     experimental: {},
+    poweredByHeader: false,
     basePath: "/sapk",
     publicRuntimeConfig: {
         basePath: getBasePath()
@@ -47,7 +48,31 @@ module.exports = withAntdLess({
 
     // Other Config Here...
 
-    webpack(config) {
-        return config;
+    webpack(config, { buildId, dev, isServer, defaultLoaders, webpack }) {
+        if (isProd) {
+            config.module.rules[3].oneOf.forEach((moduleLoader, i) => {
+                Array.isArray(moduleLoader.use) &&
+                    moduleLoader.use.forEach((l) => {
+                        if (
+                            l.loader.includes("\\css-loader") &&
+                            !l.loader.includes("postcss-loader")
+                        ) {
+                            const { getLocalIdent, ...others } =
+                                l.options.modules;
+
+                            l.options = {
+                                ...l.options,
+                                modules: {
+                                    ...others,
+                                    localIdentName: "[hash:base64:6]"
+                                }
+                            };
+                        }
+                    });
+            });
+            return config;
+        } else {
+            return config;
+        }
     }
 });
