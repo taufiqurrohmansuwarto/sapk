@@ -18,6 +18,20 @@ function getBasePath() {
     return basePath;
 }
 
+const hashOnlyIdent = (context, _, exportName) =>
+    loaderUtils
+        .getHashDigest(
+            Buffer.from(
+                `filePath:${path
+                    .relative(context.rootContext, context.resourcePath)
+                    .replace(/\\+/g, "/")}#className:${exportName}`
+            ),
+            "md4",
+            "base64",
+            6
+        )
+        .replace(/^(-?\d|--)/, "_$1");
+
 module.exports = withAntdLess({
     experimental: {},
     poweredByHeader: false,
