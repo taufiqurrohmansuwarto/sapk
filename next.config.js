@@ -49,30 +49,26 @@ module.exports = withAntdLess({
     // Other Config Here...
 
     webpack(config, { buildId, dev, isServer, defaultLoaders, webpack }) {
-        if (isProd) {
-            config.module.rules[3].oneOf.forEach((moduleLoader, i) => {
-                Array.isArray(moduleLoader.use) &&
-                    moduleLoader.use.forEach((l) => {
-                        if (
-                            l.loader.includes("\\css-loader") &&
-                            !l.loader.includes("postcss-loader")
-                        ) {
-                            const { getLocalIdent, ...others } =
-                                l.options.modules;
+        const rules = config.module.rules
+            .find((rule) => typeof rule.oneOf === "object")
+            .oneOf.filter((rule) => Array.isArray(rule.use));
 
-                            l.options = {
-                                ...l.options,
-                                modules: {
-                                    ...others,
-                                    localIdentName: "[hash:base64:6]"
-                                }
-                            };
-                        }
-                    });
+        if (isProd)
+            rules.forEach((rule) => {
+                rule.use.forEach((moduleLoader) => {
+                    if (
+                        moduleLoader.loader?.includes("css-loader") &&
+                        !moduleLoader.loader?.includes("postcss-loader")
+                    )
+                        moduleLoader.options.modules.getLocalIdent =
+                            hashOnlyIdent;
+
+                    // earlier below statements were sufficient:
+                    // delete moduleLoader.options.modules.getLocalIdent;
+                    // moduleLoader.options.modules.localIdentName = '[hash:base64:6]';
+                });
             });
-            return config;
-        } else {
-            return config;
-        }
+
+        return config;
     }
 });
