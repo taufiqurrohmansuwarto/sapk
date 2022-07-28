@@ -1,5 +1,5 @@
 import axios from "axios";
-import { orderBy } from "lodash";
+import { eq, orderBy } from "lodash";
 const https = require("https");
 const AdmZip = require("adm-zip");
 const stream = require("stream");
@@ -128,6 +128,41 @@ module.exports.rwJabatanSapk = async (req, res) => {
             ["asc"]
         );
         res.json(sorting);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+
+module.exports.referenceUnor = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const result = await fetcher.get("/sapk/reference/unor");
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+
+module.exports.referenceJabatanFungsional = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const result = await fetcher.get("/sapk/reference/jabatan-fungsional");
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(
+            "/sapk/reference/jabatan-fungsional-umum"
+        );
+        res.json(result);
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
