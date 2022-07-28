@@ -1,12 +1,34 @@
+import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
-import { Divider, Row, Col, Card, Table, Button } from "antd";
-import { useRouter } from "next/router";
 import {
+    Divider,
+    Row,
+    Col,
+    Card,
+    Table,
+    Button,
+    Modal,
+    Skeleton,
+    Form,
+    Input,
+    DatePicker,
+    Select,
+    TreeSelect
+} from "antd";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import {
+    informasiPembetulanNama,
     masterRwJabatan,
+    refJabatanFungsional,
+    refJabatanFungsionalUmum,
+    refUnor,
     rwJabatanSapk
 } from "../../../services/fasilitator.service";
+import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
+import { transformDate } from "../../../src/utils/util";
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -86,7 +108,157 @@ const TableRiwayatJabatanSAPK = ({ data, loading }) => {
     );
 };
 
-const TableRiwayatMaster = ({ data, loading }) => {
+const DialogFormMaster = ({
+    visible,
+    handleCancel,
+    userData,
+    id,
+    unor,
+    fungsional,
+    fungsionalUmum
+}) => {
+    const [form] = Form.useForm();
+
+    useEffect(() => {}, [userData]);
+
+    const format = "DD-MM-YYYY";
+
+    return (
+        <Modal
+            centered
+            title="Transfer Data"
+            visible={visible}
+            destroyOnClose
+            width={1200}
+            onCancel={handleCancel}
+        >
+            <div>
+                {userData?.jenis_jabatan} : {userData?.jabatan}
+            </div>
+            <Divider />
+            <Form
+                form={form}
+                initialValues={{
+                    id,
+                    tmt_jabatan: moment(userData?.tmt_jabatan, format),
+                    tgl_sk: moment(userData?.tgl_sk, format),
+                    nomor_sk: userData?.nomor_sk,
+                    jenis_jabatan: userData?.jenis_jabatan
+                }}
+                layout="vertical"
+            >
+                <Form.Item name="id" label="ID Pegawai SAPK">
+                    <Input readOnly />
+                </Form.Item>
+                <Form.Item name="jenis_jabatan" label="Jenis Jabatan">
+                    <Select
+                        onChange={() => {
+                            form.setFieldsValue({
+                                fungsional_id: null,
+                                fungsional_umum_id: null
+                            });
+                        }}
+                    >
+                        <Select.Option value="Pelaksana">
+                            Pelaksana
+                        </Select.Option>
+                        <Select.Option value="Fungsional">
+                            Fungsional
+                        </Select.Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item name="unor_id" label="unor id">
+                    <TreeSelect
+                        showSearch
+                        treeNodeFilterProp="title"
+                        treeData={unor}
+                    />
+                </Form.Item>
+                <Form.Item
+                    noStyle
+                    shouldUpdate={(prevValues, currentValues) =>
+                        prevValues.jenis_jabatan !== currentValues.jenis_jabatan
+                    }
+                >
+                    {({ getFieldValue }) =>
+                        getFieldValue("jenis_jabatan") === "Fungsional" ? (
+                            <Form.Item
+                                name="fungsional_id"
+                                label="Fungsional"
+                                rules={[{ required: true }]}
+                            >
+                                <Select optionFilterProp="nama" showSearch>
+                                    {fungsional?.map((f) => (
+                                        <Select.Option
+                                            key={f?.id}
+                                            value={f?.id}
+                                            nama={f?.nama}
+                                        >
+                                            {f?.nama}
+                                        </Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        ) : (
+                            <Form.Item
+                                name="fungsional_umum_id"
+                                label="Pelaksana"
+                                rules={[{ required: true }]}
+                            >
+                                <Select
+                                    // listItemHeight={10}
+                                    // listHeight={80}
+                                    optionFilterProp="nama"
+                                    showSearch
+                                >
+                                    {fungsionalUmum?.map((f) => (
+                                        <Select.Option
+                                            key={f?.id}
+                                            value={f?.id}
+                                            nama={f?.nama}
+                                        >
+                                            {f?.nama}
+                                        </Select.Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        )
+                    }
+                </Form.Item>
+                <Form.Item name="nomor_sk" label="Nomor SK">
+                    <Input readOnly />
+                </Form.Item>
+                <Form.Item name="tmt_jabatan" label="TMT Jabatan">
+                    <DatePicker format={format} />
+                </Form.Item>
+                <Form.Item name="tgl_sk" label="Tanggal SK">
+                    <DatePicker format={format} />
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+};
+
+const TableRiwayatMaster = ({
+    data,
+    loading,
+    id,
+    unor,
+    fungsional,
+    fungsionalUmum
+}) => {
+    const [visible, setVisible] = useState(false);
+    const [userData, setUserData] = useState(null);
+
+    const handleOpen = (user) => {
+        setUserData(user);
+        setVisible(true);
+    };
+    const handleCancel = () => {
+        setUserData(null);
+        setVisible(false);
+    };
+
     const columns = [
         {
             title: "Jenis",
@@ -98,7 +270,6 @@ const TableRiwayatMaster = ({ data, loading }) => {
             key: "jabatan",
             dataIndex: "jabatan"
         },
-
         {
             title: "Unor",
             key: "unor",
@@ -113,7 +284,9 @@ const TableRiwayatMaster = ({ data, loading }) => {
             dataIndex: "aksi",
             render: (_, row) => {
                 if (row?.jenis_jabatan !== "Struktural") {
-                    return <Button>Trans</Button>;
+                    return (
+                        <Button onClick={() => handleOpen(row)}>Trans</Button>
+                    );
                 } else {
                     return null;
                 }
@@ -122,14 +295,26 @@ const TableRiwayatMaster = ({ data, loading }) => {
     ];
 
     return (
-        <Table
-            size="small"
-            dataSource={data}
-            pagination={false}
-            loading={loading}
-            rowKey={(row) => row?.id}
-            columns={columns}
-        />
+        <>
+            <DialogFormMaster
+                visible={visible}
+                handleOpen={handleOpen}
+                unor={unor}
+                fungsional={fungsional}
+                fungsionalUmum={fungsionalUmum}
+                handleCancel={handleCancel}
+                userData={userData}
+                id={id}
+            />
+            <Table
+                size="small"
+                dataSource={data}
+                pagination={false}
+                loading={loading}
+                rowKey={(row) => row?.id}
+                columns={columns}
+            />
+        </>
     );
 };
 
@@ -146,30 +331,66 @@ const RiwayatJabatan = () => {
         () => masterRwJabatan(router?.query?.nip)
     );
 
+    const { data: currentUser, isLoading: currentUserLoading } = useQuery(
+        ["user-perbaikan-nama", router?.query?.nip],
+        () => informasiPembetulanNama(router?.query?.nip)
+    );
+
+    const { data: dataUnor } = useQuery(["ref-unor"], () => refUnor(), {
+        refetchOnWindowFocus: false
+    });
+    const { data: dataJabatanFungsional } = useQuery(
+        ["ref-fungsional"],
+        () => refJabatanFungsional(),
+        {
+            refetchOnWindowFocus: false
+        }
+    );
+    const { data: dataJabatanFungsionalUmum } = useQuery(
+        ["ref-fungsional-umum"],
+        () => refJabatanFungsionalUmum(),
+        {
+            refetchOnWindowFocus: false
+        }
+    );
+
     return (
         <PageContainer
+            onBack={() => router?.back()}
             title="Data Integrasi"
             style={{ minHeight: "92vh" }}
             subTitle="Riwayat Jabatan"
         >
-            <Row gutter={16}>
-                <Col span={11}>
-                    <Card title="Data Riwayat Jabatan SAPK">
-                        <TableRiwayatJabatanSAPK
-                            loading={isLoading}
-                            data={data}
-                        />
-                    </Card>
-                </Col>
-                <Col span={13}>
-                    <Card title="Data Riwayat Jabatan Master">
-                        <TableRiwayatMaster
-                            data={dataMaster}
-                            loading={loadingMasterJabatan}
-                        />
-                    </Card>
-                </Col>
-            </Row>
+            <Skeleton loading={currentUserLoading}>
+                <Row gutter={[8, 8]}>
+                    <Col span={24}>
+                        <DetailPegawai user={currentUser} />
+                    </Col>
+                </Row>
+                <Divider>Padanan Data </Divider>
+                <Row gutter={[8, 8]}>
+                    <Col span={11}>
+                        <Card title="Data Riwayat Jabatan SAPK">
+                            <TableRiwayatJabatanSAPK
+                                loading={isLoading}
+                                data={data}
+                            />
+                        </Card>
+                    </Col>
+                    <Col span={13}>
+                        <Card title="Data Riwayat Jabatan Master">
+                            <TableRiwayatMaster
+                                unor={dataUnor}
+                                fungsional={dataJabatanFungsional}
+                                fungsionalUmum={dataJabatanFungsionalUmum}
+                                data={dataMaster}
+                                loading={loadingMasterJabatan}
+                                id={currentUser?.id_sapk}
+                            />
+                        </Card>
+                    </Col>
+                </Row>
+            </Skeleton>
         </PageContainer>
     );
 };

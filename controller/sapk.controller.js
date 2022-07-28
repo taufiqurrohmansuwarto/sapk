@@ -96,9 +96,11 @@ module.exports.informasiPembetulanNama = async (req, res) => {
         const dataUtamaSapk = await fetcher.get(
             `/sapk/${employeeNumber}/data-utama-sapk`
         );
+
         const dataSapk = dataUtamaSapk?.data;
 
         const currentData = {
+            id_sapk: dataSapk?.id,
             ...result?.data,
             nama_sapk: dataSapk?.nama,
             tanggal_lahir_sapk: dataSapk?.tglLahir,
@@ -138,7 +140,7 @@ module.exports.referenceUnor = async (req, res) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get("/sapk/reference/unor");
-        res.json(result);
+        res.json(result?.data);
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
@@ -149,7 +151,7 @@ module.exports.referenceJabatanFungsional = async (req, res) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get("/sapk/reference/jabatan-fungsional");
-        res.json(result);
+        res.json(result?.data);
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });
@@ -162,7 +164,7 @@ module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
         const result = await fetcher.get(
             "/sapk/reference/jabatan-fungsional-umum"
         );
-        res.json(result);
+        res.json(result?.data);
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });

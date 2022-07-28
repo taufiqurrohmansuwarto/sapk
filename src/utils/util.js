@@ -247,3 +247,11 @@ export const disableReactDevTools = () => {
         }
     }
 };
+
+export const transformDate = (date) => {
+    const [day, month, year] = date?.split("-");
+    const data = new Date(year, month - 1, day);
+    // const [day, month, year] = date?.split("-");
+    // return new Date(year, month - 1, day);
+    return date;
+};

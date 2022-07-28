@@ -91,3 +91,19 @@ export const masterRwJabatan = (nip) => {
         .get(`/data-master/${nip}/data-rw-jabatan`)
         .then((res) => res?.data);
 };
+
+export const refUnor = () => {
+    return fetcher.get("/data-sapk/reference/unor").then((res) => res?.data);
+};
+
+export const refJabatanFungsional = () => {
+    return fetcher
+        .get("/data-sapk/reference/jabatan-fungsional")
+        .then((res) => res?.data);
+};
+
+export const refJabatanFungsionalUmum = () => {
+    return fetcher
+        .get("/data-sapk/reference/jabatan-fungsional-umum")
+        .then((res) => res?.data);
+};
