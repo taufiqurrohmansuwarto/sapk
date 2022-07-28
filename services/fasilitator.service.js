@@ -107,3 +107,7 @@ export const refJabatanFungsionalUmum = () => {
         .get("/data-sapk/reference/jabatan-fungsional-umum")
         .then((res) => res?.data);
 };
+
+export const siasnRwJabatan = (nip) => {
+    return fetcher.get(`/data-siasn/${nip}/data-rw-jabatan`);
+};

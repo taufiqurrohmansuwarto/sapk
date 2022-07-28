@@ -23,7 +23,8 @@ import {
     refJabatanFungsional,
     refJabatanFungsionalUmum,
     refUnor,
-    rwJabatanSapk
+    rwJabatanSapk,
+    siasnRwJabatan
 } from "../../../services/fasilitator.service";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
@@ -354,6 +355,11 @@ const RiwayatJabatan = () => {
         }
     );
 
+    const { data: dataSiasn, isLoading: loadingSiasn } = useQuery(
+        ["data-rw-jabatan-siasn", router?.query?.nip],
+        () => siasnRwJabatan(router?.query?.nip)
+    );
+
     return (
         <PageContainer
             onBack={() => router?.back()}
@@ -390,6 +396,7 @@ const RiwayatJabatan = () => {
                         </Card>
                     </Col>
                 </Row>
+                <div>{JSON.stringify(dataSiasn)}</div>
             </Skeleton>
         </PageContainer>
     );
