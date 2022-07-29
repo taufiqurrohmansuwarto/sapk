@@ -199,6 +199,7 @@ const DialogFormMaster = ({
             // id unor badan kepegawaian daerah provinsi jawa timur =
 
             const pemprovId = "A5EB03E23CCCF6A0E040640A040252AD";
+            const bkdId = "466D9577BDB70F89E050640A29022FEF";
 
             const postDataSapk = {
                 id: null,
@@ -245,7 +246,11 @@ const DialogFormMaster = ({
 
             // this will be hacky to complete
             const token = await tokenSiasn();
-            console.log(token);
+
+            // 1. sepertinya post dulu di usulannya ke bkd jatim
+            const urlSimpanUsul = `https://api-siasn-training.bkn.go.id/siasn-instansi/api/peremajaan/jabatan/simpan-usul?pns_orang_id=${id}&sumber=instansi&unor_verifikator_id=${bkdId}`;
+
+            console.log(urlSimpanUsul);
         } catch (error) {
             console.error(error);
         }
