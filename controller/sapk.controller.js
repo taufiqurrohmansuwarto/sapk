@@ -160,7 +160,6 @@ module.exports.referenceJabatanFungsional = async (req, res) => {
 module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
     try {
         const { fetcher } = req;
-        const { nip } = req?.query;
         const result = await fetcher.get(
             "/sapk/reference/jabatan-fungsional-umum"
         );

@@ -109,5 +109,7 @@ export const refJabatanFungsionalUmum = () => {
 };
 
 export const siasnRwJabatan = (nip) => {
-    return fetcher.get(`/data-siasn/${nip}/data-rw-jabatan`);
+    return fetcher
+        .get(`/data-siasn/${nip}/data-rw-jabatan`)
+        .then((res) => res?.data);
 };
