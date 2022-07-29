@@ -27,7 +27,11 @@ module.exports.readToken = async (req, res) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get(`/siasn/token`);
-        res.json(result);
+        const resultApproval = await fetcher.get(`/siasn/token-approval`);
+        res.json({
+            token: result?.data?.token,
+            tokenApproval: resultApproval?.data?.token
+        });
     } catch (error) {
         console.log(error);
         res.status(400).json({ code: 400, message: "Internal Server Error" });

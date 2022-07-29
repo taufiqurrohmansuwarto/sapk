@@ -1,20 +1,20 @@
-import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import {
-    Divider,
-    Row,
-    Col,
-    Card,
-    Table,
     Button,
-    Modal,
-    Skeleton,
+    Card,
+    Col,
+    DatePicker,
+    Divider,
     Form,
     Input,
-    DatePicker,
+    Modal,
+    Row,
     Select,
+    Skeleton,
+    Table,
     TreeSelect
 } from "antd";
+import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
@@ -24,12 +24,12 @@ import {
     refJabatanFungsionalUmum,
     refUnor,
     rwJabatanSapk,
-    siasnRwJabatan
+    siasnRwJabatan,
+    tokenSiasn
 } from "../../../services/fasilitator.service";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
-import { transformDate } from "../../../src/utils/util";
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -194,7 +194,11 @@ const DialogFormMaster = ({
             } = result;
 
             let jenis_jabatan_id = jenis_jabatan === "Fungsional" ? "2" : "4";
-            console.log(jenis_jabatan);
+
+            // id instansi pemeritnah provinsi jawa timur = A5EB03E23CCCF6A0E040640A040252AD
+            // id unor badan kepegawaian daerah provinsi jawa timur =
+
+            const pemprovId = "A5EB03E23CCCF6A0E040640A040252AD";
 
             const postDataSapk = {
                 id: null,
@@ -214,9 +218,37 @@ const DialogFormMaster = ({
                 pnsUserId: id
             };
 
-            // alert(JSON.stringify(postDataSapk));
-            console.log(postDataSapk);
-        } catch (error) {}
+            // console.log(postDataSapk);
+
+            // we fucking need usulan id
+
+            const postDataSIASN = {
+                usulan_id: "",
+                tipe: "I",
+                pns_orang_id: id,
+                id_riwayat: "-",
+                tmt_jabatan: moment(tmt_jabatan).format("YYYY-MM-DD"),
+                tanggal_sk: moment(tgl_sk).format("YYYY-MM-DD"),
+                tmt_pelantikan: moment(tmt_pelantikan).format("YYYY-MM-DD"),
+                jabatan_struktural_id: "-",
+                jabatan_fungsional_id: fungsional_id ? fungsional_id : "-",
+                jabatan_fungsional_umum_id: fungsional_umum_id
+                    ? fungsional_umum_id
+                    : "-",
+                unor_id,
+                nomor_sk,
+                jenis_jabatan_id,
+                // ini id untuk badan kepegawaian daerah
+                satuan_kerja_id: pemprovId,
+                instansi_id: pemprovId
+            };
+
+            // this will be hacky to complete
+            const token = await tokenSiasn();
+            console.log(token);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
