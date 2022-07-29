@@ -113,3 +113,7 @@ export const siasnRwJabatan = (nip) => {
         .get(`/data-siasn/${nip}/data-rw-jabatan`)
         .then((res) => res?.data);
 };
+
+export const tokenSiasn = () => {
+    return fetcher.get("/token-siasn").then((res) => res?.data);
+};
