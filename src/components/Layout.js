@@ -146,7 +146,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
 
     return (
         <ProLayout
-            layout="top"
+            // layout="top"
             headerTheme="light"
             menu={{
                 // type: "group",

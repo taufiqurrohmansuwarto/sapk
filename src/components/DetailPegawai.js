@@ -10,7 +10,7 @@ const DataUser = ({ data }) => {
         return (
             <Collapse>
                 <Collapse.Panel header="Informasi Pegawai">
-                    <Descriptions title="Informasi Pegawai SAPK">
+                    <Descriptions size="small" title="Informasi Pegawai SAPK">
                         <Descriptions.Item label="Nama">
                             {data?.nama_sapk}
                         </Descriptions.Item>
@@ -23,7 +23,10 @@ const DataUser = ({ data }) => {
                     </Descriptions>
 
                     <Divider />
-                    <Descriptions title="Informasi Pegawai E-Master">
+                    <Descriptions
+                        size="small"
+                        title="Informasi Pegawai E-Master"
+                    >
                         <Descriptions.Item label="Nama">
                             {data?.nama}
                         </Descriptions.Item>
@@ -45,7 +48,7 @@ const DataUser = ({ data }) => {
                     </Descriptions>
                     <Divider />
 
-                    <Descriptions title="Hasil Komparasi">
+                    <Descriptions size="small" title="Hasil Komparasi">
                         <Descriptions.Item label="Nama">
                             <StringDiff
                                 newValue={data?.nama}

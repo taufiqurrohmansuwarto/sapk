@@ -117,3 +117,9 @@ export const siasnRwJabatan = (nip) => {
 export const tokenSiasn = () => {
     return fetcher.get("/token-siasn").then((res) => res?.data);
 };
+
+export const bypassJabatanSIASN = (data) => {
+    return fetcher
+        .post("/data-siasn/bypass-jabatan", data)
+        .then((res) => res?.data);
+};

@@ -1,31 +1,26 @@
-import {
-    BugOutlined,
-    IeOutlined,
-    ShareAltOutlined,
-    UpOutlined
-} from "@ant-design/icons";
+import { DatabaseOutlined, HomeOutlined } from "@ant-design/icons";
 
 export default {
     routes: [
         {
             path: "/feeds",
-            name: " Cari NIP",
-            icon: <ShareAltOutlined />
+            name: " Beranda",
+            icon: <HomeOutlined />
         },
-        {
-            path: "/daftar",
-            name: " Daftar Pegawai",
-            icon: <IeOutlined />
-        },
-        {
-            path: "/siasn-skk",
-            name: " Daftar Usulan SKK",
-            icon: <BugOutlined />
-        },
+        // {
+        //     path: "/daftar",
+        //     name: " Daftar Pegawai",
+        //     icon: <IeOutlined />
+        // },
+        // {
+        //     path: "/siasn-skk",
+        //     name: " Daftar Usulan SKK",
+        //     icon: <BugOutlined />
+        // },
         {
             path: "/data-sapk",
-            name: " Data SAPK",
-            icon: <UpOutlined />
+            name: " Data Rusak",
+            icon: <DatabaseOutlined />
         }
     ]
 };

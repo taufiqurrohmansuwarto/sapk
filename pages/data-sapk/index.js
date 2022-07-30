@@ -13,7 +13,11 @@ const Index = () => {
     };
 
     return (
-        <PageContainer title="Padanan Data" subTitle="SAPK, SIASN, SIMASTER">
+        <PageContainer
+            style={{ minHeight: "92vh" }}
+            title="Data Rusak (Broken)"
+            subTitle="SAPK, SIASN, SIMASTER"
+        >
             <Card>
                 <Form onFinish={handleSubmit} form={form} layout="vertical">
                     <Form.Item

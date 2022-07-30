@@ -16,22 +16,7 @@ export default function SignIn({ providers }) {
         >
             <Col>
                 <Paper p="xl" shadow="xl" style={{ width: 400 }} withBorder>
-                    <Group position="apart">
-                        <img src="logobkd.jpg" alt="" style={{ width: 50 }} />
-                    </Group>
                     <Group position="center">
-                        <Space direction="vertical" align="center">
-                            <Title>Aplikasi</Title>
-                            <div>
-                                <img
-                                    src="pns.png"
-                                    style={{ width: 150 }}
-                                    alt=""
-                                />
-                            </div>
-                            <Text size="sm">Percepatan Subbid Data</Text>
-                        </Space>
-                        <Divider />
                         <Space direction="vertical">
                             {Object?.values(providers).map((provider) => (
                                 <div key={provider.name}>
@@ -46,17 +31,10 @@ export default function SignIn({ providers }) {
                                 </div>
                             ))}
                         </Space>
-                        <Stack spacing="xs">
-                            {/* <Text size="xs">
-                                    <Link href="bkd.jatimprov.go.id/pttpk">
-                                        Lupa password akun E-Master?
-                                    </Link>
-                                </Text> */}
-                        </Stack>
                         <Divider />
                     </Group>
                     <Text align="center" size="xs">
-                        2022 Sub Bidang Pengolahan Data
+                        Custom Tools SAPK,SIASN, dan SIMASTER
                     </Text>
                     <Text align="center" size="xs"></Text>
                 </Paper>

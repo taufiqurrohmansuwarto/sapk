@@ -1,10 +1,20 @@
-const index = async (req, res) => {
+import axios from "axios";
+const index = async (req, res, next) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get(`/siasn/skk/usulan`);
         res.json(result?.data);
     } catch (error) {
-        res.status(400).json({ code: 400, message: "Internal Server Error" });
+        // console.log(error);
+        if (axios.isAxiosError(error)) {
+            const { code, message } = error?.response?.data;
+            res.status(code).json({ code, message });
+        } else {
+            res.status(400).json({
+                code: 400,
+                message: "Internal Server Error"
+            });
+        }
     }
 };
 

@@ -37,3 +37,15 @@ module.exports.readToken = async (req, res) => {
         res.status(400).json({ code: 400, message: "Internal Server Error" });
     }
 };
+
+module.exports.bypassJabatan = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const data = req?.body;
+        await fetcher.post(`/siasn/bypass-jabatan`, data);
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};

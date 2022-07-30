@@ -27,6 +27,7 @@ import {
 } from "../../services/fasilitator.service";
 import Layout from "../../src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
+import { useSession } from "next-auth/react";
 
 const TombolTambahkan = ({ data }) => {
     const [visible, setVisible] = useState(false);
@@ -224,35 +225,16 @@ const DataUser = ({ data }) => {
 };
 
 const Feeds = () => {
-    const [nip, setNip] = useState("");
-    const [debounceValue] = useDebouncedValue(nip, 1000);
-    const { data, isFetching } = useQuery(
-        ["user-perbaikan-nama", debounceValue],
-        () => informasiPembetulanNama(debounceValue),
-        {
-            enabled: Boolean(debounceValue)
-        }
-    );
-
+    const { data, status } = useSession();
     return (
         <>
             <PageContainer
-                title="Percepatan Perubahan nama"
-                subTitle="SAPK"
+                title="Beranda"
+                subTitle="Solusi SIASN,SIMASTER dan SAPK"
                 style={{ height: "92vh" }}
             >
                 <Card>
-                    <Form.Item label="NIP" help="Cari berdasarkan NIP">
-                        <Input
-                            style={{ width: "40%" }}
-                            value={nip}
-                            onChange={(e) => setNip(e?.target?.value)}
-                        />
-                    </Form.Item>
-                    <Divider />
-                    <Skeleton loading={isFetching}>
-                        <DataUser data={data} />
-                    </Skeleton>
+                    <div>Hallo, {data?.user?.name}. Sehat ga? </div>
                 </Card>
             </PageContainer>
         </>

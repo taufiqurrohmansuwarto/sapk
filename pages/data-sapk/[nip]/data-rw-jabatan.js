@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Button,
     Card,
@@ -7,6 +7,7 @@ import {
     Divider,
     Form,
     Input,
+    message,
     Modal,
     Row,
     Select,
@@ -18,6 +19,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
+    bypassJabatanSIASN,
     informasiPembetulanNama,
     masterRwJabatan,
     refJabatanFungsional,
@@ -174,6 +176,20 @@ const DialogFormMaster = ({
 }) => {
     const [form] = Form.useForm();
 
+    const client = useQueryClient();
+
+    const { mutate: tambahJabatanSIASN, isLoading } = useMutation(
+        (data) => bypassJabatanSIASN(data),
+        {
+            onError: (e) => console.log(e),
+            onSuccess: () => {
+                message.success("wkkwkw");
+                client.invalidateQueries(["data-rw-jabatan-siasn"]);
+                handleCancel();
+            }
+        }
+    );
+
     useEffect(() => {}, [userData]);
 
     const format = "DD-MM-YYYY";
@@ -219,15 +235,9 @@ const DialogFormMaster = ({
                 pnsUserId: id
             };
 
-            // console.log(postDataSapk);
-
             // we fucking need usulan id
-
             const postDataSIASN = {
-                usulan_id: "",
-                tipe: "I",
                 pns_orang_id: id,
-                id_riwayat: "-",
                 tmt_jabatan: moment(tmt_jabatan).format("YYYY-MM-DD"),
                 tanggal_sk: moment(tgl_sk).format("YYYY-MM-DD"),
                 tmt_pelantikan: moment(tmt_pelantikan).format("YYYY-MM-DD"),
@@ -239,18 +249,15 @@ const DialogFormMaster = ({
                 unor_id,
                 nomor_sk,
                 jenis_jabatan_id,
-                // ini id untuk badan kepegawaian daerah
-                satuan_kerja_id: pemprovId,
-                instansi_id: pemprovId
+
+                // slave
+                unor_id_verifikator: "466D9577BDB70F89E050640A29022FEF",
+                satuan_kerja_id: "A5EB03E24213F6A0E040640A040252AD",
+                instansi_id: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            // this will be hacky to complete
-            const token = await tokenSiasn();
-
-            // 1. sepertinya post dulu di usulannya ke bkd jatim
-            const urlSimpanUsul = `https://api-siasn-training.bkn.go.id/siasn-instansi/api/peremajaan/jabatan/simpan-usul?pns_orang_id=${id}&sumber=instansi&unor_verifikator_id=${bkdId}`;
-
-            console.log(urlSimpanUsul);
+            tambahJabatanSIASN(postDataSIASN);
+            // console.log(postDataSIASN);
         } catch (error) {
             console.error(error);
         }
@@ -260,6 +267,8 @@ const DialogFormMaster = ({
         <Modal
             centered
             title="Transfer Data"
+            maskClosable={false}
+            confirmLoading={isLoading}
             visible={visible}
             destroyOnClose
             width={1200}
@@ -524,47 +533,49 @@ const RiwayatJabatan = () => {
             style={{ minHeight: "92vh" }}
             subTitle="Riwayat Jabatan"
         >
-            <Skeleton loading={currentUserLoading}>
-                <Row gutter={[8, 8]}>
-                    <Col span={24}>
-                        <DetailPegawai user={currentUser} />
-                    </Col>
-                </Row>
-                <Divider>Padanan Data </Divider>
-                <Row gutter={[8, 8]}>
-                    <Col span={11}>
-                        <Card title="Data Riwayat Jabatan SAPK">
-                            <TableRiwayatJabatanSAPK
-                                loading={isLoading}
-                                data={data}
-                            />
-                        </Card>
-                    </Col>
-                    <Col span={13}>
-                        <Card title="Data Riwayat Jabatan Master">
-                            <TableRiwayatMaster
-                                unor={dataUnor}
-                                fungsional={dataJabatanFungsional}
-                                fungsionalUmum={dataJabatanFungsionalUmum}
-                                data={dataMaster}
-                                loading={loadingMasterJabatan}
-                                id={currentUser?.id_sapk}
-                            />
-                        </Card>
-                    </Col>
-                </Row>
-                <Divider />
-                <Row gutter={[8, 8]}>
-                    <Col span={24}>
-                        <Card title="Data Riwayat Jabatan SIASN">
-                            <TableRiwayatSIASN
-                                data={dataSiasn}
-                                loading={loadingSiasn}
-                            />
-                        </Card>
-                    </Col>
-                </Row>
-            </Skeleton>
+            <Card>
+                <Skeleton loading={currentUserLoading}>
+                    <Row gutter={[8, 8]}>
+                        <Col span={24}>
+                            <DetailPegawai user={currentUser} />
+                        </Col>
+                    </Row>
+                    <Divider>Padanan Data </Divider>
+                    <Row gutter={[8, 8]}>
+                        <Col span={11}>
+                            <Card title="Data Riwayat Jabatan SAPK">
+                                <TableRiwayatJabatanSAPK
+                                    loading={isLoading}
+                                    data={data}
+                                />
+                            </Card>
+                        </Col>
+                        <Col span={13}>
+                            <Card title="Data Riwayat Jabatan Master">
+                                <TableRiwayatMaster
+                                    unor={dataUnor}
+                                    fungsional={dataJabatanFungsional}
+                                    fungsionalUmum={dataJabatanFungsionalUmum}
+                                    data={dataMaster}
+                                    loading={loadingMasterJabatan}
+                                    id={currentUser?.id_sapk}
+                                />
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Divider />
+                    <Row gutter={[8, 8]}>
+                        <Col span={24}>
+                            <Card title="Data Riwayat Jabatan SIASN">
+                                <TableRiwayatSIASN
+                                    data={dataSiasn}
+                                    loading={loadingSiasn}
+                                />
+                            </Card>
+                        </Col>
+                    </Row>
+                </Skeleton>
+            </Card>
         </PageContainer>
     );
 };
