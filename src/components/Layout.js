@@ -146,7 +146,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
 
     return (
         <ProLayout
-            // layout="top"
+            layout="top"
             headerTheme="light"
             menu={{
                 // type: "group",
@@ -159,7 +159,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
                     }
                 }
             }}
-            title={"Percepatan"}
+            title={() => null}
             fixedHeader
             selectedKeys={[active]}
             menuItemRender={menuItemRender}

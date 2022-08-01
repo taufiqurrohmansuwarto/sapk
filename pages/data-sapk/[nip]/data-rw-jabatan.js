@@ -452,7 +452,9 @@ const TableRiwayatMaster = ({
             render: (_, row) => {
                 if (row?.jenis_jabatan !== "Struktural") {
                     return (
-                        <Button onClick={() => handleOpen(row)}>Trans</Button>
+                        <Button type="primary" onClick={() => handleOpen(row)}>
+                            SIASN
+                        </Button>
                     );
                 } else {
                     return null;
@@ -542,16 +544,8 @@ const RiwayatJabatan = () => {
                     </Row>
                     <Divider>Padanan Data </Divider>
                     <Row gutter={[8, 8]}>
-                        <Col span={11}>
-                            <Card title="Data Riwayat Jabatan SAPK">
-                                <TableRiwayatJabatanSAPK
-                                    loading={isLoading}
-                                    data={data}
-                                />
-                            </Card>
-                        </Col>
-                        <Col span={13}>
-                            <Card title="Data Riwayat Jabatan Master">
+                        <Col span={24}>
+                            <Card title="SIMASTER">
                                 <TableRiwayatMaster
                                     unor={dataUnor}
                                     fungsional={dataJabatanFungsional}
@@ -562,11 +556,19 @@ const RiwayatJabatan = () => {
                                 />
                             </Card>
                         </Col>
+                        <Col span={24}>
+                            <Card title="SAPK">
+                                <TableRiwayatJabatanSAPK
+                                    loading={isLoading}
+                                    data={data}
+                                />
+                            </Card>
+                        </Col>
                     </Row>
                     <Divider />
                     <Row gutter={[8, 8]}>
                         <Col span={24}>
-                            <Card title="Data Riwayat Jabatan SIASN">
+                            <Card title="SIASN">
                                 <TableRiwayatSIASN
                                     data={dataSiasn}
                                     loading={loadingSiasn}
