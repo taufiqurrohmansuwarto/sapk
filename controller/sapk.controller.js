@@ -1,5 +1,5 @@
 import axios from "axios";
-import { eq, orderBy } from "lodash";
+import { orderBy } from "lodash";
 const https = require("https");
 const AdmZip = require("adm-zip");
 const stream = require("stream");
@@ -157,12 +157,25 @@ module.exports.referenceJabatanFungsional = async (req, res) => {
         res.status(400).json({ code: 400, message: "Internal Server Error" });
     }
 };
+
 module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get(
             "/sapk/reference/jabatan-fungsional-umum"
         );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+
+module.exports.postJabatanSapk = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { body } = req;
+        const result = await fetcher.post(`/sapk/post-jabatan-sapk`, body);
         res.json(result?.data);
     } catch (error) {
         console.log(error);

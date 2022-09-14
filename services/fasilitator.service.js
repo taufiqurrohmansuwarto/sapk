@@ -123,3 +123,9 @@ export const bypassJabatanSIASN = (data) => {
         .post("/data-siasn/bypass-jabatan", data)
         .then((res) => res?.data);
 };
+
+export const addJabatanSapk = (data) => {
+    return fetcher
+        .post("/data-sapk/tambah-jabatan", data)
+        .then((res) => res?.data);
+};

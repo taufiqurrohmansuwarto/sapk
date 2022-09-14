@@ -19,6 +19,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
+    addJabatanSapk,
     bypassJabatanSIASN,
     informasiPembetulanNama,
     masterRwJabatan,
@@ -190,6 +191,15 @@ const DialogFormMaster = ({
         }
     );
 
+    const { mutate: tambahJabatanSapk, isLoading: isLoadingTambahJabatanSapk } =
+        useMutation((data) => addJabatanSapk(data), {
+            onError: (e) => alert(e),
+            onSuccess: () => {
+                message.success("berhasil");
+                client.invalidateQueries(["data-rw-jabatan-sapk"]);
+            }
+        });
+
     useEffect(() => {}, [userData]);
 
     const format = "DD-MM-YYYY";
@@ -256,7 +266,8 @@ const DialogFormMaster = ({
                 instansi_id: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            tambahJabatanSIASN(postDataSIASN);
+            // tambahJabatanSIASN(postDataSIASN);
+            tambahJabatanSapk(postDataSapk);
             // console.log(postDataSIASN);
         } catch (error) {
             console.error(error);
@@ -268,7 +279,7 @@ const DialogFormMaster = ({
             centered
             title="Transfer Data"
             maskClosable={false}
-            confirmLoading={isLoading}
+            confirmLoading={isLoadingTambahJabatanSapk}
             visible={visible}
             destroyOnClose
             width={1200}
