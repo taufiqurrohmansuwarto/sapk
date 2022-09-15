@@ -197,6 +197,7 @@ const DialogFormMaster = ({
             onSuccess: () => {
                 message.success("berhasil");
                 client.invalidateQueries(["data-rw-jabatan-sapk"]);
+                handleCancel();
             }
         });
 
@@ -266,6 +267,7 @@ const DialogFormMaster = ({
                 instansi_id: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
+            // console.log(postDataSapk);
             // tambahJabatanSIASN(postDataSIASN);
             tambahJabatanSapk(postDataSapk);
             // console.log(postDataSIASN);
@@ -464,7 +466,7 @@ const TableRiwayatMaster = ({
                 if (row?.jenis_jabatan !== "Struktural") {
                     return (
                         <Button type="primary" onClick={() => handleOpen(row)}>
-                            SIASN
+                            Transfer ke SAPK
                         </Button>
                     );
                 } else {
