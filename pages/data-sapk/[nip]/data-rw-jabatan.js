@@ -174,7 +174,8 @@ const DialogFormMaster = ({
     id,
     unor,
     fungsional,
-    fungsionalUmum
+    fungsionalUmum,
+    user
 }) => {
     const [form] = Form.useForm();
     const router = useRouter();
@@ -264,7 +265,8 @@ const DialogFormMaster = ({
                 jft_id: fungsional_id ? fungsional_id : "",
                 jfu_id: fungsional_umum_id ? fungsional_umum_id : "",
                 no_sk: nomor_sk,
-                tgl_sk: moment(tgl_sk).format("DD-MM-YYYY")
+                tgl_sk: moment(tgl_sk).format("DD-MM-YYYY"),
+                nama: user?.nama
             };
 
             // we fucking need usulan id
@@ -447,7 +449,8 @@ const TableRiwayatMaster = ({
     id,
     unor,
     fungsional,
-    fungsionalUmum
+    fungsionalUmum,
+    user
 }) => {
     const [visible, setVisible] = useState(false);
     const [userData, setUserData] = useState(null);
@@ -513,6 +516,7 @@ const TableRiwayatMaster = ({
                 fungsionalUmum={fungsionalUmum}
                 handleCancel={handleCancel}
                 userData={userData}
+                user={user}
                 id={id}
             />
             <Table
@@ -591,6 +595,7 @@ const RiwayatJabatan = () => {
                                     fungsional={dataJabatanFungsional}
                                     fungsionalUmum={dataJabatanFungsionalUmum}
                                     data={dataMaster}
+                                    user={currentUser}
                                     loading={loadingMasterJabatan}
                                     id={currentUser?.id_sapk}
                                 />

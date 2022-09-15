@@ -13,9 +13,11 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
     try {
+        const { customId } = req?.user;
         const result = await prisma.data_import.create({
             data: {
-                ...req.body
+                ...req.body,
+                operator: customId
             }
         });
         res.json(result);

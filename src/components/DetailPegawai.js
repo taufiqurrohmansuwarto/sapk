@@ -8,8 +8,13 @@ const DataUser = ({ data }) => {
         return null;
     } else {
         return (
-            <Collapse>
-                <Collapse.Panel header="Informasi Pegawai">
+            <Collapse defaultActiveKey={["1", "2"]}>
+                <Collapse.Panel header="Perangkat Daerah" key="1">
+                    <Descriptions.Item label="Nama">
+                        {data?.skpd}
+                    </Descriptions.Item>
+                </Collapse.Panel>
+                <Collapse.Panel header="Informasi Pegawai" key="2">
                     <Descriptions size="small" title="Informasi Pegawai SAPK">
                         <Descriptions.Item label="Nama">
                             {data?.nama_sapk}
