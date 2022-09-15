@@ -34,5 +34,14 @@ model request_perbaikan_nama {
 
   user       users?    @relation(fields: [diusulkan_oleh], references: [custom_id])
   created_at DateTime? @default(now()) @db.Timestamp()
+}
 
+model data_import {
+  nip        String    @id
+  pegawai_id String?
+  unor_id    String?
+  jfu_id     String?
+  jft_id     String?
+  no_sk      String?
+  tgl_sk     String?
 }

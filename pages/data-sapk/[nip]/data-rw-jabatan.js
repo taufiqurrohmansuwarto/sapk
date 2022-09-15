@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import {
     addJabatanSapk,
     bypassJabatanSIASN,
+    createDataImport,
     informasiPembetulanNama,
     masterRwJabatan,
     refJabatanFungsional,
@@ -176,6 +177,7 @@ const DialogFormMaster = ({
     fungsionalUmum
 }) => {
     const [form] = Form.useForm();
+    const router = useRouter();
 
     const client = useQueryClient();
 
@@ -197,6 +199,15 @@ const DialogFormMaster = ({
             onSuccess: () => {
                 message.success("berhasil");
                 client.invalidateQueries(["data-rw-jabatan-sapk"]);
+                handleCancel();
+            }
+        });
+
+    const { mutate: tambahImport, isLoading: isLoadingTambahImport } =
+        useMutation((data) => createDataImport(data), {
+            onError: (e) => alert(e),
+            onSuccess: () => {
+                message.success("berhasil");
                 handleCancel();
             }
         });
@@ -246,6 +257,16 @@ const DialogFormMaster = ({
                 pnsUserId: id
             };
 
+            const data = {
+                nip: router?.query?.nip,
+                pegawai_id: id,
+                unor_id: unor_id,
+                jft_id: fungsional_id ? fungsional_id : "",
+                jfu_id: fungsional_umum_id ? fungsional_umum_id : "",
+                no_sk: nomor_sk,
+                tgl_sk: moment(tgl_sk).format("DD-MM-YYYY")
+            };
+
             // we fucking need usulan id
             const postDataSIASN = {
                 pns_orang_id: id,
@@ -269,8 +290,9 @@ const DialogFormMaster = ({
 
             // console.log(postDataSapk);
             // tambahJabatanSIASN(postDataSIASN);
-            tambahJabatanSapk(postDataSapk);
+            // tambahJabatanSapk(postDataSapk);
             // console.log(postDataSIASN);
+            tambahImport(data);
         } catch (error) {
             console.error(error);
         }
@@ -281,7 +303,7 @@ const DialogFormMaster = ({
             centered
             title="Transfer Data"
             maskClosable={false}
-            confirmLoading={isLoadingTambahJabatanSapk}
+            confirmLoading={isLoadingTambahImport}
             visible={visible}
             destroyOnClose
             width={1200}
@@ -466,7 +488,7 @@ const TableRiwayatMaster = ({
                 if (row?.jenis_jabatan !== "Struktural") {
                     return (
                         <Button type="primary" onClick={() => handleOpen(row)}>
-                            Transfer ke SAPK
+                            Tambah
                         </Button>
                     );
                 } else {

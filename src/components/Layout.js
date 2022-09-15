@@ -159,7 +159,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
                     }
                 }
             }}
-            title={() => null}
+            title="SAPK"
             fixedHeader
             selectedKeys={[active]}
             menuItemRender={menuItemRender}

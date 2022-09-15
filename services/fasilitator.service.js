@@ -129,3 +129,15 @@ export const addJabatanSapk = (data) => {
         .post("/data-sapk/tambah-jabatan", data)
         .then((res) => res?.data);
 };
+
+export const findDataImport = () => {
+    return fetcher.get("/sapk-import").then((res) => res?.data);
+};
+
+export const createDataImport = (data) => {
+    return fetcher.post("/sapk-import", data).then((res) => res?.data);
+};
+
+export const removeDataImport = (id) => {
+    return fetcher.delete(`/sapk-import/${id}`).then((res) => res?.data);
+};
