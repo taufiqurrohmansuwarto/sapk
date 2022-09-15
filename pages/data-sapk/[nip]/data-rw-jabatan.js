@@ -387,7 +387,7 @@ const DialogFormMaster = ({
                                     ))}
                                 </Select>
                             </Form.Item>
-                        ) : (
+                        ) : getFieldValue("jenis_jabatan") === "Pelaksana" ? (
                             <Form.Item
                                 name="fungsional_umum_id"
                                 label="Pelaksana"
@@ -405,7 +405,7 @@ const DialogFormMaster = ({
                                     ))}
                                 </Select>
                             </Form.Item>
-                        )
+                        ) : null
                     }
                 </Form.Item>
                 <Form.Item
@@ -485,15 +485,20 @@ const TableRiwayatMaster = ({
             title: "Aksi",
             dataIndex: "aksi",
             render: (_, row) => {
-                if (row?.jenis_jabatan !== "Struktural") {
-                    return (
-                        <Button type="primary" onClick={() => handleOpen(row)}>
-                            Tambah
-                        </Button>
-                    );
-                } else {
-                    return null;
-                }
+                return (
+                    <Button type="primary" onClick={() => handleOpen(row)}>
+                        Tambah
+                    </Button>
+                );
+                // if (row?.jenis_jabatan !== "Struktural") {
+                //     return (
+                //         <Button type="primary" onClick={() => handleOpen(row)}>
+                //             Tambah
+                //         </Button>
+                //     );
+                // } else {
+                //     return null;
+                // }
             }
         }
     ];
