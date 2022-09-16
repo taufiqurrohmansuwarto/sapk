@@ -1,5 +1,7 @@
 import moment from "moment";
 
+const url = "https://master.bkd.jatimprov.go.id/files_jatimprov/";
+
 module.exports.serializeRwJabatanMaster = (data) => {
     const jabatanStruktural = data?.jabatan_struktural;
     const jabatanFungsional = data?.jabatan_fungsional_tertentu;
@@ -13,7 +15,8 @@ module.exports.serializeRwJabatanMaster = (data) => {
         tmt_jabatan: moment(strutkural?.tmt_jab).format("DD-MM-YYYY"),
         tgl_sk: moment(strutkural?.tgl_sk).format("DD-MM-YYYY"),
         nomor_sk: strutkural?.no_sk,
-        aktif: strutkural?.aktif
+        aktif: strutkural?.aktif,
+        file: `${url}${strutkural?.file_struktural}`
     }));
 
     const rwytJabatanPelaksana = jabatanPelaksana?.map((strutkural) => ({
@@ -24,7 +27,8 @@ module.exports.serializeRwJabatanMaster = (data) => {
         tmt_jabatan: moment(strutkural?.tmt_jab).format("DD-MM-YYYY"),
         tgl_sk: moment(strutkural?.tgl_sk).format("DD-MM-YYYY"),
         nomor_sk: strutkural?.no_sk,
-        aktif: strutkural?.aktif
+        aktif: strutkural?.aktif,
+        file: `${url}${strutkural?.file_jfu}`
     }));
 
     const rwytJabatanFungsional = jabatanFungsional?.map((strutkural) => ({
@@ -35,7 +39,8 @@ module.exports.serializeRwJabatanMaster = (data) => {
         tmt_jabatan: moment(strutkural?.tmt_jab).format("DD-MM-YYYY"),
         tgl_sk: moment(strutkural?.tgl_sk).format("DD-MM-YYYY"),
         nomor_sk: strutkural?.no_sk,
-        aktif: strutkural?.aktif
+        aktif: strutkural?.aktif,
+        file: `${url}${strutkural?.file_jft}`
     }));
 
     return [

@@ -467,8 +467,16 @@ const TableRiwayatMaster = ({
     const columns = [
         {
             title: "Jenis",
-            key: "jenis_jabatan",
-            dataIndex: "jenis_jabatan"
+            dataIndex: "jenis_jabatan",
+            render: (text, record) => {
+                return (
+                    <div>
+                        <a href={record?.file} target="_blank">
+                            {record?.jenis_jabatan}
+                        </a>
+                    </div>
+                );
+            }
         },
         {
             title: "Jabatan",

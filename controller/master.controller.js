@@ -17,6 +17,7 @@ module.exports.masterRwJabatan = async (req, res) => {
             ],
             ["asc"]
         );
+
         res.json(sorting);
     } catch (error) {
         console.log(error);
