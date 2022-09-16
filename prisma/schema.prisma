@@ -46,4 +46,5 @@ model data_import {
   tgl_sk     String?
   operator   String?
   nama       String?
+  created_at DateTime? @default(now()) @db.Timestamp()
 }
