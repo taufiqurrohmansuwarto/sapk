@@ -56,6 +56,11 @@ const Index = () => {
             key: "nip"
         },
         {
+            title: "Nama",
+            dataIndex: "nama",
+            key: "nama"
+        },
+        {
             title: "ID_PEGAWAI",
             dataIndex: "pegawai_id",
             key: "pegawai_id"
@@ -84,6 +89,11 @@ const Index = () => {
             title: "TGL_SK",
             dataIndex: "tgl_sk",
             key: "tgl_sk"
+        },
+        {
+            title: "Operator",
+            dataIndex: "operator",
+            key: "operator"
         },
         {
             title: "Hapus",
