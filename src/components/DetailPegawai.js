@@ -1,18 +1,29 @@
-import { Collapse, Descriptions, Divider } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
+import { Button, Collapse, Descriptions, Divider } from "antd";
+import FileSaver from "file-saver";
 import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
+import { filePembetulanNama } from "../../services/fasilitator.service";
 
 const DataUser = ({ data }) => {
+    const downloadFile = async () => {
+        // save file using filesaver library
+    };
+
     if (isEmpty(data)) {
         return null;
     } else {
         return (
             <Collapse defaultActiveKey={["1", "2"]}>
                 <Collapse.Panel header="Perangkat Daerah" key="1">
-                    <Descriptions.Item label="Nama">
-                        {data?.skpd}
-                    </Descriptions.Item>
+                    <div>{data?.skpd}</div>
+                    <Divider />
+                    <a
+                        href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
+                    >
+                        Download File Pembetulan Nama
+                    </a>
                 </Collapse.Panel>
                 <Collapse.Panel header="Informasi Pegawai" key="2">
                     <Descriptions size="small" title="Informasi Pegawai SAPK">

@@ -315,7 +315,9 @@ const DialogFormMaster = ({
             <div>
                 {userData?.jenis_jabatan} : {userData?.jabatan}
             </div>
-            <div>unor : {userData?.unor}</div>
+            <Divider />
+            <div>opd : {user?.skpd}</div>
+            <div>unor sk : {userData?.unor}</div>
             <Divider />
             <Form
                 form={form}
@@ -329,9 +331,9 @@ const DialogFormMaster = ({
                 }}
                 layout="vertical"
             >
-                <Form.Item name="id" label="ID Pegawai SAPK">
+                {/* <Form.Item name="id" label="ID Pegawai SAPK">
                     <Input readOnly />
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item
                     rules={[{ required: true }]}
                     name="jenis_jabatan"
