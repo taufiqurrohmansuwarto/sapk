@@ -96,6 +96,11 @@ const Index = () => {
             key: "operator"
         },
         {
+            title: "Dibuat pada",
+            dataIndex: "created_at",
+            key: "created_at"
+        },
+        {
             title: "Hapus",
             dataIndex: "hapus",
             key: "hapus",

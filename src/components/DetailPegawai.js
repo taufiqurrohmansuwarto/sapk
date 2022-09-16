@@ -1,16 +1,9 @@
-import { DownloadOutlined } from "@ant-design/icons";
-import { Button, Collapse, Descriptions, Divider } from "antd";
-import FileSaver from "file-saver";
+import { Collapse, Descriptions, Divider } from "antd";
 import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
-import { filePembetulanNama } from "../../services/fasilitator.service";
 
 const DataUser = ({ data }) => {
-    const downloadFile = async () => {
-        // save file using filesaver library
-    };
-
     if (isEmpty(data)) {
         return null;
     } else {

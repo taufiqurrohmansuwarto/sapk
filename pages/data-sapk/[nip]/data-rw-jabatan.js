@@ -206,9 +206,9 @@ const DialogFormMaster = ({
 
     const { mutate: tambahImport, isLoading: isLoadingTambahImport } =
         useMutation((data) => createDataImport(data), {
-            onError: (e) => alert(e),
+            onError: (e) => alert(JSON.stringify(error)),
             onSuccess: () => {
-                message.success("berhasil");
+                message.success("Berhasil ditambahkan");
                 handleCancel();
             }
         });

@@ -3,7 +3,10 @@ const { default: prisma } = require("../lib/prisma");
 const index = async (req, res) => {
     try {
         const result = await prisma.data_import.findMany({
-            take: 6000
+            take: 6000,
+            orderBy: {
+                created_at: "desc"
+            }
         });
         res.json(result);
     } catch (error) {
