@@ -1,4 +1,4 @@
-import { Collapse, Descriptions, Divider } from "antd";
+import { Avatar, Collapse, Descriptions, Divider } from "antd";
 import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
@@ -29,6 +29,7 @@ const DataUser = ({ data }) => {
         return (
             <Collapse defaultActiveKey={["1", "2"]}>
                 <Collapse.Panel header="Perangkat Daerah" key="1">
+                    <Avatar src={data?.foto} size="large" shape="square" />
                     {data?.sudah_pensiun ? (
                         <div>
                             <Pensiun data={data?.data_pensiun} />
