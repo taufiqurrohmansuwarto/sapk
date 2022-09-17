@@ -1,4 +1,8 @@
-import { AccountBookFilled, DatabaseOutlined, HomeOutlined } from "@ant-design/icons";
+import {
+    DatabaseOutlined,
+    FileExclamationOutlined,
+    HomeOutlined
+} from "@ant-design/icons";
 
 export default {
     routes: [
@@ -19,13 +23,13 @@ export default {
         // },
         {
             path: "/data-sapk",
-            name: " Data Rusak",
+            name: "Pembetulan",
             icon: <DatabaseOutlined />
         },
         {
-            path: "/data-import",
-            name: " Data Import",
-            icon: <AccountBookFilled />
+            path: "/data-import-personal",
+            name: " Import Personal",
+            icon: <FileExclamationOutlined />
         }
     ]
 };

@@ -1,4 +1,5 @@
 import {
+    AccountBookFilled,
     FileOutlined,
     LogoutOutlined,
     ReadOutlined,
@@ -71,6 +72,9 @@ const changeRoutes = (user) => {
             (role === "FASILITATOR" && group === "MASTER") ||
             (role === "ADMIN" && group === "MASTER");
 
+        const adminFasilitator = role === "ADMIN" && group === "MASTER";
+        console.log(adminFasilitator);
+
         const isAdmin = id === "master|56543";
 
         const userMasterRoutes = [
@@ -83,6 +87,14 @@ const changeRoutes = (user) => {
                 path: "/esign/dashboard",
                 name: " E-Sign",
                 icon: <RestOutlined />
+            }
+        ];
+
+        const adminFasilitatorRoutes = [
+            {
+                path: "/data-import",
+                name: " Full Import",
+                icon: <AccountBookFilled />
             }
         ];
 
@@ -114,6 +126,9 @@ const changeRoutes = (user) => {
 
         let currentRoutes = routes?.routes;
 
+        if (adminFasilitator) {
+            currentRoutes.push(...adminFasilitatorRoutes);
+        }
         if (userMaster) {
             currentRoutes.push(...userMasterRoutes);
         }
@@ -146,7 +161,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
 
     return (
         <ProLayout
-            layout="top"
+            layout="side"
             headerTheme="light"
             menu={{
                 // type: "group",

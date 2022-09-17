@@ -15,7 +15,7 @@ const Index = () => {
     return (
         <PageContainer
             style={{ minHeight: "92vh" }}
-            title="Data Rusak (Broken)"
+            title="Pencarian Data"
             subTitle="SAPK, SIASN, SIMASTER"
         >
             <Card>
