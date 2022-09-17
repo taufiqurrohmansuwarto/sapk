@@ -331,9 +331,9 @@ const DialogFormMaster = ({
                 }}
                 layout="vertical"
             >
-                {/* <Form.Item name="id" label="ID Pegawai SAPK">
+                <Form.Item name="id" label="ID Pegawai SAPK">
                     <Input readOnly />
-                </Form.Item> */}
+                </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
                     name="jenis_jabatan"
