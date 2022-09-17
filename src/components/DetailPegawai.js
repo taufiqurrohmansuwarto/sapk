@@ -27,25 +27,31 @@ const DataUser = ({ data }) => {
         return null;
     } else {
         return (
-            <Collapse defaultActiveKey={["1", "2"]}>
-                <Collapse.Panel header="Perangkat Daerah" key="1">
-                    <Avatar src={data?.foto} size="large" shape="square" />
-                    {data?.sudah_pensiun ? (
-                        <div>
-                            <Pensiun data={data?.data_pensiun} />
-                        </div>
-                    ) : (
-                        <div>AKTIF</div>
-                    )}
-                    <Divider />
-                    <div>{data?.skpd}</div>
-                    <Divider />
-                    <a
-                        href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
-                    >
-                        Download File Pembetulan Nama
-                    </a>
-                </Collapse.Panel>
+            <Collapse defaultActiveKey={["1", "2", "3"]}>
+                {data?.nama ? (
+                    <Collapse.Panel header="Perangkat Daerah" key="1">
+                        <Avatar src={data?.foto} size="large" shape="square" />
+                        {data?.sudah_pensiun ? (
+                            <div>
+                                <Pensiun data={data?.data_pensiun} />
+                            </div>
+                        ) : (
+                            <div>AKTIF</div>
+                        )}
+                        <Divider />
+                        <div>{data?.skpd}</div>
+                        <Divider />
+                        <a
+                            href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
+                        >
+                            Download File Pembetulan Nama
+                        </a>
+                    </Collapse.Panel>
+                ) : (
+                    <Collapse.Panel header="Data Kosong" key="3">
+                        Data di SIMASTER tidak ditemukan
+                    </Collapse.Panel>
+                )}
                 <Collapse.Panel header="Informasi Pegawai" key="2">
                     <Descriptions size="small" title="Informasi Pegawai SAPK">
                         <Descriptions.Item label="Nama">
@@ -87,25 +93,31 @@ const DataUser = ({ data }) => {
 
                     <Descriptions size="small" title="Hasil Komparasi">
                         <Descriptions.Item label="Nama">
-                            <StringDiff
-                                newValue={data?.nama}
-                                oldValue={data?.nama_sapk}
-                            />
+                            {data?.nama_sapk && data?.nama ? (
+                                <StringDiff
+                                    newValue={data?.nama}
+                                    oldValue={data?.nama_sapk}
+                                />
+                            ) : null}
                         </Descriptions.Item>
                         <Descriptions.Item label="NIP">
-                            <StringDiff
-                                newValue={data?.nip}
-                                oldValue={data?.nip_sapk}
-                            />
+                            {data?.nip_sapk && data?.nip ? (
+                                <StringDiff
+                                    newValue={data?.nip}
+                                    oldValue={data?.nip_sapk}
+                                />
+                            ) : null}
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal Lahir">
-                            <StringDiff
-                                newValue={data?.tanggal_lahir?.replaceAll(
-                                    "/",
-                                    "-"
-                                )}
-                                oldValue={data?.tanggal_lahir_sapk}
-                            />
+                            {data?.tanggal_lahir_sapk && data?.tanggal_lahir ? (
+                                <StringDiff
+                                    newValue={data?.tanggal_lahir?.replaceAll(
+                                        "/",
+                                        "-"
+                                    )}
+                                    oldValue={data?.tanggal_lahir_sapk}
+                                />
+                            ) : null}
                         </Descriptions.Item>
                     </Descriptions>
                 </Collapse.Panel>

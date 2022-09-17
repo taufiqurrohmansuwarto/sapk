@@ -43,9 +43,13 @@ module.exports.serializeRwJabatanMaster = (data) => {
         file: `${url}${strutkural?.file_jft}`
     }));
 
-    return [
-        ...rwytJabatanFungsional,
-        ...rwytJabatanPelaksana,
-        ...rwytJabatanStruktural
-    ];
+    if (data) {
+        return [
+            ...rwytJabatanFungsional,
+            ...rwytJabatanPelaksana,
+            ...rwytJabatanStruktural
+        ];
+    } else {
+        return null;
+    }
 };
