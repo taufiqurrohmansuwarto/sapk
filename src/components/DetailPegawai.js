@@ -3,6 +3,25 @@ import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
 
+const Pensiun = ({ data }) => {
+    return (
+        <div>
+            <div style={{ marginTop: 10, marginBottom: "2rem" }}>
+                <span style={{ fontWeight: "bold", color: "red" }}>
+                    STATUS PENSIUN
+                </span>
+            </div>
+            <div>tgl : {data?.tgl_sk}</div>
+            <div>Nomer SK : {data?.no_sk}</div>
+            <div>
+                <a href={data?.file} target="_blank">
+                    File SK
+                </a>
+            </div>
+        </div>
+    );
+};
+
 const DataUser = ({ data }) => {
     if (isEmpty(data)) {
         return null;
@@ -10,6 +29,14 @@ const DataUser = ({ data }) => {
         return (
             <Collapse defaultActiveKey={["1", "2"]}>
                 <Collapse.Panel header="Perangkat Daerah" key="1">
+                    {data?.sudah_pensiun ? (
+                        <div>
+                            <Pensiun data={data?.data_pensiun} />
+                        </div>
+                    ) : (
+                        <div>AKTIF</div>
+                    )}
+                    <Divider />
                     <div>{data?.skpd}</div>
                     <Divider />
                     <a
