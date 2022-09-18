@@ -1,131 +1,92 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, message, Table } from "antd";
-import {
-    findDataImport,
-    removeDataImport
-} from "../../services/fasilitator.service";
+import { useQuery } from "@tanstack/react-query";
+import { Card, Input, Space, Table } from "antd";
+import { useState } from "react";
+import { findDataImport } from "../../services/fasilitator.service";
 import Layout from "../../src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
 
-import * as xlsx from "xlsx";
-import * as FileSaver from "file-saver";
-
-const fileType =
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-const fileExtension = ".xlsx";
-
 const Index = () => {
-    const { data, isLoading } = useQuery(["data-import"], () =>
-        findDataImport()
-    );
-
-    const queryClient = useQueryClient();
-
-    const { mutate: hapus } = useMutation((id) => removeDataImport(id), {
-        onSuccess: () => {
-            queryClient.invalidateQueries(["data-import"]);
-        }
+    const [query, setQuery] = useState({
+        limit: 50,
+        page: 1,
+        type: "all"
     });
 
-    const downloadExcel = () => {
-        if (!data?.length) {
-            message.info("Tidak ada data untuk diunduh");
-        } else {
-            const hasilku = xlsx.utils.json_to_sheet(data);
-            const xlbuffer = xlsx.write(
-                {
-                    Sheets: {
-                        ["rekon"]: hasilku
-                    },
-                    SheetNames: ["rekon"]
-                },
-                {
-                    bookType: "xlsx",
-                    type: "array"
-                }
-            );
-            const hasil = new Blob([xlbuffer], { type: fileType });
-            FileSaver.saveAs(hasil, "rekon" + fileExtension);
+    const { data, isLoading } = useQuery(
+        ["data-import-personal", query],
+        () => {
+            return findDataImport(query);
         }
-    };
+    );
 
     const columns = [
-        {
-            title: "NIP",
-            dataIndex: "nip",
-            key: "nip"
-        },
-        {
-            title: "Nama",
-            dataIndex: "nama",
-            key: "nama"
-        },
-        {
-            title: "ID_PEGAWAI",
-            dataIndex: "pegawai_id",
-            key: "pegawai_id"
-        },
-        {
-            title: "UNOR_ID",
-            dataIndex: "unor_id",
-            key: "unor_id"
-        },
-        {
-            title: "JFU_ID",
-            dataIndex: "jfu_id",
-            key: "jfu_id"
-        },
-        {
-            title: "JFT_ID",
-            dataIndex: "jft_id",
-            key: "jft_id"
-        },
-        {
-            title: "NO_SK",
-            dataIndex: "no_sk",
-            key: "no_sk"
-        },
-        {
-            title: "TGL_SK",
-            dataIndex: "tgl_sk",
-            key: "tgl_sk"
-        },
-        {
-            title: "Operator",
-            dataIndex: "operator",
-            key: "operator"
-        },
+        { title: "Nama", dataIndex: "nama" },
+        { title: "NIP", dataIndex: "nip" },
+        { title: "PEGAWAI_ID", dataIndex: "pegawai_id" },
+        { title: "UNOR_ID", dataIndex: "unor_id" },
+        { title: "JFU_ID", dataIndex: "jfu_id" },
+        { title: "JFT_ID", dataIndex: "jft_id" },
+        { title: "Operator", dataIndex: "operator" },
         {
             title: "Dibuat pada",
             dataIndex: "created_at",
-            key: "created_at"
-        },
-        {
-            title: "Hapus",
-            dataIndex: "hapus",
-            key: "hapus",
-            render: (text, record) => (
-                <Button
-                    type="primary"
-                    danger
-                    onClick={() => hapus(record?.nip)}
-                >
-                    Hapus
-                </Button>
-            )
+            key: "created_at",
+            render: (text, record) => {
+                // return date format dd-mm-yyyy hh:mm
+                return new Date(text).toLocaleString();
+            }
         }
     ];
 
+    const handleSearchChange = (e) => {
+        if (!e) {
+            setQuery({
+                page: 1,
+                limit: 50,
+                type: "personal"
+            });
+        } else {
+            setQuery({
+                ...query,
+                page: 1,
+                search: e.target.value
+            });
+        }
+    };
+
     return (
         <PageContainer>
-            <Button onClick={downloadExcel}>Download</Button>
-            <Table
-                pagination={false}
-                columns={columns}
-                rowKey={(row) => row?.nip}
-                loading={isLoading}
-                dataSource={data}
-            />
+            <Card>
+                <Space>
+                    <a href="/sapk/api/fasilitator/download-import?type=all">
+                        Unduh semua
+                    </a>
+                    <Input.Search onChange={handleSearchChange} />
+                </Space>
+                <Table
+                    loading={isLoading}
+                    dataSource={data?.data}
+                    rowKey={(row) => row?.nip}
+                    columns={columns}
+                    pagination={{
+                        current: query?.page,
+                        position: ["topRight", "bottomRight"],
+                        defaultCurrent: query?.page,
+                        defaultPageSize: query?.limit,
+                        showTotal: (total, range) =>
+                            `${range[0]}-${range[1]} dari ${total} data`,
+                        showSizeChanger: false,
+                        total: data?.total,
+                        onChange: (page, limit) => {
+                            setQuery({
+                                ...query,
+                                page,
+                                limit
+                            });
+                        }
+                    }}
+                />
+            </Card>
         </PageContainer>
     );
 };

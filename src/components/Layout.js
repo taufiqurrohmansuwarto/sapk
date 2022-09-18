@@ -180,6 +180,7 @@ const Layout = ({ children, disableContentMargin = false }) => {
             menuItemRender={menuItemRender}
             rightContentRender={() => rightContentRender(data?.user)}
             fixSiderbar
+            collapsed
             disableContentMargin={disableContentMargin}
         >
             {children}

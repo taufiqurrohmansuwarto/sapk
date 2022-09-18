@@ -130,8 +130,13 @@ export const addJabatanSapk = (data) => {
         .then((res) => res?.data);
 };
 
-export const findDataImport = () => {
-    return fetcher.get("/sapk-import").then((res) => res?.data);
+export const findDataImport = (data) => {
+    //  transform data to query string
+    const query = Object.keys(data)
+        .map((key) => `${key}=${data[key]}`)
+        .join("&");
+    console.log(query);
+    return fetcher.get(`/sapk-import?${query}`).then((res) => res?.data);
 };
 
 export const createDataImport = (data) => {

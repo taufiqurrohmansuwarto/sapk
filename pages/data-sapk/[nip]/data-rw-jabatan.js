@@ -589,50 +589,53 @@ const RiwayatJabatan = () => {
             style={{ minHeight: "92vh" }}
             subTitle="Riwayat Jabatan"
         >
-            <Card>
-                <Skeleton loading={currentUserLoading}>
-                    <Row gutter={[8, 8]}>
-                        <Col span={24}>
-                            <DetailPegawai user={currentUser} />
-                        </Col>
-                    </Row>
-                    <Divider>Padanan Data </Divider>
-                    <Row gutter={[8, 8]}>
-                        <Col span={24}>
-                            <Card title="SIMASTER">
-                                <TableRiwayatMaster
-                                    unor={dataUnor}
-                                    fungsional={dataJabatanFungsional}
-                                    fungsionalUmum={dataJabatanFungsionalUmum}
-                                    data={dataMaster}
-                                    user={currentUser}
-                                    loading={loadingMasterJabatan}
-                                    id={currentUser?.id_sapk}
-                                />
-                            </Card>
-                        </Col>
-                        <Col span={24}>
-                            <Card title="SAPK">
-                                <TableRiwayatJabatanSAPK
-                                    loading={isLoading}
-                                    data={data}
-                                />
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Divider />
-                    <Row gutter={[8, 8]}>
-                        <Col span={24}>
-                            <Card title="SIASN">
-                                <TableRiwayatSIASN
-                                    data={dataSiasn}
-                                    loading={loadingSiasn}
-                                />
-                            </Card>
-                        </Col>
-                    </Row>
-                </Skeleton>
-            </Card>
+            <Row>
+                <Col span={18} push={1}>
+                    <Card>
+                        <Skeleton loading={currentUserLoading}>
+                            <Row gutter={[8, 8]}>
+                                <Col span={24}>
+                                    <DetailPegawai user={currentUser} />
+                                </Col>
+                            </Row>
+                            <Divider>Padanan Data </Divider>
+                            <Row gutter={[8, 8]}>
+                                <Col span={24}>
+                                    <Card title="SIMASTER">
+                                        <TableRiwayatMaster
+                                            unor={dataUnor}
+                                            fungsional={dataJabatanFungsional}
+                                            fungsionalUmum={
+                                                dataJabatanFungsionalUmum
+                                            }
+                                            data={dataMaster}
+                                            user={currentUser}
+                                            loading={loadingMasterJabatan}
+                                            id={currentUser?.id_sapk}
+                                        />
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card title="SAPK">
+                                        <TableRiwayatJabatanSAPK
+                                            loading={isLoading}
+                                            data={data}
+                                        />
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card title="SIASN">
+                                        <TableRiwayatSIASN
+                                            data={dataSiasn}
+                                            loading={loadingSiasn}
+                                        />
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Skeleton>
+                    </Card>
+                </Col>
+            </Row>
         </PageContainer>
     );
 };

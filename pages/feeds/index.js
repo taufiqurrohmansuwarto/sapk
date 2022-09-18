@@ -234,7 +234,7 @@ const Feeds = () => {
                 style={{ height: "92vh" }}
             >
                 <Card>
-                    <div>Hallo, {data?.user?.name}. Sehat ga? </div>
+                    <div>Hallo, {data?.user?.name}. </div>
                 </Card>
             </PageContainer>
         </>

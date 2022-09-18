@@ -1,3 +1,4 @@
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { orderBy } from "lodash";
 const https = require("https");
@@ -97,14 +98,27 @@ module.exports.informasiPembetulanNama = async (req, res) => {
             `/sapk/${employeeNumber}/data-utama-sapk`
         );
 
+        const dataUnorPns = await fetcher.get(
+            `/sapk/${employeeNumber}/data-rw-pns-unor-sapk`
+        );
+
         const dataSapk = dataUtamaSapk?.data;
+        const rwUnorPns = dataUnorPns?.data;
+
+        const unor_sapk =
+            rwUnorPns?.[rwUnorPns?.length - 1]?.unor === null
+                ? `${
+                      rwUnorPns?.[rwUnorPns?.length - 1]?.namaUnorBaru
+                  } (Kemungkinan HR terhapus atau diluar pemerintah provinsi Jawa Timur)`
+                : rwUnorPns?.[rwUnorPns?.length - 1]?.unor;
 
         const currentData = {
             id_sapk: dataSapk?.id,
             ...result?.data,
             nama_sapk: dataSapk?.nama,
             tanggal_lahir_sapk: dataSapk?.tglLahir,
-            nip_sapk: dataSapk?.nipBaru
+            nip_sapk: dataSapk?.nipBaru,
+            unor_sapk
         };
 
         res.json(currentData);
@@ -164,6 +178,18 @@ module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
         const result = await fetcher.get(
             "/sapk/reference/jabatan-fungsional-umum"
         );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+
+module.exports.rwPnsUnor = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(`/sapk/${nip}/data-rw-pns-unor-sapk`);
         res.json(result?.data);
     } catch (error) {
         console.log(error);

@@ -36,7 +36,7 @@ const index = async (req, res) => {
             );
             await workbook.xlsx.write(res);
             res.status(200).end();
-        } else if (type === "operator") {
+        } else if (type === "personal") {
             const result = await prisma.data_import.findMany({
                 where: {
                     operator: customId

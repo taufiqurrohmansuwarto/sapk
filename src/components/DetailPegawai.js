@@ -1,4 +1,4 @@
-import { Avatar, Collapse, Descriptions, Divider } from "antd";
+import { Avatar, Collapse, Descriptions, Divider, Image } from "antd";
 import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
@@ -29,8 +29,8 @@ const DataUser = ({ data }) => {
         return (
             <Collapse defaultActiveKey={["1", "2", "3"]}>
                 {data?.nama ? (
-                    <Collapse.Panel header="Perangkat Daerah" key="1">
-                        <Avatar src={data?.foto} size="large" shape="square" />
+                    <Collapse.Panel header="Informasi Pegawai" key="1">
+                        <Image src={data?.foto} width={80} />
                         {data?.sudah_pensiun ? (
                             <div>
                                 <Pensiun data={data?.data_pensiun} />
@@ -39,20 +39,19 @@ const DataUser = ({ data }) => {
                             <div>AKTIF</div>
                         )}
                         <Divider />
-                        <div>{data?.skpd}</div>
-                        <Divider />
-                        <a
-                            href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
-                        >
-                            Download File Pembetulan Nama
-                        </a>
+                        <Descriptions size="small" title="Data OPD Master">
+                            <div>{data?.skpd}</div>
+                        </Descriptions>
+                        <Descriptions size="small" title="Data Unor SAPK">
+                            <div>{data?.unor_sapk}</div>
+                        </Descriptions>
                     </Collapse.Panel>
                 ) : (
                     <Collapse.Panel header="Data Kosong" key="3">
                         Data di SIMASTER tidak ditemukan
                     </Collapse.Panel>
                 )}
-                <Collapse.Panel header="Informasi Pegawai" key="2">
+                <Collapse.Panel header="Perbandingan" key="2">
                     <Descriptions size="small" title="Informasi Pegawai SAPK">
                         <Descriptions.Item label="Nama">
                             {data?.nama_sapk}
@@ -120,6 +119,12 @@ const DataUser = ({ data }) => {
                             ) : null}
                         </Descriptions.Item>
                     </Descriptions>
+                    <Divider />
+                    <a
+                        href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
+                    >
+                        Download File Pembetulan Nama
+                    </a>
                 </Collapse.Panel>
             </Collapse>
         );
