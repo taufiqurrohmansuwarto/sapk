@@ -266,6 +266,8 @@ const DialogFormMaster = ({
                 jfu_id: fungsional_umum_id ? fungsional_umum_id : "",
                 no_sk: nomor_sk,
                 tgl_sk: moment(tgl_sk).format("DD-MM-YYYY"),
+                tmt_jabatan: moment(tmt_jabatan).format("DD-MM-YYYY"),
+                tmt_pelantikan: moment(tmt_pelantikan).format("DD-MM-YYYY"),
                 nama: user?.nama
             };
 

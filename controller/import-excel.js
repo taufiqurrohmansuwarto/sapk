@@ -21,6 +21,8 @@ const index = async (req, res) => {
                 { header: "JFT_ID", key: "jft_id", width: 30 },
                 { header: "NO_SK", key: "no_sk", width: 30 },
                 { header: "TGL_SK", key: "tgl_sk", width: 30 },
+                { header: "TMT_JABATAN", key: "tmt_jabatan", width: 30 },
+                { header: "TMT_PELANTIKAN", key: "tmt_pelantikan", width: 30 },
                 { header: "Operator", key: "operator", width: 30 },
                 { header: "Tanggal Entri", key: "created_at", width: 30 }
             ];
@@ -52,6 +54,8 @@ const index = async (req, res) => {
                 { header: "JFT_ID", key: "jft_id", width: 30 },
                 { header: "NO_SK", key: "no_sk", width: 30 },
                 { header: "TGL_SK", key: "tgl_sk", width: 30 },
+                { header: "TMT_JABATAN", key: "tmt_jabatan", width: 30 },
+                { header: "TMT_PELANTIKAN", key: "tmt_pelantikan", width: 30 },
                 { header: "Operator", key: "operator", width: 30 },
                 { header: "Tanggal Entri", key: "created_at", width: 30 }
             ];

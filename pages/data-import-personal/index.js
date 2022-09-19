@@ -12,7 +12,7 @@ const Index = () => {
     const [query, setQuery] = useState({
         limit: 50,
         page: 1,
-        type: "personal"
+        type: "operator"
     });
 
     const { data, isLoading } = useQuery(
