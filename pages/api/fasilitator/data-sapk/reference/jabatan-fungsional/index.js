@@ -1,12 +1,13 @@
 import nc from "next-connect";
-const handler = nc();
-import { referenceJabatanFungsional } from "../../../../../controller/sapk.controller";
-import auth from "../../../../../middleware/auth";
+import auth from "../../../../../../middleware/auth";
 
 export const config = {
     api: {
         responseLimit: "8mb"
     }
 };
+
+import { referenceJabatanFungsional } from "'../../../../../../controller/sapk.controller";
+const handler = nc();
 
 export default handler.use(auth).get(referenceJabatanFungsional);
