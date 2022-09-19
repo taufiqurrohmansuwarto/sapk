@@ -1,4 +1,3 @@
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { orderBy } from "lodash";
 const https = require("https");
@@ -199,7 +198,7 @@ module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
     }
 };
 
-module.exports.referenceDetaulJabatanFungsionalUmum = async (req, res) => {
+module.exports.referenceDetailJabatanFungsionalUmum = async (req, res) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get(

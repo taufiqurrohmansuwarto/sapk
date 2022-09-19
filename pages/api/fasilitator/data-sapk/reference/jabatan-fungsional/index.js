@@ -7,7 +7,7 @@ export const config = {
     }
 };
 
-import { referenceJabatanFungsional } from "'../../../../../../controller/sapk.controller";
+import { referenceJabatanFungsional } from "../../../../../../controller/sapk.controller";
 const handler = nc();
 
 export default handler.use(auth).get(referenceJabatanFungsional);

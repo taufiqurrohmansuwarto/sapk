@@ -146,3 +146,11 @@ export const createDataImport = (data) => {
 export const removeDataImport = (id) => {
     return fetcher.delete(`/sapk-import/${id}`).then((res) => res?.data);
 };
+
+export const detailJfu = (nama) => {
+    return fetcher.get(`data-sapk/reference/jabatan-fungsional-umum/${nama}`);
+};
+
+export const detailJf = (nama) => {
+    return fetcher.get(`data-sapk/reference/jabatan-fungsional/${nama}`);
+};
