@@ -172,11 +172,38 @@ module.exports.referenceJabatanFungsional = async (req, res) => {
     }
 };
 
+module.exports.referenceDetailJabatanFungsional = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nama } = req?.query;
+        const result = await fetcher.get(
+            `/sapk/reference/jabatan-fungsional/${nama}`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+
 module.exports.referenceJabatanFungsionalUmum = async (req, res) => {
     try {
         const { fetcher } = req;
         const result = await fetcher.get(
             "/sapk/reference/jabatan-fungsional-umum"
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ code: 400, message: "Internal Server Error" });
+    }
+};
+
+module.exports.referenceDetaulJabatanFungsionalUmum = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const result = await fetcher.get(
+            `/sapk/reference/jabatan-fungsional-umum/${req?.query?.nama}`
         );
         res.json(result?.data);
     } catch (error) {
