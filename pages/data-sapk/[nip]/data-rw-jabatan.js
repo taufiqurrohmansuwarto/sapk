@@ -227,14 +227,14 @@ const FormJFT = ({ name }) => {
     return (
         <>
             <Form.Item
-                label="Jabatan Fungsional Umum"
+                label="Jabatan Fungsional Tertentu"
                 rules={[{ required: true }]}
                 name={name}
             >
                 <Select
                     showSearch
                     filterOption={false}
-                    placeholder="Pilih Jabatan Fungsional Umum"
+                    placeholder="Pilih Jabatan Fungsional Tertentu"
                     loading={isLoadingJfu}
                     notFoundContent={
                         isLoadingJfu && debounceValue ? (
