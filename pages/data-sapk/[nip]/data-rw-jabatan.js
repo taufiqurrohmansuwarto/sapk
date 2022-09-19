@@ -1,3 +1,4 @@
+import { useDebouncedValue } from "@mantine/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Button,
@@ -12,9 +13,11 @@ import {
     Row,
     Select,
     Skeleton,
+    Spin,
     Table,
     TreeSelect
 } from "antd";
+import { isEmpty } from "lodash";
 import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -22,6 +25,8 @@ import {
     addJabatanSapk,
     bypassJabatanSIASN,
     createDataImport,
+    detailJf,
+    detailJfu,
     informasiPembetulanNama,
     masterRwJabatan,
     refJabatanFungsional,
@@ -167,6 +172,70 @@ const TableRiwayatSIASN = ({ data, loading }) => {
     );
 };
 
+const FormJFU = ({ name }) => {
+    const [jfu, setJfu] = useState(undefined);
+    const [debounceValue] = useDebouncedValue(jfu, 500);
+
+    const { data: dataJfu, isLoading: isLoadingJfu } = useQuery(
+        ["data-jfu", debounceValue],
+        () => detailJfu(debounceValue),
+        {
+            enabled: Boolean(debounceValue)
+        }
+    );
+
+    return (
+        <>
+            <Form.Item
+                label="Jabatan Fungsional Umum"
+                rules={[{ required: true }]}
+                name={name}
+            >
+                <Select
+                    showSearch
+                    filterOption={false}
+                    placeholder="Pilih Jabatan Fungsional Umum"
+                    loading={isLoadingJfu}
+                    notFoundContent={
+                        isLoadingJfu && debounceValue ? (
+                            <Spin size="small" />
+                        ) : null
+                    }
+                    onSearch={(value) => setJfu(value)}
+                >
+                    {dataJfu?.map((item) => (
+                        <Select.Option key={item?.id} value={item?.id}>
+                            {item?.nama}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </Form.Item>
+        </>
+    );
+};
+
+const FormJFT = ({ name }) => {
+    const [jft, setJft] = useState([]);
+    cosnt[debounceValue] = useDebouncedValue(jft, 500);
+
+    const { data: dataJft, loading: loadingJft } = useQuery(
+        ["jft", debounceValue],
+        () => detailJf(debounceValue),
+        {
+            enabled: !!debounceValue,
+            refetchOnWindowFocus: false
+        }
+    );
+
+    return (
+        <Form.Item
+            rules={[{ required: true }]}
+            label="Jabatan Fungsional"
+            name={name}
+        ></Form.Item>
+    );
+};
+
 const DialogFormMaster = ({
     visible,
     handleCancel,
@@ -206,7 +275,7 @@ const DialogFormMaster = ({
 
     const { mutate: tambahImport, isLoading: isLoadingTambahImport } =
         useMutation((data) => createDataImport(data), {
-            onError: (e) => alert(JSON.stringify(error)),
+            onError: (e) => alert(JSON.stringify(e)),
             onSuccess: () => {
                 message.success("Berhasil ditambahkan");
                 handleCancel();
@@ -394,23 +463,7 @@ const DialogFormMaster = ({
                                 </Select>
                             </Form.Item>
                         ) : getFieldValue("jenis_jabatan") === "Pelaksana" ? (
-                            <Form.Item
-                                name="fungsional_umum_id"
-                                label="Pelaksana"
-                                rules={[{ required: true }]}
-                            >
-                                <Select optionFilterProp="nama" showSearch>
-                                    {fungsionalUmum?.map((f) => (
-                                        <Select.Option
-                                            key={f?.id}
-                                            value={f?.id}
-                                            nama={f?.nama}
-                                        >
-                                            {f?.nama}
-                                        </Select.Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
+                            <FormJFU name="fungsional_umum_id" />
                         ) : null
                     }
                 </Form.Item>

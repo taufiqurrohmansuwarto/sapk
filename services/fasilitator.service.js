@@ -148,9 +148,13 @@ export const removeDataImport = (id) => {
 };
 
 export const detailJfu = (nama) => {
-    return fetcher.get(`data-sapk/reference/jabatan-fungsional-umum/${nama}`);
+    return fetcher
+        .get(`data-sapk/reference/jabatan-fungsional-umum/${nama}`)
+        .then((res) => res?.data);
 };
 
 export const detailJf = (nama) => {
-    return fetcher.get(`data-sapk/reference/jabatan-fungsional/${nama}`);
+    return fetcher
+        .get(`data-sapk/reference/jabatan-fungsional/${nama}`)
+        .then((res) => res?.data);
 };
