@@ -17,7 +17,6 @@ import {
     Table,
     TreeSelect
 } from "antd";
-import { isEmpty } from "lodash";
 import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -33,8 +32,7 @@ import {
     refJabatanFungsionalUmum,
     refUnor,
     rwJabatanSapk,
-    siasnRwJabatan,
-    tokenSiasn
+    siasnRwJabatan
 } from "../../../services/fasilitator.service";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
@@ -215,24 +213,44 @@ const FormJFU = ({ name }) => {
 };
 
 const FormJFT = ({ name }) => {
-    const [jft, setJft] = useState([]);
-    cosnt[debounceValue] = useDebouncedValue(jft, 500);
+    const [jfu, setJfu] = useState(undefined);
+    const [debounceValue] = useDebouncedValue(jfu, 500);
 
-    const { data: dataJft, loading: loadingJft } = useQuery(
-        ["jft", debounceValue],
+    const { data: dataJfu, isLoading: isLoadingJfu } = useQuery(
+        ["data-jfu", debounceValue],
         () => detailJf(debounceValue),
         {
-            enabled: !!debounceValue,
-            refetchOnWindowFocus: false
+            enabled: Boolean(debounceValue)
         }
     );
 
     return (
-        <Form.Item
-            rules={[{ required: true }]}
-            label="Jabatan Fungsional"
-            name={name}
-        ></Form.Item>
+        <>
+            <Form.Item
+                label="Jabatan Fungsional Umum"
+                rules={[{ required: true }]}
+                name={name}
+            >
+                <Select
+                    showSearch
+                    filterOption={false}
+                    placeholder="Pilih Jabatan Fungsional Umum"
+                    loading={isLoadingJfu}
+                    notFoundContent={
+                        isLoadingJfu && debounceValue ? (
+                            <Spin size="small" />
+                        ) : null
+                    }
+                    onSearch={(value) => setJfu(value)}
+                >
+                    {dataJfu?.map((item) => (
+                        <Select.Option key={item?.id} value={item?.id}>
+                            {item?.nama}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </Form.Item>
+        </>
     );
 };
 
@@ -445,23 +463,7 @@ const DialogFormMaster = ({
                 >
                     {({ getFieldValue }) =>
                         getFieldValue("jenis_jabatan") === "Fungsional" ? (
-                            <Form.Item
-                                name="fungsional_id"
-                                label="Fungsional"
-                                rules={[{ required: true }]}
-                            >
-                                <Select optionFilterProp="nama" showSearch>
-                                    {fungsional?.map((f) => (
-                                        <Select.Option
-                                            key={f?.id}
-                                            value={f?.id}
-                                            nama={f?.nama}
-                                        >
-                                            {f?.nama}
-                                        </Select.Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
+                            <FormJFT name="fungsional_id" />
                         ) : getFieldValue("jenis_jabatan") === "Pelaksana" ? (
                             <FormJFU name="fungsional_umum_id" />
                         ) : null
