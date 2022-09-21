@@ -48,7 +48,51 @@ const index = async (req, res) => {
                 const unor = data?.sort(
                     (a, b) => a?.created_at - b?.created_at
                 );
+
+                const jfu = data?.filter((item) => !!item?.jfu_id);
+                const jft = data?.filter((item) => !!item?.jft_id);
+                const struktural = data?.filter(
+                    (item) => !item?.jft_id && !item?.jfu_id
+                );
+
                 const splitUnor = chunk(unor, 100);
+
+                const splitJfu = chunk(jfu, 500);
+                const splitJft = chunk(jft, 500);
+                const splitStruktural = chunk(struktural, 500);
+
+                splitJfu?.forEach((item, index) => {
+                    const wb = xlsx.utils.book_new();
+                    const ws = xlsx.utils.json_to_sheet(item);
+                    xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
+                    const buffer = xlsx.write(wb, { type: "buffer" });
+                    excel[indexKey].addFile(
+                        `data-jfu-${key}-${index}.xlsx`,
+                        buffer
+                    );
+                });
+
+                splitJft?.forEach((item, index) => {
+                    const wb = xlsx.utils.book_new();
+                    const ws = xlsx.utils.json_to_sheet(item);
+                    xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
+                    const buffer = xlsx.write(wb, { type: "buffer" });
+                    excel[indexKey].addFile(
+                        `data-jft-${key}-${index}.xlsx`,
+                        buffer
+                    );
+                });
+
+                splitStruktural?.forEach((item, index) => {
+                    const wb = xlsx.utils.book_new();
+                    const ws = xlsx.utils.json_to_sheet(item);
+                    xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
+                    const buffer = xlsx.write(wb, { type: "buffer" });
+                    excel[indexKey].addFile(
+                        `data-struktural-${key}-${index}.xlsx`,
+                        buffer
+                    );
+                });
 
                 splitUnor?.forEach((item, index) => {
                     const wb = xlsx.utils.book_new();
@@ -56,7 +100,7 @@ const index = async (req, res) => {
                     xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
                     const buffer = xlsx.write(wb, { type: "buffer" });
                     excel[indexKey].addFile(
-                        `data-${key}-${index}.xlsx`,
+                        `data-unor-${key}-${index}.xlsx`,
                         buffer
                     );
                 });
