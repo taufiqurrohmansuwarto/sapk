@@ -101,11 +101,15 @@ module.exports.informasiPembetulanNama = async (req, res) => {
             `/sapk/${employeeNumber}/data-rw-pns-unor-sapk`
         );
 
+        console.log(result, dataUtamaSapk, dataUnorPns);
+
         const dataSapk = dataUtamaSapk?.data;
         const rwUnorPns = dataUnorPns?.data;
 
         const unor_sapk =
-            rwUnorPns?.[rwUnorPns?.length - 1]?.unor === null
+            rwUnorPns === null
+                ? ""
+                : rwUnorPns?.[rwUnorPns?.length - 1]?.unor === null
                 ? `${
                       rwUnorPns?.[rwUnorPns?.length - 1]?.namaUnorBaru
                   } (Kemungkinan HR terhapus atau diluar pemerintah provinsi Jawa Timur)`
