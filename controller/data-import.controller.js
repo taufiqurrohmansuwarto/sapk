@@ -95,7 +95,36 @@ const remove = async (req, res) => {
     }
 };
 
+const dashboard = async (req, res) => {
+    try {
+        //  get count of data_import group by operator
+        const count = await prisma.$queryRaw`
+       select count(*) as value, split_part(operator, '|', 2) as operator_name
+from data_import
+group by operator
+ORDER BY count(*) DESC; 
+        `; // get average of data_import by day group by operator
+
+        const averageByDay = await prisma.$queryRaw`
+            select count(*) as value, split_part(operator, '|', 2) as operator_name, to_char(created_at, 'dd-mm-yyy') as created_at
+from data_import
+group by operator, to_char(created_at, 'dd-mm-yyy')
+ORDER BY to_char(created_at, 'dd-mm-yyy') DESC;
+            `;
+
+        const total = await prisma.$queryRaw`select count(*) from data_import;`;
+
+        const data = { count, averageByDay, total: total[0]?.count };
+
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+};
+
 module.exports = {
+    dashboard,
     index,
     create,
     remove

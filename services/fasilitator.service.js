@@ -158,3 +158,9 @@ export const detailJf = (nama) => {
         .get(`data-sapk/reference/jabatan-fungsional/${nama}`)
         .then((res) => res?.data);
 };
+
+export const dataDashboard = () => {
+    return fetcher
+        .get("/dashboard/entrian-data-import")
+        .then((res) => res?.data);
+};

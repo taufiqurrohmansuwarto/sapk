@@ -28,6 +28,7 @@ import {
 import Layout from "../../src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
 import { useSession } from "next-auth/react";
+import Dashboard from "../../src/components/Dashboard";
 
 const TombolTambahkan = ({ data }) => {
     const [visible, setVisible] = useState(false);
@@ -233,9 +234,7 @@ const Feeds = () => {
                 subTitle="Solusi SIASN,SIMASTER dan SAPK"
                 style={{ height: "92vh" }}
             >
-                <Card>
-                    <div>Hallo, {data?.user?.name}. </div>
-                </Card>
+                <Dashboard user={data} />
             </PageContainer>
         </>
     );
