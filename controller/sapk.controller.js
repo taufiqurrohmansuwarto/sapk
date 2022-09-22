@@ -121,6 +121,7 @@ module.exports.informasiPembetulanNama = async (req, res) => {
             nama_sapk: dataSapk?.nama,
             tanggal_lahir_sapk: dataSapk?.tglLahir,
             nip_sapk: dataSapk?.nipBaru,
+            email_sapk: dataSapk?.email,
             unor_sapk
         };
 

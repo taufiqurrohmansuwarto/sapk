@@ -62,6 +62,9 @@ const DataUser = ({ data }) => {
                         <Descriptions.Item label="Tanggal Lahir SAPK">
                             {data?.tanggal_lahir_sapk}
                         </Descriptions.Item>
+                        <Descriptions.Item label="Email SAPK">
+                            {data?.email_sapk}
+                        </Descriptions.Item>
                     </Descriptions>
 
                     <Divider />
