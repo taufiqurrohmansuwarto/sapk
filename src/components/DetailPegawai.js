@@ -1,4 +1,4 @@
-import { Avatar, Collapse, Descriptions, Divider, Image } from "antd";
+import { Collapse, Descriptions, Divider, Image, Space, Tag } from "antd";
 import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
@@ -30,14 +30,30 @@ const DataUser = ({ data }) => {
             <Collapse defaultActiveKey={["1", "2", "3"]}>
                 {data?.nama ? (
                     <Collapse.Panel header="Informasi Pegawai" key="1">
-                        <Image src={data?.foto} width={80} />
-                        {data?.sudah_pensiun ? (
-                            <div>
-                                <Pensiun data={data?.data_pensiun} />
-                            </div>
-                        ) : (
-                            <div>AKTIF</div>
-                        )}
+                        <Space direction="vertical">
+                            <Image src={data?.foto} width={80} />
+                            {data?.sudah_pensiun ? (
+                                <div>
+                                    <Pensiun data={data?.data_pensiun} />
+                                </div>
+                            ) : (
+                                <div>
+                                    <Space direction="vertical">
+                                        <Tag color="green">AKTIF</Tag>
+                                        <div>
+                                            <a
+                                                href={
+                                                    data?.dokumen_pangkat_terakhir
+                                                }
+                                                target="_blank"
+                                            >
+                                                Dokumen Pangkat terkahir
+                                            </a>
+                                        </div>
+                                    </Space>
+                                </div>
+                            )}
+                        </Space>
                         <Divider />
                         <Descriptions size="small" title="Data OPD Master">
                             <div>{data?.skpd}</div>

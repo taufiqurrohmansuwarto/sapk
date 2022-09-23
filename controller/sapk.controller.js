@@ -101,8 +101,6 @@ module.exports.informasiPembetulanNama = async (req, res) => {
             `/sapk/${employeeNumber}/data-rw-pns-unor-sapk`
         );
 
-        console.log(result, dataUtamaSapk, dataUnorPns);
-
         const dataSapk = dataUtamaSapk?.data;
         const rwUnorPns = dataUnorPns?.data;
 
