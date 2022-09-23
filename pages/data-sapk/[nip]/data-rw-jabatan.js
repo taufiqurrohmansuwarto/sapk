@@ -361,8 +361,6 @@ const DialogFormMaster = ({
                 tambah_riwayat_unor_saja
             };
 
-            console.log(data);
-
             // we fucking need usulan id
             const postDataSIASN = {
                 pns_orang_id: id,
