@@ -36,12 +36,8 @@ const Index = () => {
     };
 
     const columns = [
-        { title: "Nama", dataIndex: "nama" },
         { title: "NIP", dataIndex: "nip" },
-        { title: "PEGAWAI_ID", dataIndex: "pegawai_id" },
-        { title: "UNOR_ID", dataIndex: "unor_id" },
-        { title: "JFU_ID", dataIndex: "jfu_id" },
-        { title: "JFT_ID", dataIndex: "jft_id" },
+        { title: "Nama", dataIndex: "nama" },
         {
             title: "Dibuat pada",
             dataIndex: "created_at",
