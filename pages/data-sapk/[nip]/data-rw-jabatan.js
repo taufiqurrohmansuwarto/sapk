@@ -295,7 +295,7 @@ const DialogFormMaster = ({
         useMutation((data) => createDataImport(data), {
             onError: (e) =>
                 alert(
-                    "Pasien sudah dientri oleh petugas lain harap cek kembali"
+                    "Pasien sudah dientri oleh petugas lain harap cek kembali di menu full import"
                 ),
             onSuccess: () => {
                 message.success("Berhasil ditambahkan");
@@ -389,7 +389,7 @@ const DialogFormMaster = ({
 
             if (!data?.pegawai_id) {
                 message.error(
-                    "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki"
+                    "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki."
                 );
             } else {
                 tambahImport(data);
