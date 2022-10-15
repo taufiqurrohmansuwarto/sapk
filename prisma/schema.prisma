@@ -37,16 +37,17 @@ model request_perbaikan_nama {
 }
 
 model data_import {
-  nip            String    @id
-  pegawai_id     String?
-  unor_id        String?
-  jfu_id         String?
-  jft_id         String?
-  no_sk          String?
-  tgl_sk         String?
-  operator       String?
-  nama           String?
-  tmt_jabatan    String?
-  tmt_pelantikan String?
-  created_at     DateTime? @default(now()) @db.Timestamp()
+  nip                      String    @id
+  pegawai_id               String?
+  unor_id                  String?
+  jfu_id                   String?
+  jft_id                   String?
+  no_sk                    String?
+  tgl_sk                   String?
+  operator                 String?
+  nama                     String?
+  tmt_jabatan              String?
+  tmt_pelantikan           String?
+  created_at               DateTime? @default(now()) @db.Timestamp()
+  tambah_riwayat_unor_saja Boolean   @default(false)
 }

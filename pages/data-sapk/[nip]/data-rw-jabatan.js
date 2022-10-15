@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Button,
     Card,
+    Checkbox,
     Col,
     DatePicker,
     Divider,
@@ -320,6 +321,7 @@ const DialogFormMaster = ({
                 fungsional_id,
                 fungsional_umum_id,
                 jenis_jabatan
+                // tambah_riwayat_unor_saja
             } = result;
 
             let jenis_jabatan_id = jenis_jabatan === "Fungsional" ? "2" : "4";
@@ -359,6 +361,7 @@ const DialogFormMaster = ({
                 tmt_jabatan: moment(tmt_jabatan).format("DD-MM-YYYY"),
                 tmt_pelantikan: moment(tmt_pelantikan).format("DD-MM-YYYY"),
                 nama: user?.nama
+                // tambah_riwayat_unor_saja
             };
 
             // we fucking need usulan id
@@ -430,6 +433,15 @@ const DialogFormMaster = ({
                 }}
                 layout="vertical"
             >
+                {/* <Form.Item
+                    name="tambah_riwayat_unor_saja"
+                    help="Kalau jabatan sudah sama di sapk, maka hanya tambahkan riwayat unor saja"
+                    valuePropName="checked"
+                >
+                    <Checkbox>
+                        Tandai jika butuh riwayat unor saja, tidak pakai jabatan
+                    </Checkbox>
+                </Form.Item> */}
                 <Form.Item name="id" label="ID Pegawai SAPK">
                     <Input readOnly />
                 </Form.Item>
@@ -570,15 +582,6 @@ const TableRiwayatMaster = ({
                         Tambah
                     </Button>
                 );
-                // if (row?.jenis_jabatan !== "Struktural") {
-                //     return (
-                //         <Button type="primary" onClick={() => handleOpen(row)}>
-                //             Tambah
-                //         </Button>
-                //     );
-                // } else {
-                //     return null;
-                // }
             }
         }
     ];
