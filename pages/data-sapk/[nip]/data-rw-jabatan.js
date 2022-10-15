@@ -293,7 +293,10 @@ const DialogFormMaster = ({
 
     const { mutate: tambahImport, isLoading: isLoadingTambahImport } =
         useMutation((data) => createDataImport(data), {
-            onError: (e) => alert(JSON.stringify(e)),
+            onError: (e) =>
+                alert(
+                    "Pasien sudah dientri oleh petugas lain harap cek kembali"
+                ),
             onSuccess: () => {
                 message.success("Berhasil ditambahkan");
                 handleCancel();
@@ -383,7 +386,14 @@ const DialogFormMaster = ({
             // tambahJabatanSIASN(postDataSIASN);
             // tambahJabatanSapk(postDataSapk);
             // console.log(postDataSIASN);
-            tambahImport(data);
+
+            if (!data?.pegawai_id) {
+                message.error(
+                    "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki"
+                );
+            } else {
+                tambahImport(data);
+            }
         } catch (error) {
             console.error(error);
         }
