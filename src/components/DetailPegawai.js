@@ -97,11 +97,23 @@ const DataUser = ({ data }) => {
                         <Descriptions.Item label="Tanggal Lahir">
                             {data?.tanggal_lahir?.replaceAll("/", "-")}
                         </Descriptions.Item>
+                        <Descriptions.Item label="SK CPNS">
+                            {data?.no_sk_cpns}
+                        </Descriptions.Item>
                         <Descriptions.Item label="TMT CPNS">
                             {data?.tmt_pangkat_cpns}
                         </Descriptions.Item>
+                        <Descriptions.Item label="Tanggal SK CPNS">
+                            {data?.tgl_sk_cpns}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="SK PNS">
+                            {data?.no_sk_pns}
+                        </Descriptions.Item>
                         <Descriptions.Item label="TMT PNS">
                             {data?.tmt_pangkat_pns}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Tanggal SK PNS">
+                            {data?.tgl_sk_pns}
                         </Descriptions.Item>
                         <Descriptions.Item label="Nomer Handphone">
                             {data?.no_hp}
