@@ -106,6 +106,11 @@ const DataUser = ({ data }) => {
                         <Descriptions.Item label="Tanggal SK CPNS">
                             {data?.tgl_sk_cpns}
                         </Descriptions.Item>
+                        <Descriptions.Item label="File SK CPNS">
+                            <a href={data?.file_sk_cpns} target="_blank">
+                                file sk cpns
+                            </a>
+                        </Descriptions.Item>
                         <Descriptions.Item label="SK PNS">
                             {data?.no_sk_pns}
                         </Descriptions.Item>
@@ -114,6 +119,11 @@ const DataUser = ({ data }) => {
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal SK PNS">
                             {data?.tgl_sk_pns}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="File SK PNS">
+                            <a href={data?.file_sk_pns} target="_blank">
+                                file sk pns
+                            </a>
                         </Descriptions.Item>
                         <Descriptions.Item label="Nomer Handphone">
                             {data?.no_hp}
