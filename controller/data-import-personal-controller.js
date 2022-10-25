@@ -15,7 +15,7 @@ const detail = async (req, res) => {
             res.json({
                 code: 200,
                 description: "Data belum dientri oleh petugas operator",
-                type: "Success",
+                type: "success",
                 message: "Data Belum dientri"
             });
         } else {
