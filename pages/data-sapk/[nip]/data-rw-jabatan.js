@@ -1,6 +1,7 @@
 import { useDebouncedValue } from "@mantine/hooks";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+    Alert,
     Button,
     Card,
     Checkbox,
@@ -262,6 +263,7 @@ const DialogFormMaster = ({
     userData,
     id,
     unor,
+    dataTerakhirSapk,
     fungsional,
     fungsionalUmum,
     user
@@ -415,7 +417,12 @@ const DialogFormMaster = ({
             onCancel={handleCancel}
             onOk={handleSubmit}
         >
-            <div>
+            <Alert
+                type="info"
+                message="Pastikan tanggal SK terakhir di SAPK lebih kecil dari yang dientri, soale kewoco tanggal sk terakhir"
+                showIcon
+            />
+            <div style={{ marginTop: 5 }}>
                 {userData?.jenis_jabatan} : {userData?.jabatan}
             </div>
             <Divider />
@@ -521,11 +528,16 @@ const DialogFormMaster = ({
                     <DatePicker format={format} />
                 </Form.Item>
             </Form>
+            <Divider />
+            <Form.Item label="Data Terakhir SK SAPK">
+                <Input value={dataTerakhirSapk?.tanggalSk} />
+            </Form.Item>
         </Modal>
     );
 };
 
 const TableRiwayatMaster = ({
+    dataTerakhirSapk,
     data,
     loading,
     id,
@@ -590,6 +602,7 @@ const TableRiwayatMaster = ({
     return (
         <>
             <DialogFormMaster
+                dataTerakhirSapk={dataTerakhirSapk}
                 visible={visible}
                 handleOpen={handleOpen}
                 unor={unor}
@@ -676,6 +689,9 @@ const RiwayatJabatan = () => {
                                 <Col span={24}>
                                     <Card title="SIMASTER">
                                         <TableRiwayatMaster
+                                            dataTerakhirSapk={
+                                                data[data?.length - 1]
+                                            }
                                             unor={dataUnor}
                                             fungsional={dataJabatanFungsional}
                                             fungsionalUmum={
