@@ -690,7 +690,7 @@ const RiwayatJabatan = () => {
                                     <Card title="SIMASTER">
                                         <TableRiwayatMaster
                                             dataTerakhirSapk={
-                                                data[data?.length - 1]
+                                                data?.[data?.length - 1]
                                                     ? data[data?.length - 1]
                                                     : null
                                             }
