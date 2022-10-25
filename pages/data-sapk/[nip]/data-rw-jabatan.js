@@ -35,6 +35,7 @@ import {
     rwJabatanSapk,
     siasnRwJabatan
 } from "../../../services/fasilitator.service";
+import Checker from "../../../src/components/Checker";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
@@ -662,6 +663,8 @@ const RiwayatJabatan = () => {
             <Row>
                 <Col span={18} push={1}>
                     <Card>
+                        <Checker id={router?.query?.nip} />
+
                         <Skeleton loading={currentUserLoading}>
                             <Row gutter={[8, 8]}>
                                 <Col span={24}>

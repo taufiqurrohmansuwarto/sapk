@@ -164,3 +164,7 @@ export const dataDashboard = () => {
         .get("/dashboard/entrian-data-import")
         .then((res) => res?.data);
 };
+
+export const dataChecker = (id) => {
+    return fetcher.get(`/data-import/${id}`).then((res) => res?.data);
+};
