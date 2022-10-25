@@ -691,6 +691,8 @@ const RiwayatJabatan = () => {
                                         <TableRiwayatMaster
                                             dataTerakhirSapk={
                                                 data[data?.length - 1]
+                                                    ? data[data?.length - 1]
+                                                    : null
                                             }
                                             unor={dataUnor}
                                             fungsional={dataJabatanFungsional}
