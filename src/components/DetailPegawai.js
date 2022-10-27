@@ -125,6 +125,17 @@ const DataUser = ({ data }) => {
                                 file sk pns
                             </a>
                         </Descriptions.Item>
+                        <Descriptions.Item label="No STTPL">
+                            {data?.no_sttpl}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Tanggal STTPL">
+                            {data?.tgl_sttpl}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="File STTPL">
+                            <a href={data?.file_sttpl} target="_blank">
+                                file sttpl
+                            </a>
+                        </Descriptions.Item>
                         <Descriptions.Item label="Nomer Handphone">
                             {data?.no_hp}
                         </Descriptions.Item>
