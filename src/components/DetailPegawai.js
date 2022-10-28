@@ -133,24 +133,24 @@ const DataUser = ({ data }) => {
                             </Typography.Paragraph>
                         </Descriptions.Item>
 
-                        <Descriptions.Item label="SK PNS">
-                            <Typography.Paragraph copyable>
-                                {data?.no_sk_pns}
-                            </Typography.Paragraph>
-                        </Descriptions.Item>
                         <Descriptions.Item label="Tanggal SK PNS">
                             <Typography.Paragraph copyable>
                                 {data?.tgl_sk_pns}
                             </Typography.Paragraph>
                         </Descriptions.Item>
-                        <Descriptions.Item label="No STTPL">
+                        <Descriptions.Item label="SK PNS">
                             <Typography.Paragraph copyable>
-                                {data?.no_sttpl}
+                                {data?.no_sk_pns}
                             </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal STTPL">
                             <Typography.Paragraph copyable>
                                 {data?.tgl_sttpl}
+                            </Typography.Paragraph>
+                        </Descriptions.Item>
+                        <Descriptions.Item label="No STTPL">
+                            <Typography.Paragraph copyable>
+                                {data?.no_sttpl}
                             </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="File STTPL">
