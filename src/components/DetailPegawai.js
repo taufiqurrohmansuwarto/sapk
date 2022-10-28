@@ -111,11 +111,6 @@ const DataUser = ({ data }) => {
                                 {data?.tanggal_lahir?.replaceAll("/", "-")}
                             </Typography.Paragraph>
                         </Descriptions.Item>
-                        <Descriptions.Item label="SK CPNS">
-                            <Typography.Paragraph copyable>
-                                {data?.no_sk_cpns}
-                            </Typography.Paragraph>
-                        </Descriptions.Item>
                         <Descriptions.Item label="TMT CPNS">
                             <Typography.Paragraph copyable>
                                 {data?.tmt_pangkat_cpns}
@@ -126,14 +121,10 @@ const DataUser = ({ data }) => {
                                 {data?.tgl_sk_cpns}
                             </Typography.Paragraph>
                         </Descriptions.Item>
-                        <Descriptions.Item label="File SK CPNS">
-                            <a href={data?.file_sk_cpns} target="_blank">
-                                file sk cpns
-                            </a>
-                        </Descriptions.Item>
-                        <Descriptions.Item label="SK PNS">
+
+                        <Descriptions.Item label="SK CPNS">
                             <Typography.Paragraph copyable>
-                                {data?.no_sk_pns}
+                                {data?.no_sk_cpns}
                             </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="TMT PNS">
@@ -141,15 +132,16 @@ const DataUser = ({ data }) => {
                                 {data?.tmt_pangkat_pns}
                             </Typography.Paragraph>
                         </Descriptions.Item>
+
+                        <Descriptions.Item label="SK PNS">
+                            <Typography.Paragraph copyable>
+                                {data?.no_sk_pns}
+                            </Typography.Paragraph>
+                        </Descriptions.Item>
                         <Descriptions.Item label="Tanggal SK PNS">
                             <Typography.Paragraph copyable>
                                 {data?.tgl_sk_pns}
                             </Typography.Paragraph>
-                        </Descriptions.Item>
-                        <Descriptions.Item label="File SK PNS">
-                            <a href={data?.file_sk_pns} target="_blank">
-                                file sk pns
-                            </a>
                         </Descriptions.Item>
                         <Descriptions.Item label="No STTPL">
                             <Typography.Paragraph copyable>
@@ -166,6 +158,17 @@ const DataUser = ({ data }) => {
                                 file sttpl
                             </a>
                         </Descriptions.Item>
+                        <Descriptions.Item label="File SK CPNS">
+                            <a href={data?.file_sk_cpns} target="_blank">
+                                file sk cpns
+                            </a>
+                        </Descriptions.Item>
+                        <Descriptions.Item label="File SK PNS">
+                            <a href={data?.file_sk_pns} target="_blank">
+                                file sk pns
+                            </a>
+                        </Descriptions.Item>
+
                         <Descriptions.Item label="Nomer Handphone">
                             <Typography.Paragraph copyable>
                                 {data?.no_hp}
