@@ -168,7 +168,6 @@ const DataUser = ({ data }) => {
                                 file sk pns
                             </a>
                         </Descriptions.Item>
-
                         <Descriptions.Item label="Nomer Handphone">
                             <Typography.Paragraph copyable>
                                 {data?.no_hp}
