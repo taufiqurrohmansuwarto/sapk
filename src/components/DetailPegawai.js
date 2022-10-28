@@ -1,4 +1,12 @@
-import { Collapse, Descriptions, Divider, Image, Space, Tag } from "antd";
+import {
+    Collapse,
+    Descriptions,
+    Divider,
+    Image,
+    Space,
+    Tag,
+    Typography
+} from "antd";
 import { isEmpty } from "lodash";
 import React from "react";
 import { StringDiff } from "react-string-diff";
@@ -89,22 +97,34 @@ const DataUser = ({ data }) => {
                         title="Informasi Pegawai E-Master"
                     >
                         <Descriptions.Item label="Nama">
-                            {data?.nama}
+                            <Typography.Paragraph copyable>
+                                {data?.nama}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="NIP">
-                            {data?.nip}
+                            <Typography.Paragraph copyable>
+                                {data?.nip}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal Lahir">
-                            {data?.tanggal_lahir?.replaceAll("/", "-")}
+                            <Typography.Paragraph copyable>
+                                {data?.tanggal_lahir?.replaceAll("/", "-")}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="SK CPNS">
-                            {data?.no_sk_cpns}
+                            <Typography.Paragraph copyable>
+                                {data?.no_sk_cpns}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="TMT CPNS">
-                            {data?.tmt_pangkat_cpns}
+                            <Typography.Paragraph copyable>
+                                {data?.tmt_pangkat_cpns}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal SK CPNS">
-                            {data?.tgl_sk_cpns}
+                            <Typography.Paragraph copyable>
+                                {data?.tgl_sk_cpns}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="File SK CPNS">
                             <a href={data?.file_sk_cpns} target="_blank">
@@ -112,13 +132,19 @@ const DataUser = ({ data }) => {
                             </a>
                         </Descriptions.Item>
                         <Descriptions.Item label="SK PNS">
-                            {data?.no_sk_pns}
+                            <Typography.Paragraph copyable>
+                                {data?.no_sk_pns}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="TMT PNS">
-                            {data?.tmt_pangkat_pns}
+                            <Typography.Paragraph copyable>
+                                {data?.tmt_pangkat_pns}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal SK PNS">
-                            {data?.tgl_sk_pns}
+                            <Typography.Paragraph copyable>
+                                {data?.tgl_sk_pns}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="File SK PNS">
                             <a href={data?.file_sk_pns} target="_blank">
@@ -126,10 +152,14 @@ const DataUser = ({ data }) => {
                             </a>
                         </Descriptions.Item>
                         <Descriptions.Item label="No STTPL">
-                            {data?.no_sttpl}
+                            <Typography.Paragraph copyable>
+                                {data?.no_sttpl}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="Tanggal STTPL">
-                            {data?.tgl_sttpl}
+                            <Typography.Paragraph copyable>
+                                {data?.tgl_sttpl}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                         <Descriptions.Item label="File STTPL">
                             <a href={data?.file_sttpl} target="_blank">
@@ -137,7 +167,9 @@ const DataUser = ({ data }) => {
                             </a>
                         </Descriptions.Item>
                         <Descriptions.Item label="Nomer Handphone">
-                            {data?.no_hp}
+                            <Typography.Paragraph copyable>
+                                {data?.no_hp}
+                            </Typography.Paragraph>
                         </Descriptions.Item>
                     </Descriptions>
                     <Divider />
