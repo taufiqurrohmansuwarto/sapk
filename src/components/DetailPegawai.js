@@ -26,6 +26,9 @@ const Pensiun = ({ data }) => {
                     File SK
                 </a>
             </div>
+            <div>tmt_awal : {data?.tmt_awal}</div>
+            <div>tmt_akhir : {data?.tmt_akhir}</div>
+            <div>jenis pensiun : {data?.jenis_pensiun}</div>
         </div>
     );
 };
