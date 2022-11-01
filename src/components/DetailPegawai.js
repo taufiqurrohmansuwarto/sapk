@@ -61,6 +61,11 @@ const DataUser = ({ data }) => {
                                                 Dokumen Pangkat terkahir
                                             </a>
                                         </div>
+                                        <div>bup : {data?.data_bup?.bup}</div>
+                                        <div>
+                                            TMT Pensiun :{" "}
+                                            {data?.data_bup?.tmt_pensiun}
+                                        </div>
                                     </Space>
                                 </div>
                             )}
