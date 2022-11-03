@@ -206,7 +206,7 @@ const FormJFU = ({ name }) => {
                 >
                     {dataJfu?.map((item) => (
                         <Select.Option key={item?.id} value={item?.id}>
-                            {item?.nama}
+                            {item?.nama} - {item?.id}
                         </Select.Option>
                     ))}
                 </Select>
@@ -248,7 +248,7 @@ const FormJFT = ({ name }) => {
                 >
                     {dataJfu?.map((item) => (
                         <Select.Option key={item?.id} value={item?.id}>
-                            {item?.nama}
+                            {item?.nama} - {item?.id}
                         </Select.Option>
                     ))}
                 </Select>

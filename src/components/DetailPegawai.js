@@ -80,7 +80,7 @@ const DataUser = ({ data }) => {
                     </Collapse.Panel>
                 ) : (
                     <Collapse.Panel header="Data Kosong" key="3">
-                        Data di SIMASTER tidak ditemukan
+                        <div>Data di SIMASTER tidak ditemukan</div>
                     </Collapse.Panel>
                 )}
                 <Collapse.Panel header="Perbandingan" key="2">
