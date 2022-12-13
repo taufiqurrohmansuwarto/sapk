@@ -214,11 +214,18 @@ const DataUser = ({ data }) => {
                         </Descriptions.Item>
                     </Descriptions>
                     <Divider />
-                    <a
-                        href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
-                    >
-                        Download File Pembetulan Nama
-                    </a>
+                    <Space>
+                        <a
+                            href={`/sapk/api/fasilitator/pembetulan-nama/${data?.nip}/dokumen`}
+                        >
+                            Download File Pembetulan Nama
+                        </a>
+                        <a
+                            href={`/sapk/api/fasilitator/dokumen-pangkat/${data?.nip}/dokumen`}
+                        >
+                            Download File Kenaikan Pangkat
+                        </a>
+                    </Space>
                 </Collapse.Panel>
             </Collapse>
         );

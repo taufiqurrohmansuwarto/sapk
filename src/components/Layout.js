@@ -6,7 +6,7 @@ import {
     RestOutlined,
     VerifiedOutlined
 } from "@ant-design/icons";
-import { Avatar, Dropdown, Menu, Space } from "antd";
+import { Avatar, Dropdown, Form, Input, Menu, Space } from "antd";
 import { uniqBy } from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -41,11 +41,11 @@ const menuUser = () => (
 
 const rightContentRender = (user) => {
     return (
-        <Space size="large">
+        <Space size="large" align="start">
+            <Input.Search onSubmit={(e) => console.log(e)} />
             <Dropdown overlay={menuUser()}>
                 <Space align="center">
                     <Avatar
-                        // shape="square"
                         size="small"
                         style={{ cursor: "pointer" }}
                         src={user?.image}

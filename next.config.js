@@ -33,7 +33,6 @@ const hashOnlyIdent = (context, _, exportName) =>
         .replace(/^(-?\d|--)/, "_$1");
 
 module.exports = withAntdLess({
-    experimental: {},
     poweredByHeader: false,
     basePath: "/sapk",
     publicRuntimeConfig: {
