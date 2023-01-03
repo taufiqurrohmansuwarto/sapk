@@ -1,4 +1,4 @@
-import nc from "next-connect";
+mport nc from "next-connect";
 import { pembetulanNama } from "../../../../../controller/sapk.controller";
 import auth from "../../../../../middleware/auth";
 const handler = nc();
