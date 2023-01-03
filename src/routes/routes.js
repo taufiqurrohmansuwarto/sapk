@@ -1,7 +1,8 @@
 import {
     DatabaseOutlined,
     FileExclamationOutlined,
-    HomeOutlined
+    HomeOutlined,
+    MoneyCollectOutlined
 } from "@ant-design/icons";
 
 export default {
@@ -30,6 +31,11 @@ export default {
             path: "/data-import-personal",
             name: " Import Personal",
             icon: <FileExclamationOutlined />
+        },
+        {
+            path: "/verifikator",
+            name: "Verifikator SIASN",
+            icon: <MoneyCollectOutlined />
         }
     ]
 };

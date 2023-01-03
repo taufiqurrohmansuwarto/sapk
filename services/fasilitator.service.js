@@ -168,3 +168,11 @@ export const dataDashboard = () => {
 export const dataChecker = (id) => {
     return fetcher.get(`/data-import/${id}`).then((res) => res?.data);
 };
+
+export const listVerifikator = () => {
+    return fetcher.get(`/verifikator`).then((res) => res?.data);
+};
+
+export const listDataVerifikator = (id) => {
+    return fetcher.get(`/verifikator/${id}`).then((res) => res?.data);
+};
