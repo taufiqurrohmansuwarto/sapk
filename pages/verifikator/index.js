@@ -43,7 +43,7 @@ const Verifikator = () => {
                     <Form form={form} onFinish={handleFinish}>
                         <Form.Item name="verifikator_id">
                             <Select
-                                style={{ width: 400 }}
+                                style={{ width: 800 }}
                                 showSearch
                                 optionFilterProp="nama"
                             >
