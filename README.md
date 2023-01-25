@@ -12,4 +12,6 @@ Aplikasi untuk melihat perbandingan data pegawai SIMASTER (Simpeg Daerah), SAPK,
 - Menampilkan data Simpeg,SIASN dan SAPK dilakukan untuk pembetulan nama
 - Download file pembetulan nama (sk pangkat terakhir, ijazah pendidikan CPNS, dan sk cpns)
 
-![gambar1!](./schreenshots/1.jpg)
+![gambar1!](./screenshots/1.jpg)
+![gambar2!](./screenshots/2.jpg)
+![gambar3!](./screenshots/3.jpg)
