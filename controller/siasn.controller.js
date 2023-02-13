@@ -4,7 +4,9 @@ module.exports.rwJabatanSiasn = async (req, res) => {
     try {
         const { fetcher } = req;
         const { nip } = req?.query;
-        const result = await fetcher.get(`/siasn/pegawai/${nip}/rw-jabatan`);
+        const result = await fetcher.get(
+            `/siasn-ws/proxy/pns/rw-jabatan/${nip}`
+        );
 
         const sorting = orderBy(
             result?.data,
