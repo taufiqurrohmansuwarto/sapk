@@ -74,9 +74,9 @@ const DataUser = ({ data }) => {
                         <Descriptions size="small" title="Data OPD Master">
                             <div>{data?.skpd}</div>
                         </Descriptions>
-                        <Descriptions size="small" title="Data Unor SAPK">
+                        {/* <Descriptions size="small" title="Data Unor SAPK">
                             <div>{data?.unor_sapk}</div>
-                        </Descriptions>
+                        </Descriptions> */}
                     </Collapse.Panel>
                 ) : (
                     <Collapse.Panel header="Data Kosong" key="3">

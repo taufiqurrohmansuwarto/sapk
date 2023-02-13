@@ -97,21 +97,21 @@ module.exports.informasiPembetulanNama = async (req, res) => {
             `/sapk/${employeeNumber}/data-utama-sapk`
         );
 
-        const dataUnorPns = await fetcher.get(
-            `/sapk/${employeeNumber}/data-rw-pns-unor-sapk`
-        );
+        // const dataUnorPns = await fetcher.get(
+        //     `/sapk/${employeeNumber}/data-rw-pns-unor-sapk`
+        // );
 
         const dataSapk = dataUtamaSapk?.data;
-        const rwUnorPns = dataUnorPns?.data;
+        // const rwUnorPns = dataUnorPns?.data;
 
-        const unor_sapk =
-            rwUnorPns === null
-                ? ""
-                : rwUnorPns?.[rwUnorPns?.length - 1]?.unor === null
-                ? `${
-                      rwUnorPns?.[rwUnorPns?.length - 1]?.namaUnorBaru
-                  } (Kemungkinan HR terhapus atau diluar pemerintah provinsi Jawa Timur)`
-                : rwUnorPns?.[rwUnorPns?.length - 1]?.unor;
+        // const unor_sapk =
+        //     rwUnorPns === null
+        //         ? ""
+        //         : rwUnorPns?.[rwUnorPns?.length - 1]?.unor === null
+        //         ? `${
+        //               rwUnorPns?.[rwUnorPns?.length - 1]?.namaUnorBaru
+        //           } (Kemungkinan HR terhapus atau diluar pemerintah provinsi Jawa Timur)`
+        //         : rwUnorPns?.[rwUnorPns?.length - 1]?.unor;
 
         const currentData = {
             id_sapk: dataSapk?.id,
@@ -119,8 +119,8 @@ module.exports.informasiPembetulanNama = async (req, res) => {
             nama_sapk: dataSapk?.nama,
             tanggal_lahir_sapk: dataSapk?.tglLahir,
             nip_sapk: dataSapk?.nipBaru,
-            email_sapk: dataSapk?.email,
-            unor_sapk
+            email_sapk: dataSapk?.email
+            // unor_sapk
         };
 
         res.json(currentData);
