@@ -542,8 +542,8 @@ const TableRiwayatMaster = ({
     loading,
     id,
     unor,
-    fungsional,
-    fungsionalUmum,
+    // fungsional,
+    // fungsionalUmum,
     user
 }) => {
     const [visible, setVisible] = useState(false);
@@ -606,8 +606,8 @@ const TableRiwayatMaster = ({
                 visible={visible}
                 handleOpen={handleOpen}
                 unor={unor}
-                fungsional={fungsional}
-                fungsionalUmum={fungsionalUmum}
+                // fungsional={fungsional}
+                // fungsionalUmum={fungsionalUmum}
                 handleCancel={handleCancel}
                 userData={userData}
                 user={user}
@@ -646,20 +646,6 @@ const RiwayatJabatan = () => {
     const { data: dataUnor } = useQuery(["ref-unor"], () => refUnor(), {
         refetchOnWindowFocus: false
     });
-    const { data: dataJabatanFungsional } = useQuery(
-        ["ref-fungsional"],
-        () => refJabatanFungsional(),
-        {
-            refetchOnWindowFocus: false
-        }
-    );
-    const { data: dataJabatanFungsionalUmum } = useQuery(
-        ["ref-fungsional-umum"],
-        () => refJabatanFungsionalUmum(),
-        {
-            refetchOnWindowFocus: false
-        }
-    );
 
     const { data: dataSiasn, isLoading: loadingSiasn } = useQuery(
         ["data-rw-jabatan-siasn", router?.query?.nip],
@@ -695,10 +681,6 @@ const RiwayatJabatan = () => {
                                                     : null
                                             }
                                             unor={dataUnor}
-                                            fungsional={dataJabatanFungsional}
-                                            fungsionalUmum={
-                                                dataJabatanFungsionalUmum
-                                            }
                                             data={dataMaster}
                                             user={currentUser}
                                             loading={loadingMasterJabatan}
@@ -707,18 +689,19 @@ const RiwayatJabatan = () => {
                                     </Card>
                                 </Col>
                                 <Col span={24}>
-                                    <Card title="SAPK">
-                                        <TableRiwayatJabatanSAPK
-                                            loading={isLoading}
-                                            data={data}
-                                        />
-                                    </Card>
-                                </Col>
-                                <Col span={24}>
                                     <Card title="SIASN">
                                         <TableRiwayatSIASN
                                             data={dataSiasn}
                                             loading={loadingSiasn}
+                                        />
+                                    </Card>
+                                </Col>
+
+                                <Col span={24}>
+                                    <Card title="SAPK">
+                                        <TableRiwayatJabatanSAPK
+                                            loading={isLoading}
+                                            data={data}
                                         />
                                     </Card>
                                 </Col>

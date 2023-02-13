@@ -34,7 +34,7 @@ export default function SignIn({ providers }) {
                         <Divider />
                     </Group>
                     <Text align="center" size="xs">
-                        Custom Tools SAPK,SIASN, dan SIMASTER
+                        SOLUSI MASTER LEMOT
                     </Text>
                     <Text align="center" size="xs"></Text>
                 </Paper>
