@@ -22,7 +22,7 @@ function Dashboard({ user }) {
 
     return (
         <Card title="Dashboard" loading={isLoading}>
-            Halo, {user?.user?.name}... Siapkan roti goreng sebelum mengentri
+            Halo, {user?.user?.name}
             <Divider />
             <Statistic title="Total Data Keseluruhan" value={data?.total} />
             <Divider />

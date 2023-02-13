@@ -2,7 +2,8 @@ import {
     DatabaseOutlined,
     FileExclamationOutlined,
     HomeOutlined,
-    MoneyCollectOutlined
+    MoneyCollectOutlined,
+    UserOutlined
 } from "@ant-design/icons";
 
 export default {
@@ -12,16 +13,11 @@ export default {
             name: " Beranda",
             icon: <HomeOutlined />
         },
-        // {
-        //     path: "/daftar",
-        //     name: " Daftar Pegawai",
-        //     icon: <IeOutlined />
-        // },
-        // {
-        //     path: "/siasn-skk",
-        //     name: " Daftar Usulan SKK",
-        //     icon: <BugOutlined />
-        // },
+        {
+            path: "/pegawai",
+            name: "Pegawai",
+            icon: <UserOutlined />
+        },
         {
             path: "/data-sapk",
             name: "Pembetulan",

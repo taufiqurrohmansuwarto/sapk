@@ -1,12 +1,10 @@
 import {
     AccountBookFilled,
-    FileOutlined,
     LogoutOutlined,
     ReadOutlined,
-    RestOutlined,
-    VerifiedOutlined
+    RestOutlined
 } from "@ant-design/icons";
-import { Avatar, Dropdown, Form, Input, Menu, Space } from "antd";
+import { Avatar, Dropdown, Input, Menu, Space } from "antd";
 import { uniqBy } from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -60,22 +58,13 @@ const changeRoutes = (user) => {
     return new Promise((resolve, reject) => {
         const role = user?.role;
         const group = user?.group;
-        const id = user?.id;
-        const userPtt = role === "USER" && group === "PTTPK";
+
         const userMaster = role === "USER" && group === "MASTER";
-        const userPttFasilitator =
-            (role === "FASILITATOR" && group === "PTTPK") ||
-            (role === "ADMIN" && group === "PTTPK");
 
         // todo tambahkan master fasilitator
         const userMasterFasilitator =
             (role === "FASILITATOR" && group === "MASTER") ||
             (role === "ADMIN" && group === "MASTER");
-
-        const adminFasilitator = role === "ADMIN" && group === "MASTER";
-        console.log(adminFasilitator);
-
-        const isAdmin = id === "master|56543";
 
         const userMasterRoutes = [
             {
@@ -90,7 +79,7 @@ const changeRoutes = (user) => {
             }
         ];
 
-        const adminFasilitatorRoutes = [
+        const masterFasilitatorRoutes = [
             {
                 path: "/data-import",
                 name: " Full Import",
@@ -98,59 +87,20 @@ const changeRoutes = (user) => {
             }
         ];
 
-        const userPttpkRoutes = [
-            {
-                path: "/user/dashboard",
-                name: " Penilaian PTT-PK",
-                icon: <ReadOutlined />
-            }
-        ];
-
-        const fasilitatorRoutes = [
-            {
-                path: "/fasilitator/dashboard",
-                name: " Penilaian PTT-PK",
-                icon: <ReadOutlined />
-            }
-        ];
-
-        const masterFasilitatorRotes = [];
-
-        const adminRoutes = [
-            {
-                path: "/admin/dashboard",
-                name: " Admin",
-                icon: <VerifiedOutlined />
-            }
-        ];
-
         let currentRoutes = routes?.routes;
 
-        if (adminFasilitator) {
-            currentRoutes.push(...adminFasilitatorRoutes);
-        }
         if (userMaster) {
             currentRoutes.push(...userMasterRoutes);
         }
-        if (userPtt) {
-            currentRoutes.push(...userPttpkRoutes);
-        }
-        if (userPttFasilitator) {
-            currentRoutes.push(...fasilitatorRoutes);
-        }
-        if (isAdmin) {
-            currentRoutes.push(...adminRoutes);
-        }
-
         if (userMasterFasilitator) {
-            currentRoutes.push(...masterFasilitatorRotes);
+            currentRoutes.push(...masterFasilitatorRoutes);
         }
 
         resolve(uniqBy(currentRoutes, "path"));
     });
 };
 
-const Layout = ({ children, disableContentMargin = false }) => {
+const Layout = ({ children, title = "SAPK", disableContentMargin = false }) => {
     const { data } = useSession({
         required: true,
         onUnauthenticated: () => signIn()
@@ -164,7 +114,6 @@ const Layout = ({ children, disableContentMargin = false }) => {
             layout="side"
             headerTheme="light"
             menu={{
-                // type: "group",
                 request: async () => {
                     try {
                         const user = await changeRoutes(data?.user);
@@ -174,7 +123,8 @@ const Layout = ({ children, disableContentMargin = false }) => {
                     }
                 }
             }}
-            title="SAPK"
+            style={{ minHeight: "100vh" }}
+            title={title}
             fixedHeader
             selectedKeys={[active]}
             menuItemRender={menuItemRender}
