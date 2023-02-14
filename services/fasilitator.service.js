@@ -261,3 +261,15 @@ export const rwPindahInstansi = (nip) => {
 export const rwPMK = (nip) => {
     return fetcher.get(`/siasn/${nip}/rw-pmk`).then((res) => res?.data);
 };
+
+// operators
+export const operatorEmployees = (query = {}) => {
+    // transform data to query string
+    const queryString = Object.keys(query)
+        .map((key) => `${key}=${query[key]}`)
+        .join("&");
+
+    return fetcher
+        .get(`/operators/employees?${queryString}`)
+        .then((res) => res?.data);
+};

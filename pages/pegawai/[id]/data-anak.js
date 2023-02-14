@@ -10,11 +10,23 @@ function DataAnak() {
     const id = router.query.id;
 
     const { data, isLoading } = useQuery(["data-anak", id], () => dataAnak(id));
+    const columns = [
+        {
+            title: "Nama Anak",
+            dataIndex: "nama",
+            key: "nama"
+        }
+    ];
 
     return (
         <PegawaiLayout title="Data Anak">
             {JSON.stringify(data)}
-            <Table pagination={false} loading={isLoading} />
+            <Table
+                rowKey={(row) => row?.id}
+                columns={columns}
+                pagination={false}
+                loading={isLoading}
+            />
         </PegawaiLayout>
     );
 }

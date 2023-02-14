@@ -1,72 +1,87 @@
-import { GroupOutlined, HomeOutlined } from "@ant-design/icons";
+import {
+    ApartmentOutlined,
+    ApiOutlined,
+    DeploymentUnitOutlined,
+    FlagOutlined,
+    FundViewOutlined,
+    HeartOutlined,
+    HistoryOutlined,
+    HomeOutlined,
+    LaptopOutlined,
+    LinkOutlined,
+    PartitionOutlined,
+    ScheduleOutlined,
+    ThunderboltOutlined,
+    UsergroupAddOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 import { Avatar, Card, Col, Divider, Row, Space, Typography } from "antd";
-import { upperCase } from "lodash";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import PageContainer from "./PageContainer";
 
 const items = [
-    { title: "Data Anak", icon: <GroupOutlined />, link: "/data-anak" },
-    { title: "Data PNS", icon: <HomeOutlined />, link: "/data-pns" },
-    { title: "Data Utama", icon: <HomeOutlined />, link: "/data-utama" },
+    { title: "Data Anak", icon: <UsergroupAddOutlined />, link: "/data-anak" },
+    { title: "Data PNS", icon: <UserOutlined />, link: "/data-pns" },
+    { title: "Data Utama", icon: <UserOutlined />, link: "/data-utama" },
     {
         title: "Angka Kredit",
-        icon: <HomeOutlined />,
+        icon: <ScheduleOutlined />,
         link: "riwayat-angka-kredit"
     },
     {
         title: "CLTN",
-        icon: <HomeOutlined />,
+        icon: <FlagOutlined />,
         link: "riwayat-cltn"
     },
     {
         title: "Diklat",
-        icon: <HomeOutlined />,
+        icon: <FundViewOutlined />,
         link: "riwayat-diklat"
     },
     {
         title: "Golongan",
-        icon: <HomeOutlined />,
+        icon: <ApartmentOutlined />,
         link: "riwayat-golongan"
     },
     {
         title: "Jabatan",
-        icon: <HomeOutlined />,
+        icon: <ApiOutlined />,
         link: "riwayat-jabatan"
     },
     {
         title: "KGB",
-        icon: <HomeOutlined />,
+        icon: <DeploymentUnitOutlined />,
         link: "riwayat-kenaikan-gaji-berkala"
     },
     {
         title: "Kinerja",
-        icon: <HomeOutlined />,
+        icon: <LinkOutlined />,
         link: "riwayat-kinerja"
     },
     {
         title: "Organisasi",
-        icon: <HomeOutlined />,
+        icon: <PartitionOutlined />,
         link: "riwayat-organisasi"
     },
     {
         title: "Pendidikan",
-        icon: <HomeOutlined />,
+        icon: <ThunderboltOutlined />,
         link: "riwayat-pendidikan"
     },
     {
         title: "Penghargaan",
-        icon: <HomeOutlined />,
+        icon: <HeartOutlined />,
         link: "riwayat-penghargaan"
     },
     {
         title: "Pindah Instansi",
-        icon: <HomeOutlined />,
+        icon: <HistoryOutlined />,
         link: "riwayat-pindah-instansi"
     },
     {
         title: "PMK",
-        icon: <HomeOutlined />,
+        icon: <LaptopOutlined />,
         link: "riwayat-pmk"
     }
 ];
@@ -99,7 +114,7 @@ function PegawaiLayout({ title, children }) {
                                             <Link
                                                 href={`/pegawai/${id}/${item?.link}`}
                                             >
-                                                {upperCase(item?.title)}
+                                                {item?.title}
                                             </Link>
                                         </Space>
                                     </div>
