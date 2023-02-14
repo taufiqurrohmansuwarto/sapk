@@ -1,13 +1,10 @@
-const URL_WS_PROXY = "/siasn-ws/proxy";
-const PNS_PROXY = "/pns";
-
 export const dataAnak = async (req, res) => {
     try {
         const { nip } = req?.query;
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/data-anak/${nip}`
+            `/siasn-ws/proxy/pns/data-anak/${nip}`
         );
 
         res.json(result?.data);
@@ -23,7 +20,7 @@ export const dataPasangan = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/data-pasangan/${nip}`
+            `/siasn-ws/proxy/pns/data-pasangan/${nip}`
         );
 
         res.json(result?.data);
@@ -36,10 +33,11 @@ export const dataPasangan = async (req, res) => {
 export const dataUtama = async (req, res) => {
     try {
         const { nip } = req?.query;
+
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/data-utama/${nip}`
+            `/siasn-ws/proxy/pns/data-utama/${nip}`
         );
 
         res.json(result?.data);
@@ -55,7 +53,7 @@ export const dataOrtu = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/data-ortu/${nip}`
+            `/siasn-ws/proxy/pns/data-ortu/${nip}`
         );
 
         res.json(result?.data);
@@ -70,9 +68,7 @@ export const dataPNS = async (req, res) => {
         const { nip } = req?.query;
         const { fetcher } = req;
 
-        const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/data-pns/${nip}`
-        );
+        const result = await fetcher.get(`/siasn-ws/proxy/pns/data-pns/${nip}`);
 
         res.json(result?.data);
     } catch (error) {
@@ -86,7 +82,7 @@ export const kenaikanGajiBerkala = async (req, res) => {
         const { nip } = req?.query;
         const { fetcher } = req;
 
-        const result = await fetcher.get(`/${URL_WS_PROXY}/pns/rw-kgb/${nip}`);
+        const result = await fetcher.get(`/siasn-ws/proxy/pns/rw-kgb/${nip}`);
 
         res.json(result?.data);
     } catch (error) {
@@ -101,7 +97,7 @@ export const hukumanDisiplin = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-hukdis/${nip}`
+            `/siasn-ws/proxy/pns/rw-hukdis/${nip}`
         );
 
         res.json(result?.data);
@@ -117,7 +113,7 @@ export const kinerja = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-kinerja/${nip}`
+            `/siasn-ws/proxy/pns/rw-kinerja/${nip}`
         );
 
         res.json(result?.data);
@@ -133,7 +129,7 @@ export const organisasi = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-organisasi/${nip}`
+            `/siasn-ws/proxy/pns/rw-organisasi/${nip}`
         );
 
         res.json(result?.data);
@@ -149,7 +145,7 @@ export const penghargaan = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-penghargaan/${nip}`
+            `/siasn-ws/proxy/pns/rw-penghargaan/${nip}`
         );
 
         res.json(result?.data);
@@ -165,7 +161,7 @@ export const angkaKredit = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-angkakredit/${nip}`
+            `/siasn-ws/proxy/pns/rw-angkakredit/${nip}`
         );
 
         res.json(result?.data);
@@ -181,7 +177,7 @@ export const diklat = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-diklat/${nip}`
+            `/siasn-ws/proxy/pns/rw-diklat/${nip}`
         );
 
         res.json(result?.data);
@@ -197,7 +193,7 @@ export const jabatan = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-jabatan-full/${nip}`
+            `/siasn-ws/proxy/pns/rw-jabatan-full/${nip}`
         );
 
         res.json(result?.data);
@@ -212,7 +208,7 @@ export const cltn = async (req, res) => {
         const { nip } = req?.query;
         const { fetcher } = req;
 
-        const result = await fetcher.get(`/${URL_WS_PROXY}/pns/rw-cltn/${nip}`);
+        const result = await fetcher.get(`/siasn-ws/proxy/pns/rw-cltn/${nip}`);
 
         res.json(result?.data);
     } catch (error) {
@@ -227,7 +223,7 @@ export const pindahInstansi = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-pindahinstansi/${nip}`
+            `/siasn-ws/proxy/pns/rw-pindahinstansi/${nip}`
         );
 
         res.json(result?.data);
@@ -242,7 +238,7 @@ export const pmk = async (req, res) => {
         const { nip } = req?.query;
         const { fetcher } = req;
 
-        const result = await fetcher.get(`/${URL_WS_PROXY}/pns/rw-pmk/${nip}`);
+        const result = await fetcher.get(`/siasn-ws/proxy/pns/rw-pmk/${nip}`);
 
         res.json(result?.data);
     } catch (error) {
@@ -257,7 +253,7 @@ export const pendidikan = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-pendidikan/${nip}`
+            `/siasn-ws/proxy/pns/rw-pendidikan/${nip}`
         );
 
         res.json(result?.data);
@@ -273,7 +269,7 @@ export const golongan = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/pns/rw-golongan/${nip}`
+            `/siasn-ws/proxy/pns/rw-golongan/${nip}`
         );
 
         res.json(result?.data);
@@ -288,22 +284,30 @@ export const foto = async (req, res) => {
         const { nip } = req?.query;
         const { fetcher } = req;
 
-        const result = await fetcher.get(`/${URL_WS_PROXY}/pns/foto/${nip}`);
+        const result = await fetcher.get(`/siasn-ws/proxy/pns/foto/${nip}`, {
+            responseType: "arraybuffer"
+        });
 
-        res.json(result?.data);
+        // return image
+        res.writeHead(200, {
+            "Content-Type": "image/jpeg",
+            "Content-Length": result?.data?.length
+        });
+
+        res.end(Buffer.from(result?.data, "binary"));
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal Server Error", code: 500 });
     }
 };
 
-export const dowwnload = async (req, res) => {
+export const download = async (req, res) => {
     try {
         const { file_path } = req?.query;
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/${URL_WS_PROXY}/download?file_path=${file_path}`
+            `/siasn-ws/proxy/download?file_path=${file_path}`
         );
 
         res.json(result?.data);

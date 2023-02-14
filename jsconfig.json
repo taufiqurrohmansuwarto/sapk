@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/components/*": ["components/*"],
+            "@/controller/*": ["controller/*"],
+            "@/middleware/*": ["middleware/*"],
+            "@/services/*": ["services/*"],
+            "@/lib/*": ["lib/*"],
+            "@/validators/*": ["validators/*"],
+            "@/features/*": ["features/*"],
+            "@services/*": ["services/*"]
+        }
+    }
+}
