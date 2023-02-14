@@ -204,7 +204,7 @@ export const fileDownload = (file_path) => {
         .then((res) => res?.data);
 };
 
-export const foto = (nip) => {
+export const fotoPegawai = (nip) => {
     return fetcher.get(`/siasn/${nip}/foto`).then((res) => res?.data);
 };
 

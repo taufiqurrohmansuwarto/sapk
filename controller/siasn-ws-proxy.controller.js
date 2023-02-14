@@ -288,13 +288,18 @@ export const foto = async (req, res) => {
             responseType: "arraybuffer"
         });
 
-        // return image
-        res.writeHead(200, {
-            "Content-Type": "image/jpeg",
-            "Content-Length": result?.data?.length
-        });
+        // array buffer to base64
+        const base64 = Buffer.from(result?.data, "binary").toString("base64");
 
-        res.end(Buffer.from(result?.data, "binary"));
+        res.json({ base64 });
+
+        // return image
+        // res.writeHead(200, {
+        //     "Content-Type": "image/jpeg",
+        //     "Content-Length": result?.data?.length
+        // });
+
+        // res.end(Buffer.from(result?.data, "binary"));
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal Server Error", code: 500 });

@@ -9,8 +9,12 @@ function DataAnak() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-angka-kredit", id], () =>
-        rwAngkaKredit(id)
+    const { data, isLoading } = useQuery(
+        ["riwayat-angka-kredit", id],
+        () => rwAngkaKredit(id),
+        {
+            refetchOnWindowFocus: false
+        }
     );
     return (
         <PegawaiLayout title="Riwayat Angka Kredit">

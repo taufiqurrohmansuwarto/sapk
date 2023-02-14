@@ -1,4 +1,5 @@
 import { rwHukdis } from "@/services/fasilitator.service";
+import { useQuery } from "@tanstack/react-query";
 import { Table } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
@@ -8,8 +9,12 @@ function RiwayatHukdis() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-hukdis", id], () =>
-        rwHukdis(id)
+    const { data, isLoading } = useQuery(
+        ["riwayat-hukdis", id],
+        () => rwHukdis(id),
+        {
+            refetchOnWindowFocus: false
+        }
     );
 
     return (

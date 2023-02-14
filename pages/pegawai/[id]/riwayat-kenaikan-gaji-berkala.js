@@ -9,12 +9,18 @@ function RiwayatKGB() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-kgb", id], () => rwKgb(id));
+    const { data, isLoading } = useQuery(["riwayat-kgb", id], () => rwKgb(id), {
+        refetchOnWindowFocus: false
+    });
 
     return (
         <PegawaiLayout title="Riwayat Kenaikan Gaji Berkala">
-            {JSON.stringify(data)}
-            <Table loading={isLoading} />
+            <Table
+                dataSource={data}
+                pagination={false}
+                rowKey={(row) => row?.id}
+                loading={isLoading}
+            />
         </PegawaiLayout>
     );
 }

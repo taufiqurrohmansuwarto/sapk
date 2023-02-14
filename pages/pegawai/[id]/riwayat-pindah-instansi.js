@@ -9,12 +9,19 @@ function RiwayatPindahInstansi() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-pindahinstansi", id], () =>
-        rwPindahInstansi(id)
+    const { data, isLoading } = useQuery(
+        ["riwayat-pindahinstansi", id],
+        () => rwPindahInstansi(id),
+        { refetchOnWindowFocus: false }
     );
     return (
         <PegawaiLayout title="Riwayat Pindah Instansi">
-            <Table loading={isLoading} dataSource={data} />
+            <Table
+                loading={isLoading}
+                pagination={false}
+                rowKey={(row) => row?.id}
+                dataSource={data}
+            />
         </PegawaiLayout>
     );
 }

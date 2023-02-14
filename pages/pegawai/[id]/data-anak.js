@@ -15,13 +15,38 @@ function DataAnak() {
             title: "Nama Anak",
             dataIndex: "nama",
             key: "nama"
+        },
+        {
+            title: "Tgl.Lahir",
+            dataIndex: "tgl_lhr",
+            key: "tgl_lhr"
+        },
+        {
+            title: "Jenis Kelamin",
+            dataIndex: "jenis_kelamin",
+            key: "jenis_kelamin"
+        },
+        {
+            title: "Status",
+            dataIndex: "jenis_kawin_nama",
+            key: "jenis_kawin_nama"
+        },
+        {
+            title: "Agama",
+            dataIndex: "agama_nama",
+            key: "agama_nama"
+        },
+        {
+            title: "Alamat",
+            dataIndex: "alamat",
+            key: "alamat"
         }
     ];
 
     return (
         <PegawaiLayout title="Data Anak">
-            {JSON.stringify(data)}
             <Table
+                dataSource={data}
                 rowKey={(row) => row?.id}
                 columns={columns}
                 pagination={false}

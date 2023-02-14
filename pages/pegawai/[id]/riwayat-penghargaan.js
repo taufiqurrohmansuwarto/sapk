@@ -9,12 +9,21 @@ function RiwayatPenghargaan() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-penghargaan", id], () =>
-        rwPenghargaan(id)
+    const { data, isLoading } = useQuery(
+        ["riwayat-penghargaan", id],
+        () => rwPenghargaan(id),
+        {
+            refetchOnWindowFocus: false
+        }
     );
     return (
         <PegawaiLayout title="Riwayat Penghargaan">
-            <Table />
+            <Table
+                pagination={false}
+                dataSource={data}
+                loading={isLoading}
+                rowKey={(row) => row?.id}
+            />
         </PegawaiLayout>
     );
 }

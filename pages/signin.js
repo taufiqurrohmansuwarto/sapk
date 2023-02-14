@@ -33,9 +33,6 @@ export default function SignIn({ providers }) {
                         </Space>
                         <Divider />
                     </Group>
-                    <Text align="center" size="xs">
-                        SOLUSI MASTER LEMOT
-                    </Text>
                     <Text align="center" size="xs"></Text>
                 </Paper>
             </Col>

@@ -9,8 +9,12 @@ function RiwayatCLTN() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-cltn", id], () =>
-        rwCtln(id)
+    const { data, isLoading } = useQuery(
+        ["riwayat-cltn", id],
+        () => rwCtln(id),
+        {
+            refetchOnWindowFocus: false
+        }
     );
     return (
         <PegawaiLayout title="Riwayat CLTN">

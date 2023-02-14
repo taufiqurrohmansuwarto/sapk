@@ -1,17 +1,17 @@
-import { dataPasangan } from "@/services/fasilitator.service";
+import { dataOrtu, dataPasangan } from "@/services/fasilitator.service";
 import { useQuery } from "@tanstack/react-query";
 import { Table } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
 import PegawaiLayout from "../../../src/components/PegawaiLayout";
 
-function DataPasangan() {
+function DataOrtu() {
     const router = useRouter();
     const id = router.query.id;
 
     const { data, isLoading } = useQuery(
-        ["data-pasangan", id],
-        () => dataPasangan(id),
+        ["data-ortu", id],
+        () => dataOrtu(id),
         {
             refetchOnWindowFocus: false
         }
@@ -47,7 +47,8 @@ function DataPasangan() {
     ];
 
     return (
-        <PegawaiLayout title="Data Pasangan">
+        <PegawaiLayout title="Data Orang Tua">
+            {JSON.stringify(data)}
             <Table
                 columns={columns}
                 dataSource={data}
@@ -59,13 +60,13 @@ function DataPasangan() {
     );
 }
 
-DataPasangan.Auth = {
+DataOrtu.Auth = {
     roles: ["FASILITATOR", "ADMIN"],
     groups: ["MASTER"]
 };
 
-DataPasangan.getLayout = function getLayout(page) {
-    return <Layout title="Data Pasangan">{page}</Layout>;
+DataOrtu.getLayout = function getLayout(page) {
+    return <Layout title="Data Orang Tua">{page}</Layout>;
 };
 
-export default DataPasangan;
+export default DataOrtu;

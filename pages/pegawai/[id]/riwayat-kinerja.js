@@ -1,4 +1,5 @@
 import { rwKinerja } from "@/services/fasilitator.service";
+import { useQuery } from "@tanstack/react-query";
 import { Table } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
@@ -8,8 +9,12 @@ function RiwayatKinerja() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-kinerja", id], () =>
-        rwKinerja(id)
+    const { data, isLoading } = useQuery(
+        ["riwayat-kinerja", id],
+        () => rwKinerja(id),
+        {
+            refetchOnWindowFocus: false
+        }
     );
     return (
         <PegawaiLayout title="Riwayat Kinerja">

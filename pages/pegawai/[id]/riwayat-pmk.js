@@ -9,10 +9,17 @@ function RiwayatPMK() {
     const router = useRouter();
     const id = router.query.id;
 
-    const { data, isLoading } = useQuery(["riwayat-pmk", id], () => rwPMK(id));
+    const { data, isLoading } = useQuery(["riwayat-pmk", id], () => rwPMK(id), {
+        refetchOnWindowFocus: false
+    });
     return (
         <PegawaiLayout title="Riwayat PMK">
-            <Table loading={isLoading} dataSource={data} />
+            <Table
+                rowKey={(row) => row?.id}
+                pagination={false}
+                loading={isLoading}
+                dataSource={data}
+            />
         </PegawaiLayout>
     );
 }

@@ -2,7 +2,6 @@ module.exports.operatorEmployees = async (req, res) => {
     try {
         const { fetcher } = req;
         const query = req?.query;
-        console.log(query);
 
         // json to query string
         const queryString = Object.keys(query)

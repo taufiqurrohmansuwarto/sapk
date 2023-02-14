@@ -10,8 +10,12 @@ function DataUtama() {
     const id = router.query.id;
     const form = Form.useForm();
 
-    const { data, isLoading } = useQuery(["data-pasangan", id], () =>
-        dataUtama(id)
+    const { data, isLoading } = useQuery(
+        ["data-utama", id],
+        () => dataUtama(id),
+        {
+            refetchOnWindowFocus: false
+        }
     );
     return (
         <PegawaiLayout title="Data Utama">
