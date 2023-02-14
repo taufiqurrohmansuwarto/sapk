@@ -19,8 +19,7 @@ function RiwayatOrganisasi() {
 
     return (
         <PegawaiLayout title="Riwayat Organisasi">
-            {JSON.stringify(data)}
-            <Table loading={isLoading} />
+            <Table pagination={false} dataSource={data} loading={isLoading} />
         </PegawaiLayout>
     );
 }

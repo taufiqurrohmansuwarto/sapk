@@ -279,6 +279,20 @@ export const golongan = async (req, res) => {
     }
 };
 
+export const skp = async (req, res) => {
+    try {
+        const { nip } = req?.query;
+        const { fetcher } = req;
+
+        const result = await fetcher.get(`/siasn-ws/proxy/pns/rw-skp/${nip}`);
+
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};
+
 export const foto = async (req, res) => {
     try {
         const { nip } = req?.query;

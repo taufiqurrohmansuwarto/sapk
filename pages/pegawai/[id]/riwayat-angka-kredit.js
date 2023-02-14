@@ -16,10 +16,49 @@ function DataAnak() {
             refetchOnWindowFocus: false
         }
     );
+
+    const columns = [
+        {
+            title: "Nomer SK",
+            dataIndex: "nomor_sk",
+            key: "nomor_sk"
+        },
+        {
+            title: "Total Kredit Baru",
+            dataIndex: "kredit_utama_baru",
+            key: "kredit_utama_baru"
+        },
+        {
+            title: "Bulan Mulai Penilaian",
+            dataIndex: "bulan_mulai_penilaian",
+            key: "bulan_mulai_penilaian"
+        },
+        {
+            title: "Tanggal SK",
+            dataIndex: "tanggal_sk",
+            key: "tanggal_sk"
+        },
+        {
+            title: "Tahun Selesai Penilaian",
+            dataIndex: "tahun_selesai_penilaian",
+            key: "tahun_selesai_penilaian"
+        },
+        {
+            title: "Kredit Penunjang Baru",
+            dataIndex: "kredit_penunjang_baru",
+            key: "kredit_penunjang_baru"
+        }
+    ];
+
     return (
         <PegawaiLayout title="Riwayat Angka Kredit">
-            {JSON.stringify(data)}
-            <Table loading={isLoading} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                rowKey={(row) => row?.id}
+                pagination={false}
+                loading={isLoading}
+            />
         </PegawaiLayout>
     );
 }

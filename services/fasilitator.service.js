@@ -262,6 +262,10 @@ export const rwPMK = (nip) => {
     return fetcher.get(`/siasn/${nip}/rw-pmk`).then((res) => res?.data);
 };
 
+export const rwSKP = (nip) => {
+    return fetcher.get(`/siasn/${nip}/rw-skp`).then((res) => res?.data);
+};
+
 // operators
 export const operatorEmployees = (query = {}) => {
     // transform data to query string

@@ -16,10 +16,39 @@ function RiwayatKinerja() {
             refetchOnWindowFocus: false
         }
     );
+
+    const columns = [
+        {
+            title: "Tahun",
+            dataIndex: "tahun",
+            key: "tahun"
+        },
+        {
+            title: "Hasil Kinerja",
+            dataIndex: "hasil_kinerja",
+            key: "hasil_kinerja"
+        },
+        {
+            title: "Perilaku Kerja",
+            dataIndex: "perilaku_kerja",
+            key: "perilaku_kerja"
+        },
+        {
+            title: "Kuadran Kerja",
+            dataIndex: "kuadran_kinerja",
+            key: "kuadran_kinerja"
+        }
+    ];
+
     return (
         <PegawaiLayout title="Riwayat Kinerja">
-            {JSON.stringify(data)}
-            <Table loading={isLoading} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                pagination={false}
+                rowKey={(row) => row?.id}
+                loading={isLoading}
+            />
         </PegawaiLayout>
     );
 }

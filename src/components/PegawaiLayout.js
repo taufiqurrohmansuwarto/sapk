@@ -5,6 +5,7 @@ import {
     DeploymentUnitOutlined,
     FlagOutlined,
     FundViewOutlined,
+    GifOutlined,
     HeartOutlined,
     HistoryOutlined,
     HomeOutlined,
@@ -100,6 +101,11 @@ const items = [
         title: "PMK",
         icon: <LaptopOutlined />,
         link: "riwayat-pmk"
+    },
+    {
+        title: "SKP",
+        icon: <GifOutlined />,
+        link: "riwayat-skp"
     }
 ];
 

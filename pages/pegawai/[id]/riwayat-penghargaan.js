@@ -16,9 +16,25 @@ function RiwayatPenghargaan() {
             refetchOnWindowFocus: false
         }
     );
+
+    const columns = [
+        {
+            title: "Jenis Penghargaan",
+            key: "nama_penghargaan",
+            dataIndex: "nama_penghargaan"
+        },
+        { title: "Tahun Perolehan", key: "tahun", dataIndex: "tahun" },
+        { title: "Nomor SK", dataIndex: "sk_nomor", dataIndex: "sk_nomor" },
+        {
+            title: "Tanggal SK",
+            dataIndex: "sk_tanggal",
+            dataIndex: "sk_tanggal"
+        }
+    ];
     return (
         <PegawaiLayout title="Riwayat Penghargaan">
             <Table
+                columns={columns}
                 pagination={false}
                 dataSource={data}
                 loading={isLoading}

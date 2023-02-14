@@ -48,7 +48,6 @@ function DataOrtu() {
 
     return (
         <PegawaiLayout title="Data Orang Tua">
-            {JSON.stringify(data)}
             <Table
                 columns={columns}
                 dataSource={data}

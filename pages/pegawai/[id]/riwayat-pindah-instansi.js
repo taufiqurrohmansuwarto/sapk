@@ -14,9 +14,49 @@ function RiwayatPindahInstansi() {
         () => rwPindahInstansi(id),
         { refetchOnWindowFocus: false }
     );
+
+    const columns = [
+        {
+            title: "Satuan Kerja Lama",
+            dataIndex: "satuan_kerja_induk_nama",
+            key: "satuan_kerja_induk_nama"
+        },
+        {
+            title: "Satuan Kerja Baru",
+            dataIndex: "satuan_kerja_induk_nama_baru",
+            key: "satuan_kerja_induk_nama_baru"
+        },
+        {
+            title: "No. SK BKN",
+            dataIndex: "nomor_sk_bkn",
+            key: "nomor_sk_bkn"
+        },
+        {
+            title: "Tgl. SK BKN",
+            dataIndex: "tgl_sk_bkn",
+            key: "tgl_sk_bkn"
+        },
+        {
+            title: "TMT Pindah Instansi",
+            dataIndex: "tmt_pi",
+            key: "tmt_pi"
+        },
+        {
+            title: "No. Surat Instansi Asal",
+            dataIndex: "no_surat_instansi_asal",
+            key: "no_surat_instansi_asal"
+        },
+        {
+            title: "No. Surat Instansi Tujugan",
+            dataIndex: "no_surat_instansi_tujuan",
+            key: "no_surat_instansi_tujuan"
+        }
+    ];
+
     return (
         <PegawaiLayout title="Riwayat Pindah Instansi">
             <Table
+                columns={columns}
                 loading={isLoading}
                 pagination={false}
                 rowKey={(row) => row?.id}
