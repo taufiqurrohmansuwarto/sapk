@@ -1,7 +1,7 @@
-import { angkaKredit } from "@/controller/siasn-ws-proxy.controller";
+import { penghargaan } from "@/controller/siasn-ws-proxy.controller";
 import auth from "@/middleware/auth";
 import nc from "next-connect";
 
 const handler = nc();
 
-export default handler.use(auth).get(angkaKredit);
+export default handler.use(auth).get(penghargaan);

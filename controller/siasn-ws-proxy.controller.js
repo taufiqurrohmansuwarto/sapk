@@ -193,7 +193,7 @@ export const jabatan = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/siasn-ws/proxy/pns/rw-jabatan-full/${nip}`
+            `/siasn-ws/proxy/pns/rw-jabatan/${nip}`
         );
 
         res.json(result?.data);

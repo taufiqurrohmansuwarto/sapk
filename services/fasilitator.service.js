@@ -176,3 +176,118 @@ export const listVerifikator = () => {
 export const listDataVerifikator = (id) => {
     return fetcher.get(`/verifikator/${id}`).then((res) => res?.data);
 };
+
+// siasn proxy
+export const dataAnak = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/data-anak`)
+        .then((res) => res?.data);
+};
+
+export const dataOrtu = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/data-ortu`)
+        .then((res) => res?.data);
+};
+
+export const dataPasangan = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/data-pasangan`)
+        .then((res) => res?.data);
+};
+
+export const dataPns = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/data-pns`)
+        .then((res) => res?.data);
+};
+
+export const dataUtama = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/data-utama`)
+        .then((res) => res?.data);
+};
+
+export const fileDownload = (file_path) => {
+    return fetcher
+        .get(`/pegawai/siasn/download?file_path=${file_path}`)
+        .then((res) => res?.data);
+};
+
+export const foto = (nip) => {
+    return fetcher.get(`/pegawai/siasn/${nip}/foto`).then((res) => res?.data);
+};
+
+export const rwAngkaKredit = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-angkakredit`)
+        .then((res) => res?.data);
+};
+
+export const rwCtln = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-ctln`)
+        .then((res) => res?.data);
+};
+
+export const rwDiklat = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-diklat`)
+        .then((res) => res?.data);
+};
+
+export const rwGolongan = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-golongan`)
+        .then((res) => res?.data);
+};
+
+export const rwHukdis = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-hukdis`)
+        .then((res) => res?.data);
+};
+
+export const rwJabatan = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-jabatan`)
+        .then((res) => res?.data);
+};
+
+export const rwKgb = (nip) => {
+    return fetcher.get(`/pegawai/siasn/${nip}/rw-kgb`).then((res) => res?.data);
+};
+
+export const rwKinerja = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-kinerja`)
+        .then((res) => res?.data);
+};
+
+export const rwOrganisasi = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-organisasi`)
+        .then((res) => res?.data);
+};
+
+export const rwPendidikan = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-pendidikan`)
+        .then((res) => res?.data);
+};
+
+export const rwPenghargaan = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-penghargaan`)
+        .then((res) => res?.data);
+};
+
+export const rwPindahInstansi = (nip) => {
+    return fetcher
+        .get(`/pegawai/siasn/${nip}/rw-pindahinstansi`)
+        .then((res) => res?.data);
+};
+
+export const rwPMK = (nip) => {
+    return fetcher.get(`/pegawai/siasn/${nip}/rw-pmk`).then((res) => res?.data);
+};
