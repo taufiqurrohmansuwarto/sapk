@@ -2,21 +2,21 @@ import { Table } from "antd";
 import Layout from "../../../src/components/Layout";
 import PegawaiLayout from "../../../src/components/PegawaiLayout";
 
-function DataAnak() {
+function RiwayatCLTN() {
     return (
-        <PegawaiLayout title="Data Anak">
+        <PegawaiLayout title="Riwayat CLTN">
             <Table />
         </PegawaiLayout>
     );
 }
 
-DataAnak.Auth = {
+RiwayatCLTN.Auth = {
     roles: ["FASILITATOR", "ADMIN"],
     groups: ["MASTER"]
 };
 
-DataAnak.getLayout = function getLayout(page) {
-    return <Layout title="Test">{page}</Layout>;
+RiwayatCLTN.getLayout = function getLayout(page) {
+    return <Layout title="Riwayat CLTN">{page}</Layout>;
 };
 
-export default DataAnak;
+export default RiwayatCLTN;

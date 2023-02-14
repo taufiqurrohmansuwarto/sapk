@@ -16,7 +16,7 @@ DataUtama.Auth = {
 };
 
 DataUtama.getLayout = function getLayout(page) {
-    return <Layout title="Test">{page}</Layout>;
+    return <Layout title="Data Utama">{page}</Layout>;
 };
 
 export default DataUtama;

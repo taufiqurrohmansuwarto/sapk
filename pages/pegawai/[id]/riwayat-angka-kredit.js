@@ -4,7 +4,7 @@ import PegawaiLayout from "../../../src/components/PegawaiLayout";
 
 function DataAnak() {
     return (
-        <PegawaiLayout title="Data Anak">
+        <PegawaiLayout title="Riwayat Angka Kredit">
             <Table />
         </PegawaiLayout>
     );
@@ -16,7 +16,7 @@ DataAnak.Auth = {
 };
 
 DataAnak.getLayout = function getLayout(page) {
-    return <Layout title="Test">{page}</Layout>;
+    return <Layout title="Riwayat Angka Kredit">{page}</Layout>;
 };
 
 export default DataAnak;

@@ -16,7 +16,7 @@ DataPasangan.Auth = {
 };
 
 DataPasangan.getLayout = function getLayout(page) {
-    return <Layout title="Test">{page}</Layout>;
+    return <Layout title="Data Pasangan">{page}</Layout>;
 };
 
 export default DataPasangan;
