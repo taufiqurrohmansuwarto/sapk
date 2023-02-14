@@ -326,10 +326,19 @@ export const download = async (req, res) => {
         const { fetcher } = req;
 
         const result = await fetcher.get(
-            `/siasn-ws/proxy/download?file_path=${file_path}`
+            `/siasn-ws/proxy/download?file_path=${file_path}`,
+            {
+                responseType: "arraybuffer"
+            }
         );
 
-        res.json(result?.data);
+        // send file via pdf
+        res.writeHead(200, {
+            "Content-Type": "application/pdf",
+            "Content-Length": result?.data?.length
+        });
+
+        res.end(Buffer.from(result?.data, "binary"));
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal Server Error", code: 500 });

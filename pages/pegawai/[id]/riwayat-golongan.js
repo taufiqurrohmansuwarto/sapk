@@ -19,6 +19,28 @@ function RiwayatGolongan() {
 
     const columns = [
         {
+            title: "File",
+            dataIndex: "file",
+            render: (_, row) => {
+                if (!row?.path) {
+                    return null;
+                } else {
+                    return (
+                        <div>
+                            <a
+                                href={`/sapk/api/fasilitator/siasn/download?file_path=${
+                                    row?.path?.[Object.keys(row?.path)]?.dok_uri
+                                }`}
+                                target="_blank"
+                            >
+                                Download
+                            </a>
+                        </div>
+                    );
+                }
+            }
+        },
+        {
             title: "Golongan",
             dataIndex: "golongan_nama",
             key: "golongan_nama"
@@ -64,7 +86,7 @@ RiwayatGolongan.Auth = {
 };
 
 RiwayatGolongan.getLayout = function getLayout(page) {
-    return <Layout title="Test">{page}</Layout>;
+    return <Layout title="Riwayat Golongan">{page}</Layout>;
 };
 
 export default RiwayatGolongan;

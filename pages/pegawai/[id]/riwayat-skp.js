@@ -44,12 +44,15 @@ function RiwayatSKP() {
             dataIndex: "nilai_integrasi",
             key: "nilai_integrasi"
         },
-        { title: "Peraturan", dataIndex: "peraturan", key: "peraturan" }
+        {
+            title: "Peraturan",
+            dataIndex: "jenis_peraturan",
+            key: "jenis_peraturan"
+        }
     ];
 
     return (
         <PegawaiLayout title="Riwayat SKP">
-            {JSON.stringify(data)}
             <Table
                 columns={columns}
                 rowKey={(row) => row?.id}
