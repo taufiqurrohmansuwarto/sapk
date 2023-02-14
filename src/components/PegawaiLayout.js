@@ -77,7 +77,7 @@ function PegawaiLayout({ title, children }) {
     return (
         <PageContainer title="Daftar Pegawai">
             <Row gutter={[16, 16]}>
-                <Col span={6}>
+                <Col span={6} xs={24} sm={24} lg={6}>
                     <Card>
                         <Row justify="center">
                             <Space direction="vertical" align="center">
@@ -112,7 +112,7 @@ function PegawaiLayout({ title, children }) {
                         </Row>
                     </Card>
                 </Col>
-                <Col span={18}>
+                <Col lg={18} xs={24} sm={24}>
                     <Card title={title}>{children}</Card>
                 </Col>
             </Row>

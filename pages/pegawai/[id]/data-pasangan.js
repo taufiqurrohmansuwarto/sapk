@@ -1,11 +1,21 @@
+import { dataPasangan } from "@/services/fasilitator.service";
 import { Table } from "antd";
+import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
 import PegawaiLayout from "../../../src/components/PegawaiLayout";
 
 function DataPasangan() {
+    const router = useRouter();
+    const id = router.query.id;
+
+    const { data, isLoading } = useQuery(["data-pasangan", id], () =>
+        dataPasangan(id)
+    );
+
     return (
         <PegawaiLayout title="Data Pasangan">
-            <Table />
+            {JSON.stringify(data)}
+            <Table loading={isLoading} />
         </PegawaiLayout>
     );
 }
