@@ -7,6 +7,7 @@ const isProd = process.env.NODE_ENV === "production";
 function getBasePath() {
     var basePath = "";
 
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     if (isProd && process.env.BASE_PATH) {
         if (process.env.BASE_PATH.startsWith("/")) {
             basePath = process.env.BASE_PATH;
@@ -35,6 +36,10 @@ const hashOnlyIdent = (context, _, exportName) =>
 module.exports = withAntdLess({
     poweredByHeader: false,
     basePath: "/sapk",
+    images: {
+        domains: ["master.bkd.jatimprov.go.id"],
+        formats: ["image/webp"]
+    },
     publicRuntimeConfig: {
         basePath: getBasePath()
     },
