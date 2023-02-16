@@ -1,6 +1,16 @@
 import { operatorEmployees } from "@/services/fasilitator.service";
 import { useQuery } from "@tanstack/react-query";
-import { Card, Col, Divider, Input, Row, Space, Table, Typography } from "antd";
+import {
+    BackTop,
+    Card,
+    Col,
+    Divider,
+    Input,
+    Row,
+    Space,
+    Table,
+    Typography
+} from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import AvatarNext from "src/components/AvatarNext";
@@ -27,7 +37,7 @@ function Pegawai() {
             dataIndex: "foto",
             width: 100,
             render: (_, row) => {
-                return <AvatarNext size={80} src={row?.foto} shape="square" />;
+                return <AvatarNext src={row?.foto} />;
             }
         },
         {
@@ -65,11 +75,13 @@ function Pegawai() {
     return (
         <PageContainer title="Daftar Pegawai">
             <Card>
+                <BackTop />
                 <Row justify="center">
                     <Col span={20}>
                         <Table
                             title={() => (
                                 <Input.Search
+                                    placeholder="Cari Berdasarkan NIP atau nama"
                                     onSearch={(value) => {
                                         setQuery({
                                             ...query,
@@ -83,9 +95,10 @@ function Pegawai() {
                             loading={isLoading || isFetching}
                             dataSource={data?.data}
                             rowKey={(row) => row?.pegawai_id}
-                            // size="small"
+                            size="small"
                             columns={columns}
                             pagination={{
+                                showSizeChanger: false,
                                 onChange: (page) =>
                                     setQuery({ ...query, page }),
                                 position: ["bottomRight", "topRight"],
@@ -109,7 +122,7 @@ Pegawai.Auth = {
 };
 
 Pegawai.getLayout = function getLayout(page) {
-    return <Layout title="Daftar Pegawai">{page}</Layout>;
+    return <Layout title="Daftar Pegawai SIMASTER">{page}</Layout>;
 };
 
 export default Pegawai;

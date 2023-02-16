@@ -1,7 +1,7 @@
-import { Col, Card, Divider, Row, Statistic } from "antd";
-import { dataDashboard } from "../../services/fasilitator.service";
-import { useQuery } from "@tanstack/react-query";
 import { Bar } from "@ant-design/plots";
+import { useQuery } from "@tanstack/react-query";
+import { Card } from "antd";
+import { dataDashboard } from "../../services/fasilitator.service";
 
 const Chart = ({ data }) => {
     const config = {
@@ -22,15 +22,15 @@ function Dashboard({ user }) {
 
     return (
         <Card title="Dashboard" loading={isLoading}>
-            Halo, {user?.user?.name}
-            <Divider />
-            <Statistic title="Total Data Keseluruhan" value={data?.total} />
+            Halo, {user?.user?.name}. Selamat datang di data Integrasi
+            {/* <Divider /> */}
+            {/* <Statistic title="Total Data Keseluruhan" value={data?.total} />
             <Divider />
             <Row>
                 <Col span={12}>
                     <Chart data={data?.count} />
                 </Col>
-            </Row>
+            </Row> */}
         </Card>
     );
 }

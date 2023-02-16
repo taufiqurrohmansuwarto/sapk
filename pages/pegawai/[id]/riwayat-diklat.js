@@ -17,10 +17,57 @@ function RiwayatDiklat() {
         }
     );
 
+    const columns = [
+        {
+            title: "Nama diklat",
+            dataIndex: "nama_diklat",
+            key: "nama_diklat"
+        },
+        {
+            title: "Nomer",
+            dataIndex: "nomor",
+            key: "nomor"
+        },
+        {
+            title: "Tahun",
+            dataIndex: "tahun",
+            key: "tahun"
+        },
+        {
+            title: "Jenis Diklat",
+            dataIndex: "jenis_diklat_nama",
+            key: "jenis_diklat_nama"
+        },
+        {
+            title: "Jumlah Jam",
+            dataIndex: "jumlah_jam",
+            key: "jumlah_jam"
+        },
+        {
+            title: "Institusi Penyelenggara",
+            dataIndex: "institusi_penyelenggara",
+            key: "institusi_penyelenggara"
+        },
+        {
+            title: "Tanggal Kursus",
+            dataIndex: "tanggal_kursus",
+            key: "tanggal_kursus"
+        },
+        {
+            title: "Tanggal Selesai",
+            dataIndex: "tanggal_selesai",
+            key: "tanggal_selesai"
+        }
+    ];
+
     return (
         <PegawaiLayout title="Riwayat Diklat">
-            {JSON.stringify(data)}
-            <Table loading={isLoading} />
+            <Table
+                columns={columns}
+                dataSource={data}
+                pagination={false}
+                loading={isLoading}
+            />
         </PegawaiLayout>
     );
 }
@@ -31,7 +78,7 @@ RiwayatDiklat.Auth = {
 };
 
 RiwayatDiklat.getLayout = function getLayout(page) {
-    return <Layout title="Test">{page}</Layout>;
+    return <Layout title="Riwayat Diklat">{page}</Layout>;
 };
 
 export default RiwayatDiklat;

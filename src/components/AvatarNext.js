@@ -1,15 +1,16 @@
 // create avatar component with antd and image next
 
-const { default: Image } = require("next/image");
+import Image from "next/image";
 
 const AvatarNext = ({ src, alt, ...props }) => {
     return (
         <Image
             src={src}
-            alt={alt}
-            width={300}
-            height={300}
+            // contains="fill"
+            width={80}
+            height={80}
             style={{ borderRadius: 8 }}
+            loading="lazy"
         />
     );
 };

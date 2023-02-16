@@ -37,7 +37,7 @@ module.exports = withAntdLess({
     poweredByHeader: false,
     basePath: "/sapk",
     images: {
-        domains: ["master.bkd.jatimprov.go.id"],
+        domains: ["master.bkd.jatimprov.go.id", "siasn.bkd.jatimprov.go.id"],
         formats: ["image/webp"]
     },
     publicRuntimeConfig: {

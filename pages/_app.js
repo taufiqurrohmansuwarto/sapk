@@ -1,17 +1,18 @@
 import "@ant-design/pro-components/dist/components.css";
 import "@ant-design/pro-layout/dist/layout.css";
 import { MantineProvider } from "@mantine/core";
-import { ConfigProvider } from "antd";
-import "antd/dist/antd.css";
-import id from "antd/lib/locale/id_ID";
-import { SessionProvider, signIn, useSession } from "next-auth/react";
-import { useState } from "react";
 import {
     Hydrate,
     QueryClient,
     QueryClientProvider
 } from "@tanstack/react-query";
+import { ConfigProvider } from "antd";
+import "antd/dist/antd.css";
+import id from "antd/lib/locale/id_ID";
+import { SessionProvider, signIn, useSession } from "next-auth/react";
+import { useState } from "react";
 import "semantic-ui-css/semantic.min.css";
+import Loading from "src/components/Loading";
 import "./index.css";
 
 export default function MyApp({
@@ -70,7 +71,7 @@ function Auth({ children, roles, groups, isAdmin }) {
     const currentUserId = data?.user?.id;
 
     if (status === "loading") {
-        return <div>loading...</div>;
+        return <Loading />;
     }
 
     if (

@@ -1,10 +1,14 @@
 import {
-    AccountBookFilled,
+    AccountBookOutlined,
+    DatabaseOutlined,
+    FileExclamationOutlined,
     LogoutOutlined,
+    MoneyCollectOutlined,
     ReadOutlined,
-    RestOutlined
+    RestOutlined,
+    UserOutlined
 } from "@ant-design/icons";
-import { Avatar, Dropdown, Input, Menu, Space } from "antd";
+import { Avatar, Dropdown, Menu, Space } from "antd";
 import { uniqBy } from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -40,7 +44,7 @@ const menuUser = () => (
 const rightContentRender = (user) => {
     return (
         <Space size="large" align="start">
-            <Input.Search onSubmit={(e) => console.log(e)} />
+            {/* <Input.Search onSubmit={(e) => console.log(e)} /> */}
             <Dropdown overlay={menuUser()}>
                 <Space align="center">
                     <Avatar
@@ -81,9 +85,29 @@ const changeRoutes = (user) => {
 
         const masterFasilitatorRoutes = [
             {
+                path: "/pegawai",
+                name: "Pegawai",
+                icon: <UserOutlined />
+            },
+            {
+                path: "/data-sapk",
+                name: "Pembetulan",
+                icon: <DatabaseOutlined />
+            },
+            {
+                path: "/data-import-personal",
+                name: " Import Personal",
+                icon: <FileExclamationOutlined />
+            },
+            {
+                path: "/verifikator",
+                name: "Verifikator SIASN",
+                icon: <MoneyCollectOutlined />
+            },
+            {
                 path: "/data-import",
                 name: " Full Import",
-                icon: <AccountBookFilled />
+                icon: <AccountBookOutlined />
             }
         ];
 
@@ -113,6 +137,7 @@ const Layout = ({ children, title = "SAPK", disableContentMargin = false }) => {
         <ProLayout
             layout="side"
             headerTheme="light"
+            logo={null}
             menu={{
                 request: async () => {
                     try {

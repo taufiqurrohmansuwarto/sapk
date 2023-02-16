@@ -8,7 +8,6 @@ import {
     GifOutlined,
     HeartOutlined,
     HistoryOutlined,
-    HomeOutlined,
     LaptopOutlined,
     LinkOutlined,
     PartitionOutlined,
@@ -130,12 +129,17 @@ function PegawaiLayout({ title, children }) {
     );
 
     const handleBack = () => router.push("/pegawai");
+    const Title = () => (
+        <Skeleton loading={isLoading} active>
+            {data?.nama}
+        </Skeleton>
+    );
 
     return (
         <PageContainer
             loading={isLoading}
             onBack={handleBack}
-            title={`Data SIASN - ${data?.nama}`}
+            title={<Title />}
         >
             <Row gutter={[16, 16]}>
                 <Col span={6} xs={24} sm={24} lg={6}>
