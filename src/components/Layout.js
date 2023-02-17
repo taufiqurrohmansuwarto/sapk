@@ -4,6 +4,7 @@ import {
     FileExclamationOutlined,
     LogoutOutlined,
     MoneyCollectOutlined,
+    QqOutlined,
     ReadOutlined,
     RestOutlined,
     UserOutlined
@@ -108,6 +109,21 @@ const changeRoutes = (user) => {
                 path: "/data-import",
                 name: " Full Import",
                 icon: <AccountBookOutlined />
+            },
+            {
+                path: "/ref-unor",
+                name: "Referensi Unit Organisasi",
+                icon: <QqOutlined />
+            },
+            {
+                path: "/ref-jfu",
+                name: "Referensi Jabatan Fungsional Umum",
+                icon: <QqOutlined />
+            },
+            {
+                path: "/ref-jft",
+                name: "Referensi Jabatan Fungsional Tertentu",
+                icon: <QqOutlined />
             }
         ];
 
