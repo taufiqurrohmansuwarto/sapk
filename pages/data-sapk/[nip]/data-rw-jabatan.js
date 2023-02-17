@@ -4,7 +4,6 @@ import {
     Alert,
     Button,
     Card,
-    Checkbox,
     Col,
     DatePicker,
     Divider,
@@ -20,6 +19,7 @@ import {
     TreeSelect
 } from "antd";
 import moment from "moment";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
@@ -30,8 +30,6 @@ import {
     detailJfu,
     informasiPembetulanNama,
     masterRwJabatan,
-    refJabatanFungsional,
-    refJabatanFungsionalUmum,
     refUnor,
     rwJabatanSapk,
     siasnRwJabatan
@@ -652,12 +650,16 @@ const RiwayatJabatan = () => {
         () => siasnRwJabatan(router?.query?.nip)
     );
 
+    const LinkSIASN = () => (
+        <Link href={`/pegawai/${currentUser?.nip}/data-utama`}>Data SIASN</Link>
+    );
+
     return (
         <PageContainer
             onBack={() => router?.back()}
             title="Data Integrasi"
             style={{ minHeight: "92vh" }}
-            subTitle="Riwayat Jabatan"
+            subTitle={<LinkSIASN />}
         >
             <Row>
                 <Col span={18} push={1}>

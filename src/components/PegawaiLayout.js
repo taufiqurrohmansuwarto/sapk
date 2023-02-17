@@ -135,9 +135,16 @@ function PegawaiLayout({ title, children }) {
         </Skeleton>
     );
 
+    const Padanan = () => (
+        <Link href={`/data-sapk/${data?.nip_baru}/data-rw-jabatan`}>
+            Komparasi Data
+        </Link>
+    );
+
     return (
         <PageContainer
             loading={isLoading}
+            subTitle={<Padanan />}
             onBack={handleBack}
             title={<Title />}
         >
