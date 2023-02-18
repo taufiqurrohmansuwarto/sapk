@@ -1,8 +1,128 @@
-import React from "react";
+import {
+    refMasterUnor,
+    refSapkUnor,
+    updateUnorMaster
+} from "@/services/fasilitator.service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+    Alert,
+    Button,
+    Card,
+    message,
+    Skeleton,
+    Space,
+    TreeSelect
+} from "antd";
+import { useState } from "react";
 import Layout from "src/components/Layout";
+import PageContainer from "src/components/PageContainer";
 
 function RefUnor() {
-    return <div>index</div>;
+    const [master, setMaster] = useState(null);
+    const [sapk, setSapk] = useState(null);
+
+    const client = useQueryClient();
+
+    const { data, isLoading } = useQuery(
+        ["ref-unor-master"],
+        () => refMasterUnor(),
+        {
+            refetchOnWindowFocus: false
+        }
+    );
+
+    const { data: unorSapk, isLoading: isLoadingUnorSapk } = useQuery(
+        ["ref-unor-sapk"],
+        () => refSapkUnor(),
+        {
+            refetchOnWindowFocus: false
+        }
+    );
+
+    const { mutate: updateMaster, isLoading: isLoadingUpdateUnorMaster } =
+        useMutation((data) => updateUnorMaster(data), {
+            onSuccess: () => {
+                message.success("Data berhasil disimpan");
+                client.invalidateQueries(["ref-unor-master"]);
+                setMaster({
+                    ...master,
+                    id_sapk: sapk
+                });
+            },
+            onError: (err) => {
+                message.error(err.message);
+            }
+        });
+
+    const handleUpdateUnorMaster = () => {
+        if (!sapk) {
+            message.error("Pilih unor SAPK terlebih dahulu");
+        } else {
+            const data = {
+                id: master.id,
+                data: {
+                    id_sapk: sapk
+                }
+            };
+            updateMaster(data);
+        }
+    };
+
+    const handleSelectMaster = (value, label, extra) => {
+        // console.log(e);
+        const { id_sapk, name, id } = label;
+
+        if (id_sapk) {
+            setSapk(id_sapk);
+        }
+
+        setMaster({
+            id_sapk,
+            id,
+            name
+        });
+    };
+
+    return (
+        <PageContainer title="Unor">
+            <Card>
+                <Alert
+                    type="warning"
+                    message="Perhatian"
+                    showIcon
+                    description="Pilih unor master terlebih dahulu, kemudian pilih unor SAPK. Sesuaikan unor SAPK dengan unor master. Apabila dirasa cocok, klik tombol simpan. Apabila tidak ada laporkan pada helpdesk. Dengan anda mengupdate unor ini maka akan memudahkan proses integrasi data unor"
+                    style={{ marginBottom: 10 }}
+                />
+                <Skeleton loading={isLoading || isLoadingUnorSapk}>
+                    <Space direction="vertical">
+                        <TreeSelect
+                            placeholder="UNOR MASTER"
+                            treeData={data}
+                            showSearch
+                            treeNodeFilterProp="name"
+                            onSelect={handleSelectMaster}
+                            style={{ width: "800px" }}
+                        />
+                        <TreeSelect
+                            placeholder="UNOR SAPK"
+                            treeNodeFilterProp="title"
+                            showSearch
+                            value={sapk}
+                            onChange={setSapk}
+                            treeData={unorSapk}
+                            style={{ width: "800px" }}
+                        />
+                        <Button
+                            onClick={handleUpdateUnorMaster}
+                            loading={isLoadingUpdateUnorMaster}
+                        >
+                            Update Unor
+                        </Button>
+                    </Space>
+                </Skeleton>
+            </Card>
+        </PageContainer>
+    );
 }
 
 RefUnor.Auth = {

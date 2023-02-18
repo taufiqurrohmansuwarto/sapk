@@ -277,3 +277,18 @@ export const operatorEmployees = (query = {}) => {
         .get(`/operators/employees?${queryString}`)
         .then((res) => res?.data);
 };
+
+// refs
+export const refMasterUnor = () => {
+    return fetcher.get(`/operators/refs/master-unor`).then((res) => res?.data);
+};
+
+export const updateUnorMaster = ({ id, data }) => {
+    return fetcher
+        .patch(`/operators/refs/master-unor/${id}`, data)
+        .then((res) => res?.data);
+};
+
+export const refSapkUnor = () => {
+    return fetcher.get(`/operators/refs/sapk-unor`).then((res) => res?.data);
+};

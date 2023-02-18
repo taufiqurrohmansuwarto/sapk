@@ -255,3 +255,15 @@ export const transformDate = (date) => {
     // return new Date(year, month - 1, day);
     return date;
 };
+
+export const flattenTree = (tree) => {
+    const flattened = [];
+    const flatten = (node) => {
+        flattened.push(node);
+        if (node?.children?.length) {
+            node.children.forEach(flatten);
+        }
+    };
+    tree.forEach(flatten);
+    return flattened;
+};

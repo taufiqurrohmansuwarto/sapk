@@ -1,5 +1,6 @@
 import {
     AccountBookOutlined,
+    BookOutlined,
     DatabaseOutlined,
     FileExclamationOutlined,
     LogoutOutlined,
@@ -113,18 +114,18 @@ const changeRoutes = (user) => {
             {
                 path: "/ref-unor",
                 name: "Referensi Unit Organisasi",
-                icon: <QqOutlined />
-            },
-            {
-                path: "/ref-jfu",
-                name: "Referensi Jabatan Fungsional Umum",
-                icon: <QqOutlined />
-            },
-            {
-                path: "/ref-jft",
-                name: "Referensi Jabatan Fungsional Tertentu",
-                icon: <QqOutlined />
+                icon: <BookOutlined />
             }
+            // {
+            //     path: "/ref-jfu",
+            //     name: "Referensi Jabatan Fungsional Umum",
+            //     icon: <BookOutlined />
+            // },
+            // {
+            //     path: "/ref-jft",
+            //     name: "Referensi Jabatan Fungsional Tertentu",
+            //     icon: <BookOutlined />
+            // }
         ];
 
         let currentRoutes = routes?.routes;

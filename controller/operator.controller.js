@@ -61,3 +61,24 @@ module.exports.operatorFullEmployees = async (req, res) => {
         });
     }
 };
+
+module.exports.updateUnorMaster = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const body = req?.body;
+
+        await fetcher.patch(
+            `/master-ws/operator/departments/${req?.query?.id}`,
+            body
+        );
+
+        res.json({
+            message: "success"
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+};
