@@ -115,17 +115,17 @@ const changeRoutes = (user) => {
                 path: "/ref-unor",
                 name: "Referensi Unit Organisasi",
                 icon: <BookOutlined />
+            },
+            {
+                path: "/ref-jfu",
+                name: "Referensi Jabatan Fungsional Umum",
+                icon: <BookOutlined />
+            },
+            {
+                path: "/ref-jft",
+                name: "Referensi Jabatan Fungsional Tertentu",
+                icon: <BookOutlined />
             }
-            // {
-            //     path: "/ref-jfu",
-            //     name: "Referensi Jabatan Fungsional Umum",
-            //     icon: <BookOutlined />
-            // },
-            // {
-            //     path: "/ref-jft",
-            //     name: "Referensi Jabatan Fungsional Tertentu",
-            //     icon: <BookOutlined />
-            // }
         ];
 
         let currentRoutes = routes?.routes;
