@@ -292,3 +292,14 @@ export const updateUnorMaster = ({ id, data }) => {
 export const refSapkUnor = () => {
     return fetcher.get(`/operators/refs/sapk-unor`).then((res) => res?.data);
 };
+
+export const downloadFileExcel = (query) => {
+    const queryString = Object.keys(query)
+        .map((key) => `${key}=${query[key]}`)
+        .join("&");
+    return fetcher
+        .get(`/operators/employees-report?${queryString}`, {
+            responseType: "blob"
+        })
+        .then((res) => res?.data);
+};

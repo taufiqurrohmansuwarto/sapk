@@ -23,13 +23,13 @@ export default function MyApp({
     const getLayout = Component.getLayout || ((page) => page);
 
     return (
-        <SessionProvider
-            basePath="/sapk/api/auth"
-            baseUrl="/sapk"
-            session={session}
-        >
-            <QueryClientProvider client={queryClient}>
-                <ConfigProvider locale={id}>
+        <ConfigProvider locale={id}>
+            <SessionProvider
+                basePath="/sapk/api/auth"
+                baseUrl="/sapk"
+                session={session}
+            >
+                <QueryClientProvider client={queryClient}>
                     <MantineProvider
                         withGlobalStyles
                         withNormalizeCSS
@@ -52,9 +52,9 @@ export default function MyApp({
                             )}
                         </Hydrate>
                     </MantineProvider>
-                </ConfigProvider>
-            </QueryClientProvider>
-        </SessionProvider>
+                </QueryClientProvider>
+            </SessionProvider>
+        </ConfigProvider>
     );
 }
 

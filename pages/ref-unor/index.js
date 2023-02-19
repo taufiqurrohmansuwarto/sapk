@@ -96,8 +96,8 @@ function RefUnor() {
                 <Skeleton loading={isLoading || isLoadingUnorSapk}>
                     <Space direction="vertical">
                         <TreeSelect
-                            placeholder="UNOR MASTER"
                             treeData={data}
+                            placeholder="UNOR MASTER"
                             showSearch
                             treeNodeFilterProp="name"
                             onSelect={handleSelectMaster}

@@ -1,20 +1,29 @@
-import { operatorEmployees } from "@/services/fasilitator.service";
+import {
+    downloadFileExcel,
+    operatorEmployees,
+    refMasterUnor
+} from "@/services/fasilitator.service";
 import { useQuery } from "@tanstack/react-query";
 import {
     BackTop,
+    Button,
     Card,
     Col,
     Divider,
+    Form,
     Input,
     Row,
+    Skeleton,
     Space,
     Table,
+    TreeSelect,
     Typography
 } from "antd";
+import FileSaver from "file-saver";
 import Link from "next/link";
 import { useState } from "react";
 import AvatarNext from "src/components/AvatarNext";
-import Layout from "../../src/components/Layout";
+import Layout from "src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
 
 function Pegawai() {
@@ -31,6 +40,15 @@ function Pegawai() {
             refetchOnWindowFocus: false
         }
     );
+
+    const { data: unor, isLoading: isLoadingUnor } = useQuery(
+        ["ref-unor-master"],
+        () => refMasterUnor(),
+        {
+            refetchOnWindowFocus: false
+        }
+    );
+
     const columns = [
         {
             title: "Foto",
@@ -97,6 +115,89 @@ function Pegawai() {
             )
         }
     ];
+
+    const [form] = Form.useForm();
+    const handleReset = () => {
+        form.resetFields();
+        setQuery({
+            page: 1
+        });
+    };
+
+    const handleSubmit = async () => {
+        const result = await form.getFieldValue();
+        setQuery({
+            ...query,
+            ...result
+        });
+    };
+
+    const [loadingDownload, setLoadingDownload] = useState(false);
+
+    const downloadExcel = async () => {
+        try {
+            const result = await form.getFieldValue();
+            let currentQuery = {};
+
+            if (result?.skpd_id) {
+                currentQuery = {
+                    ...currentQuery,
+                    skpd_id: result?.skpd_id
+                };
+            }
+            setLoadingDownload(true);
+            const hasil = await downloadFileExcel(currentQuery);
+            await FileSaver.saveAs(hasil, "data-pegawai.xlsx");
+            setLoadingDownload(false);
+        } catch (error) {
+            console.log(error);
+            setLoadingDownload(false);
+        }
+    };
+
+    const FilterForm = () => {
+        return (
+            <Skeleton loading={isLoadingUnor}>
+                <Form form={form} onFinish={handleSubmit}>
+                    <Row gutter={24}>
+                        <Col span={6}>
+                            <Form.Item label="NIP atau Nama" name="search">
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                        <Col span={10}>
+                            <Form.Item label="Unit Organisasi" name="skpd_id">
+                                <TreeSelect
+                                    treeData={unor}
+                                    showSearch
+                                    treeNodeFilterProp="name"
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24} style={{ textAlign: "right" }}>
+                            <Space>
+                                <Button htmlType="submit" type="primary">
+                                    <Typography.Text>Filter</Typography.Text>
+                                </Button>
+                                <Button onClick={handleReset}>
+                                    <Typography.Text>Reset</Typography.Text>
+                                </Button>
+                                <Button
+                                    loading={loadingDownload}
+                                    onClick={downloadExcel}
+                                >
+                                    Download Excel
+                                </Button>
+                            </Space>
+                        </Col>
+                    </Row>
+                </Form>
+            </Skeleton>
+        );
+    };
+
     return (
         <PageContainer title="Daftar Pegawai">
             <Card>
@@ -104,19 +205,20 @@ function Pegawai() {
                 <Row justify="center">
                     <Col span={23}>
                         <Table
-                            title={() => (
-                                <Input.Search
-                                    placeholder="Cari Berdasarkan NIP atau nama"
-                                    onSearch={(value) => {
-                                        setQuery({
-                                            ...query,
-                                            search: value,
-                                            page: 1
-                                        });
-                                    }}
-                                    style={{ width: 300 }}
-                                />
-                            )}
+                            // title={() => (
+                            //     <Input.Search
+                            //         placeholder="Cari Berdasarkan NIP atau nama"
+                            //         onSearch={(value) => {
+                            //             setQuery({
+                            //                 ...query,
+                            //                 search: value,
+                            //                 page: 1
+                            //             });
+                            //         }}
+                            //         style={{ width: 300 }}
+                            //     />
+                            // )}
+                            title={() => <FilterForm />}
                             loading={isLoading || isFetching}
                             dataSource={data?.data}
                             rowKey={(row) => row?.pegawai_id}
@@ -147,7 +249,7 @@ Pegawai.Auth = {
 };
 
 Pegawai.getLayout = function getLayout(page) {
-    return <Layout title="Daftar Pegawai SIMASTER">{page}</Layout>;
+    return <Layout>{page}</Layout>;
 };
 
 export default Pegawai;

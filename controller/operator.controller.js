@@ -115,6 +115,21 @@ module.exports.updateUnorMaster = async (req, res) => {
     }
 };
 
+const serializeExcel = (employees) => {
+    return employees.map((item) => {
+        return {
+            NIP: item?.nip_baru,
+            Nama: item?.nama,
+            "Jabatan SIMASTER": item?.jabatan,
+            "Jabatan SIASN": item?.siasn?.nama_jabatan,
+            "Jabatan Sesuai?": "",
+            "Unit Kerja SIMASTER": item?.skpd,
+            "Unit Kerja SIASN": `${item?.siasn?.unor_induk_nama} - ${item?.siasn?.unor_nama}`,
+            "Unit Kerja Sesuai?": ""
+        };
+    });
+};
+
 module.exports.employeesExcel = async (req, res) => {
     try {
         const { fetcher } = req;
@@ -132,9 +147,12 @@ module.exports.employeesExcel = async (req, res) => {
             `/master-ws/operator/employees?${queryString}`
         );
 
+        const employees = await getSiasnAttr(result?.data, fetcher);
+        const hasil = serializeExcel(employees);
+
         // using exceljs
         const wb = xlsx.utils.book_new();
-        const ws = xlsx.utils.json_to_sheet(result?.data);
+        const ws = xlsx.utils.json_to_sheet(hasil);
 
         xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
 
