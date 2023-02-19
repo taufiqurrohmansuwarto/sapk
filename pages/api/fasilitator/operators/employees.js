@@ -1,7 +1,4 @@
-import {
-    operatorDepartments,
-    operatorEmployees
-} from "@/controller/operator.controller";
+import { operatorEmployees } from "@/controller/operator.controller";
 import auth from "@/middleware/auth";
 import nc from "next-connect";
 

@@ -1,3 +1,25 @@
+const xlsx = require("xlsx");
+const getSiasnAttr = async (employees, fetcher) => {
+    let promise = [];
+
+    employees.forEach((pegawai) => {
+        promise.push(
+            fetcher.get(`/siasn-ws/proxy/pns/data-utama/${pegawai?.nip_baru}`)
+        );
+    });
+
+    const result = await Promise.allSettled(promise);
+
+    const newListPegawai = result.map((item, index) => {
+        return {
+            ...employees[index],
+            siasn: item?.value?.data
+        };
+    });
+
+    return newListPegawai;
+};
+
 module.exports.operatorEmployees = async (req, res) => {
     try {
         const { fetcher } = req;
@@ -12,33 +34,18 @@ module.exports.operatorEmployees = async (req, res) => {
             `/master-ws/operator/employees?${queryString}`
         );
 
-        const listPegawai = result?.data?.data;
-        let promise = [];
+        const employees = result?.data?.data;
 
-        listPegawai.forEach((pegawai) => {
-            promise.push(
-                fetcher.get(
-                    `/siasn-ws/proxy/pns/data-utama/${pegawai?.nip_baru}`
-                )
-            );
-        });
-
-        const newresult = await Promise.allSettled(promise);
-        const newlistPegawai = newresult.map((item, index) => {
-            return {
-                ...listPegawai[index],
-                siasn: item?.value?.data
-            };
-        });
+        const newListPegawai = await getSiasnAttr(employees, fetcher);
 
         const newData = {
             ...result?.data,
-            data: newlistPegawai
+            data: newListPegawai
         };
 
         res.json(newData);
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         res.status(500).json({
             message: "Internal Server Error"
         });
@@ -100,6 +107,54 @@ module.exports.updateUnorMaster = async (req, res) => {
         res.json({
             message: "success"
         });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+};
+
+module.exports.employeesExcel = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const query = {
+            ...req?.query,
+            limit: "-1"
+        };
+
+        // json to query string
+        const queryString = Object.keys(query)
+            .map((key) => `${key}=${query[key]}`)
+            .join("&");
+
+        const result = await fetcher.get(
+            `/master-ws/operator/employees?${queryString}`
+        );
+
+        // using exceljs
+        const wb = xlsx.utils.book_new();
+        const ws = xlsx.utils.json_to_sheet(result?.data);
+
+        xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
+
+        const excelBuffer = xlsx.write(wb, {
+            bookType: "xlsx",
+            type: "buffer"
+        });
+
+        res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+        res.setHeader(
+            "Content-Disposition",
+            "attachment; filename=" + "test.xlsx"
+        );
+
+        res.send(excelBuffer);
+
+        // return excel format
     } catch (error) {
         console.log(error);
         res.status(500).json({
