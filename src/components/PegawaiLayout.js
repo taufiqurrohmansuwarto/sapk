@@ -136,9 +136,11 @@ function PegawaiLayout({ title, children }) {
     );
 
     const Padanan = () => (
-        <Link href={`/data-sapk/${data?.nip_baru}/data-rw-jabatan`}>
-            Komparasi Data
-        </Link>
+        <Skeleton loading={isLoading}>
+            <Link href={`/data-sapk/${data?.nip_baru}/data-rw-jabatan`}>
+                Komparasi Data
+            </Link>
+        </Skeleton>
     );
 
     return (

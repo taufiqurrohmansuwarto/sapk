@@ -90,7 +90,7 @@ function RefUnor() {
                     type="warning"
                     message="Perhatian"
                     showIcon
-                    description="Pilih unor master terlebih dahulu, kemudian pilih unor SAPK. Sesuaikan unor SAPK dengan unor master. Apabila dirasa cocok, klik tombol simpan. Apabila tidak ada laporkan pada helpdesk. Dengan anda mengupdate unor ini maka akan memudahkan proses integrasi data unor"
+                    description="Pilih UNOR MASTER terlebih dahulu, kemudian pilih UNOR SAPK. Sesuaikan UNOR SAPK dengan UNOR MASTER. Apabila dirasa cocok, klik tombol Update Unor. Untuk SMA, gunakan UNOR SAPK yang berawalan UPT SMA xxx. Apabila tidak ada laporkan pada helpdesk dengan melakukan screenshot. Dengan anda mengupdate unor ini maka akan memudahkan proses integrasi data UNOR antar SIASN dan SIMASTER."
                     style={{ marginBottom: 10 }}
                 />
                 <Skeleton loading={isLoading || isLoadingUnorSapk}>

@@ -52,10 +52,35 @@ function Pegawai() {
             )
         },
         {
-            title: "Perangkat Daerah",
+            title: "UNOR SIMASTER",
             dataIndex: "skpd",
+            width: 300,
             key: "skpd"
         },
+        {
+            title: "UNOR SIASN",
+            dataIndex: "unor_siasn",
+            width: 300,
+            render: (_, row) => (
+                <div>
+                    {row?.siasn?.unor_induk_nama} - {row?.siasn?.unor_nama}
+                </div>
+            )
+        },
+        {
+            title: "Jabatan SIMASTER",
+            dataIndex: "jabatan",
+            key: "jabatan",
+            width: 300
+        },
+        ,
+        {
+            title: "Jabatan SIASN",
+            dataIndex: "jabatan_siasn",
+            render: (_, row) => <div>{row?.siasn?.nama_jabatan}</div>,
+            width: 300
+        },
+
         {
             title: "Aksi",
             dataIndex: "aksi",
@@ -77,7 +102,7 @@ function Pegawai() {
             <Card>
                 <BackTop />
                 <Row justify="center">
-                    <Col span={20}>
+                    <Col span={23}>
                         <Table
                             title={() => (
                                 <Input.Search

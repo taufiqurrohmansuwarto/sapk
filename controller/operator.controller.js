@@ -11,9 +11,34 @@ module.exports.operatorEmployees = async (req, res) => {
         const result = await fetcher.get(
             `/master-ws/operator/employees?${queryString}`
         );
-        res.json(result.data);
+
+        const listPegawai = result?.data?.data;
+        let promise = [];
+
+        listPegawai.forEach((pegawai) => {
+            promise.push(
+                fetcher.get(
+                    `/siasn-ws/proxy/pns/data-utama/${pegawai?.nip_baru}`
+                )
+            );
+        });
+
+        const newresult = await Promise.allSettled(promise);
+        const newlistPegawai = newresult.map((item, index) => {
+            return {
+                ...listPegawai[index],
+                siasn: item?.value?.data
+            };
+        });
+
+        const newData = {
+            ...result?.data,
+            data: newlistPegawai
+        };
+
+        res.json(newData);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             message: "Internal Server Error"
         });
