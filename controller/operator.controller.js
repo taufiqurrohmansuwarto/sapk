@@ -142,7 +142,7 @@ module.exports.employeesExcel = async (req, res) => {
             `/master-ws/operator/employees?${queryString}`
         );
 
-        const hasil = serializeExcel(result);
+        const hasil = serializeExcel(result?.data);
 
         // using exceljs
         const wb = xlsx.utils.book_new();
