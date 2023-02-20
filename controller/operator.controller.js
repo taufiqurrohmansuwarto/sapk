@@ -34,16 +34,11 @@ module.exports.operatorEmployees = async (req, res) => {
             `/master-ws/operator/employees?${queryString}`
         );
 
-        const employees = result?.data?.data;
+        const employees = result?.data;
 
-        const newListPegawai = await getSiasnAttr(employees, fetcher);
+        // const newListPegawai = await getSiasnAttr(employees, fetcher);
 
-        const newData = {
-            ...result?.data,
-            data: newListPegawai
-        };
-
-        res.json(newData);
+        res.json(employees);
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -147,8 +142,7 @@ module.exports.employeesExcel = async (req, res) => {
             `/master-ws/operator/employees?${queryString}`
         );
 
-        const employees = await getSiasnAttr(result?.data, fetcher);
-        const hasil = serializeExcel(employees);
+        const hasil = serializeExcel(result);
 
         // using exceljs
         const wb = xlsx.utils.book_new();
