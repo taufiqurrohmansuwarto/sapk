@@ -128,7 +128,8 @@ function Pegawai() {
         const result = await form.getFieldValue();
         setQuery({
             ...query,
-            ...result
+            ...result,
+            page: 1
         });
     };
 
