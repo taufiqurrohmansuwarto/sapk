@@ -55,7 +55,11 @@ function Pegawai() {
             dataIndex: "foto",
             width: 100,
             render: (_, row) => {
-                return <AvatarNext src={row?.foto} />;
+                if (!row?.foto) {
+                    return null;
+                } else {
+                    return <AvatarNext src={row?.foto} size={50} />;
+                }
             }
         },
         {
@@ -126,11 +130,13 @@ function Pegawai() {
 
     const handleSubmit = async () => {
         const result = await form.getFieldValue();
-        setQuery({
-            ...query,
+        const data = {
             ...result,
-            page: 1
-        });
+            page: 1,
+            ...query
+        };
+
+        setQuery(data);
     };
 
     const [loadingDownload, setLoadingDownload] = useState(false);
@@ -206,19 +212,6 @@ function Pegawai() {
                 <Row justify="center">
                     <Col span={23}>
                         <Table
-                            // title={() => (
-                            //     <Input.Search
-                            //         placeholder="Cari Berdasarkan NIP atau nama"
-                            //         onSearch={(value) => {
-                            //             setQuery({
-                            //                 ...query,
-                            //                 search: value,
-                            //                 page: 1
-                            //             });
-                            //         }}
-                            //         style={{ width: 300 }}
-                            //     />
-                            // )}
                             title={() => <FilterForm />}
                             loading={isLoading || isFetching}
                             dataSource={data?.data}
