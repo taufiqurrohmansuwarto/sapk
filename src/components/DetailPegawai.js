@@ -38,7 +38,7 @@ const DataUser = ({ data }) => {
         return null;
     } else {
         return (
-            <Collapse defaultActiveKey={["1", "2", "3"]}>
+            <Collapse defaultActiveKey={["1", "3"]}>
                 {data?.nama ? (
                     <Collapse.Panel header="Informasi Pegawai" key="1">
                         <Space direction="vertical">
@@ -74,9 +74,6 @@ const DataUser = ({ data }) => {
                         <Descriptions size="small" title="Data OPD Master">
                             <div>{data?.skpd}</div>
                         </Descriptions>
-                        {/* <Descriptions size="small" title="Data Unor SAPK">
-                            <div>{data?.unor_sapk}</div>
-                        </Descriptions> */}
                     </Collapse.Panel>
                 ) : (
                     <Collapse.Panel header="Data Kosong" key="3">

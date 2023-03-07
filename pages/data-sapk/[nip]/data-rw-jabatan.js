@@ -132,6 +132,17 @@ const TableRiwayatJabatanSAPK = ({ data, loading }) => {
 };
 
 const TableRiwayatSIASN = ({ data, loading }) => {
+    const [showUpdate, setShowUpdate] = useState(false);
+
+    const handleShow = () => setShowUpdate(true);
+    const handleCancel = () => setShowUpdate(false);
+
+    const handleRemove = async (row) => {
+        alert(row?.id);
+    };
+
+    const handleUpdate = async (row) => {};
+
     const columns = [
         {
             title: "Jenis",
@@ -153,7 +164,20 @@ const TableRiwayatSIASN = ({ data, loading }) => {
         },
         { title: "No. SK", dataIndex: "nomor_sk", key: "nomor_sk" },
         { title: "TMT Jab", dataIndex: "tmt_jabatan", key: "tmt_jabatan" },
-        { title: "Tgl SK", dataIndex: "tanggal_sk", key: "tanggal_sk" }
+        { title: "Tgl SK", dataIndex: "tanggal_sk", key: "tanggal_sk" },
+        {
+            title: "Aksi",
+            key: "aksi",
+            render: (_, row) => {
+                return (
+                    <>
+                        <a onClick={() => handleRemove(row)}>Hapus</a>
+                        <Divider type="vertical" />
+                        <a>Update</a>
+                    </>
+                );
+            }
+        }
     ];
 
     return (
@@ -261,9 +285,6 @@ const DialogFormMaster = ({
     userData,
     id,
     unor,
-    dataTerakhirSapk,
-    fungsional,
-    fungsionalUmum,
     user
 }) => {
     const [form] = Form.useForm();
@@ -327,9 +348,6 @@ const DialogFormMaster = ({
 
             let jenis_jabatan_id = jenis_jabatan === "Fungsional" ? "2" : "4";
 
-            // id instansi pemeritnah provinsi jawa timur = A5EB03E23CCCF6A0E040640A040252AD
-            // id unor badan kepegawaian daerah provinsi jawa timur =
-
             const pemprovId = "A5EB03E23CCCF6A0E040640A040252AD";
             const bkdId = "466D9577BDB70F89E050640A29022FEF";
 
@@ -386,11 +404,6 @@ const DialogFormMaster = ({
                 instansi_id: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            // console.log(postDataSapk);
-            // tambahJabatanSIASN(postDataSIASN);
-            // tambahJabatanSapk(postDataSapk);
-            // console.log(postDataSIASN);
-
             if (!data?.pegawai_id) {
                 message.error(
                     "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki."
@@ -406,7 +419,7 @@ const DialogFormMaster = ({
     return (
         <Modal
             centered
-            title="Transfer Data"
+            title="Transfer Data Ke SIASN"
             maskClosable={false}
             confirmLoading={isLoadingTambahImport}
             visible={visible}
@@ -415,17 +428,17 @@ const DialogFormMaster = ({
             onCancel={handleCancel}
             onOk={handleSubmit}
         >
-            <Alert
-                type="info"
-                message="Pastikan tanggal SK terakhir di SAPK lebih kecil dari yang dientri, soale kewoco tanggal sk terakhir"
-                showIcon
-            />
-            <div style={{ marginTop: 5 }}>
-                {userData?.jenis_jabatan} : {userData?.jabatan}
-            </div>
-            <Divider />
-            <div>opd : {user?.skpd}</div>
-            <div>unor sk : {userData?.unor}</div>
+            <Form layout="vertical">
+                <Form.Item label="Jenis Jabatan">
+                    <Input readOnly value={userData?.jenis_jabatan} />
+                </Form.Item>
+                <Form.Item label="Jabatan">
+                    <Input readOnly value={userData?.jabatan} />
+                </Form.Item>
+                <Form.Item label="Unor SIMASTER">
+                    <Input readOnly value={user?.skpd} />
+                </Form.Item>
+            </Form>
             <Divider />
             <Form
                 form={form}
@@ -439,18 +452,6 @@ const DialogFormMaster = ({
                 }}
                 layout="vertical"
             >
-                {/* <Form.Item
-                    name="tambah_riwayat_unor_saja"
-                    help="Kalau jabatan sudah sama di sapk, maka hanya tambahkan riwayat unor saja"
-                    valuePropName="checked"
-                >
-                    <Checkbox>
-                        Tandai jika butuh riwayat unor saja, tidak pakai jabatan
-                    </Checkbox>
-                </Form.Item> */}
-                <Form.Item name="id" label="ID Pegawai SAPK">
-                    <Input readOnly />
-                </Form.Item>
                 <Form.Item
                     rules={[{ required: true }]}
                     name="jenis_jabatan"
@@ -526,10 +527,10 @@ const DialogFormMaster = ({
                     <DatePicker format={format} />
                 </Form.Item>
             </Form>
-            <Divider />
-            <Form.Item label="Data Terakhir SK SAPK">
-                <Input value={dataTerakhirSapk?.tanggalSk} />
-            </Form.Item>
+            <a href={userData?.file} target="_blank">
+                Lihat SK
+            </a>
+            <Button>Pakai SK Ini</Button>
         </Modal>
     );
 };
@@ -540,17 +541,17 @@ const TableRiwayatMaster = ({
     loading,
     id,
     unor,
-    // fungsional,
-    // fungsionalUmum,
     user
 }) => {
     const [visible, setVisible] = useState(false);
     const [userData, setUserData] = useState(null);
 
-    const handleOpen = (user) => {
+    const handleOpen = async (user) => {
+        // handle api to membuat usulan
         setUserData(user);
         setVisible(true);
     };
+
     const handleCancel = () => {
         setUserData(null);
         setVisible(false);
@@ -560,7 +561,7 @@ const TableRiwayatMaster = ({
         {
             title: "Jenis",
             dataIndex: "jenis_jabatan",
-            render: (text, record) => {
+            render: (_, record) => {
                 return (
                     <div>
                         <a href={record?.file} target="_blank">
@@ -581,17 +582,15 @@ const TableRiwayatMaster = ({
             dataIndex: "unor"
         },
         { title: "No. SK", dataIndex: "nomor_sk", key: "nomor_sk" },
-        { title: "TMT Jab", dataIndex: "tmt_jabatan", key: "tmt_jabatan" },
-        { title: "Tgl SK", dataIndex: "tgl_sk", key: "tgl_sk" },
+        { title: "TMT. Jab", dataIndex: "tmt_jabatan", key: "tmt_jabatan" },
+        { title: "Tgl. SK", dataIndex: "tgl_sk", key: "tgl_sk" },
         { title: "Aktif", dataIndex: "aktif", key: "aktif" },
         {
             title: "Aksi",
             dataIndex: "aksi",
             render: (_, row) => {
                 return (
-                    <Button type="primary" onClick={() => handleOpen(row)}>
-                        Tambah
-                    </Button>
+                    <Button onClick={() => handleOpen(row)}>Transfer</Button>
                 );
             }
         }
@@ -604,8 +603,6 @@ const TableRiwayatMaster = ({
                 visible={visible}
                 handleOpen={handleOpen}
                 unor={unor}
-                // fungsional={fungsional}
-                // fungsionalUmum={fungsionalUmum}
                 handleCancel={handleCancel}
                 userData={userData}
                 user={user}
@@ -672,7 +669,13 @@ const RiwayatJabatan = () => {
                                     <DetailPegawai user={currentUser} />
                                 </Col>
                             </Row>
-                            <Divider>Padanan Data </Divider>
+                            <Alert
+                                type="success"
+                                description="Dengan mengacu pada data terakhir pada SIMASTER, maka data pada SIASN sudah sesuai dengan SIMASTER"
+                                showIcon
+                                message="Perhatian: Sesuaikan jabatan pada SIASN dengan SIMASTER"
+                                style={{ marginTop: 10, marginBottom: 10 }}
+                            />
                             <Row gutter={[8, 8]}>
                                 <Col span={24}>
                                     <Card title="SIMASTER">
@@ -695,15 +698,6 @@ const RiwayatJabatan = () => {
                                         <TableRiwayatSIASN
                                             data={dataSiasn}
                                             loading={loadingSiasn}
-                                        />
-                                    </Card>
-                                </Col>
-
-                                <Col span={24}>
-                                    <Card title="SAPK">
-                                        <TableRiwayatJabatanSAPK
-                                            loading={isLoading}
-                                            data={data}
                                         />
                                     </Card>
                                 </Col>
