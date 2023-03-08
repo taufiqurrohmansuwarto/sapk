@@ -303,3 +303,20 @@ export const downloadFileExcel = (query) => {
         })
         .then((res) => res?.data);
 };
+
+// statistik ngentod
+export const statistikPemberhentian = () => {
+    return fetcher.get(`/statistik/pemberhentian`).then((res) => res?.data);
+};
+
+export const statistikKenaikanPangkat = () => {
+    return fetcher.get(`/statistik/kenaikan-pangkat`).then((res) => res?.data);
+};
+
+export const statistikPindahInstansi = () => {
+    return fetcher.get(`/statistik/pindah-instansi`).then((res) => res?.data);
+};
+
+export const statistikSKK = () => {
+    return fetcher.get(`/statistik/skk`).then((res) => res?.data);
+};

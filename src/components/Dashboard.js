@@ -23,14 +23,6 @@ function Dashboard({ user }) {
     return (
         <Card title="Dashboard" loading={isLoading}>
             Halo, {user?.user?.name}. Selamat datang di data Integrasi
-            {/* <Divider /> */}
-            {/* <Statistic title="Total Data Keseluruhan" value={data?.total} />
-            <Divider />
-            <Row>
-                <Col span={12}>
-                    <Chart data={data?.count} />
-                </Col>
-            </Row> */}
         </Card>
     );
 }
