@@ -1,3 +1,4 @@
+import { Divider } from "antd";
 import { useSession } from "next-auth/react";
 import DashboarStatistik from "src/components/DashboarStatistik";
 import Dashboard from "../../src/components/Dashboard";
@@ -11,10 +12,11 @@ const Feeds = () => {
             <PageContainer
                 title="Beranda"
                 subTitle="Solusi SIASN,SIMASTER dan SAPK"
-                style={{ height: "92vh" }}
+                style={{ minHeight: "100vh" }}
             >
                 <Dashboard user={data} />
-                <DashboarStatistik />
+                <Divider />
+                {data?.user?.role === "ADMIN" && <DashboarStatistik />}
             </PageContainer>
         </>
     );
