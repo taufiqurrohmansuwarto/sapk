@@ -33,7 +33,8 @@ import {
     masterRwJabatan,
     refUnor,
     rwJabatanSapk,
-    siasnRwJabatan
+    siasnRwJabatan,
+    simpanJaban
 } from "../../../services/fasilitator.service";
 import Checker from "../../../src/components/Checker";
 import DetailPegawai from "../../../src/components/DetailPegawai";
@@ -328,6 +329,18 @@ const DialogFormMaster = ({
             }
         });
 
+    const queryClient = useQueryClient();
+
+    const { mutate: saveJabatan, isLoading: isLoadingSaveJabatan } =
+        useMutation((data) => simpanJaban(data), {
+            onError: (e) => alert(e),
+            onSuccess: () => {
+                queryClient.invalidateQueries(["data-rw-jabatan"]);
+                message.success("Berhasil ditambahkan");
+                handleCancel();
+            }
+        });
+
     useEffect(() => {}, [userData]);
 
     const format = "DD-MM-YYYY";
@@ -388,9 +401,9 @@ const DialogFormMaster = ({
             // we fucking need usulan id
             const postDataSIASN = {
                 pnsId: user?.id_sapk,
-                tmtJabatan: moment(tmt_jabatan).format("YYYY-MM-DD"),
-                tanggalSk: moment(tgl_sk).format("YYYY-MM-DD"),
-                tmtPelantikan: moment(tmt_pelantikan).format("YYYY-MM-DD"),
+                tmtJabatan: moment(tmt_jabatan).format("DD-MM-YYYY"),
+                tanggalSk: moment(tgl_sk).format("DD-MM-YYYY"),
+                tmtPelantikan: moment(tmt_pelantikan).format("DD-MM-YYYY"),
                 // jabatan_struktural_id: "-",
                 jabatanFungsionalId: fungsional_id ? fungsional_id : "-",
                 jabatanFungsionalUmumId: fungsional_umum_id
@@ -398,7 +411,7 @@ const DialogFormMaster = ({
                     : "-",
                 unorId: unor_id,
                 nomorSk: nomor_sk,
-                jenisJabatanId: jenis_jabatan_id,
+                jenisJabatan: jenis_jabatan_id,
                 eselonId: "",
                 // slave
                 // unorId: "466D9577BDB70F89E050640A29022FEF",
@@ -406,7 +419,7 @@ const DialogFormMaster = ({
                 instansiId: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            console.log(postDataSIASN);
+            saveJabatan(postDataSIASN);
 
             // if (!data?.pegawai_id) {
             //     message.error(
@@ -425,7 +438,7 @@ const DialogFormMaster = ({
             centered
             title="Transfer Data Ke SIASN"
             maskClosable={false}
-            confirmLoading={isLoadingTambahImport}
+            confirmLoading={isLoadingSaveJabatan}
             visible={visible}
             destroyOnClose
             width={1200}

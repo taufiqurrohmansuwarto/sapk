@@ -1,3 +1,5 @@
+import { fetcher } from "@/services/esign.service";
+
 export const dataAnak = async (req, res) => {
     try {
         const { nip } = req?.query;
@@ -339,6 +341,30 @@ export const download = async (req, res) => {
         });
 
         res.end(Buffer.from(result?.data, "binary"));
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};
+
+export const saveJabatan = async (req, res) => {
+    try {
+        const body = req?.body;
+        const user = req?.user;
+        const { fetcher } = req;
+
+        console.log(body, user);
+
+        if (user?.role !== "ADMIN") {
+            res.status(403).json({ message: "Forbidden", code: 403 });
+        } else {
+            await fetcher.post(`/siasn-ws/proxy/pns/jabatan/save`, body);
+
+            res.json({
+                message: "success",
+                code: 200
+            });
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal Server Error", code: 500 });

@@ -320,3 +320,7 @@ export const statistikPindahInstansi = () => {
 export const statistikSKK = () => {
     return fetcher.get(`/statistik/skk`).then((res) => res?.data);
 };
+
+export const simpanJaban = (data) => {
+    return fetcher.post(`/siasn/jabatan`, data).then((res) => res?.data);
+};
