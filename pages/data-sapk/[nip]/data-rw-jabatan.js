@@ -5,6 +5,7 @@ import {
     Button,
     Card,
     Col,
+    Collapse,
     DatePicker,
     Divider,
     Form,
@@ -38,6 +39,7 @@ import Checker from "../../../src/components/Checker";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
+import { useSession } from "next-auth/react";
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -385,32 +387,34 @@ const DialogFormMaster = ({
 
             // we fucking need usulan id
             const postDataSIASN = {
-                pns_orang_id: id,
-                tmt_jabatan: moment(tmt_jabatan).format("YYYY-MM-DD"),
-                tanggal_sk: moment(tgl_sk).format("YYYY-MM-DD"),
-                tmt_pelantikan: moment(tmt_pelantikan).format("YYYY-MM-DD"),
-                jabatan_struktural_id: "-",
-                jabatan_fungsional_id: fungsional_id ? fungsional_id : "-",
-                jabatan_fungsional_umum_id: fungsional_umum_id
+                pnsId: user?.id_sapk,
+                tmtJabatan: moment(tmt_jabatan).format("YYYY-MM-DD"),
+                tanggalSk: moment(tgl_sk).format("YYYY-MM-DD"),
+                tmtPelantikan: moment(tmt_pelantikan).format("YYYY-MM-DD"),
+                // jabatan_struktural_id: "-",
+                jabatanFungsionalId: fungsional_id ? fungsional_id : "-",
+                jabatanFungsionalUmumId: fungsional_umum_id
                     ? fungsional_umum_id
                     : "-",
-                unor_id,
-                nomor_sk,
-                jenis_jabatan_id,
-
+                unorId: unor_id,
+                nomorSk: nomor_sk,
+                jenisJabatanId: jenis_jabatan_id,
+                eselonId: "",
                 // slave
-                unor_id_verifikator: "466D9577BDB70F89E050640A29022FEF",
-                satuan_kerja_id: "A5EB03E24213F6A0E040640A040252AD",
-                instansi_id: "A5EB03E23CCCF6A0E040640A040252AD"
+                // unorId: "466D9577BDB70F89E050640A29022FEF",
+                satuanKerjaId: "A5EB03E24213F6A0E040640A040252AD",
+                instansiId: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            if (!data?.pegawai_id) {
-                message.error(
-                    "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki."
-                );
-            } else {
-                tambahImport(data);
-            }
+            console.log(postDataSIASN);
+
+            // if (!data?.pegawai_id) {
+            //     message.error(
+            //         "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki."
+            //     );
+            // } else {
+            //     tambahImport(data);
+            // }
         } catch (error) {
             console.error(error);
         }
@@ -428,17 +432,21 @@ const DialogFormMaster = ({
             onCancel={handleCancel}
             onOk={handleSubmit}
         >
-            <Form layout="vertical">
-                <Form.Item label="Jenis Jabatan">
-                    <Input readOnly value={userData?.jenis_jabatan} />
-                </Form.Item>
-                <Form.Item label="Jabatan">
-                    <Input readOnly value={userData?.jabatan} />
-                </Form.Item>
-                <Form.Item label="Unor SIMASTER">
-                    <Input readOnly value={user?.skpd} />
-                </Form.Item>
-            </Form>
+            <Collapse>
+                <Collapse.Panel header="Data SIMASTER">
+                    <Form layout="vertical">
+                        <Form.Item label="Jenis Jabatan">
+                            <Input readOnly value={userData?.jenis_jabatan} />
+                        </Form.Item>
+                        <Form.Item label="Jabatan">
+                            <Input readOnly value={userData?.jabatan} />
+                        </Form.Item>
+                        <Form.Item label="Unor SIMASTER">
+                            <Input readOnly value={user?.skpd} />
+                        </Form.Item>
+                    </Form>
+                </Collapse.Panel>
+            </Collapse>
             <Divider />
             <Form
                 form={form}
@@ -545,6 +553,7 @@ const TableRiwayatMaster = ({
 }) => {
     const [visible, setVisible] = useState(false);
     const [userData, setUserData] = useState(null);
+    const { data: currentUser } = useSession();
 
     const handleOpen = async (user) => {
         // handle api to membuat usulan
@@ -590,7 +599,13 @@ const TableRiwayatMaster = ({
             dataIndex: "aksi",
             render: (_, row) => {
                 return (
-                    <Button onClick={() => handleOpen(row)}>Transfer</Button>
+                    <>
+                        {currentUser?.user?.role === "ADMIN" && (
+                            <Button onClick={() => handleOpen(row)}>
+                                Transfer
+                            </Button>
+                        )}
+                    </>
                 );
             }
         }
