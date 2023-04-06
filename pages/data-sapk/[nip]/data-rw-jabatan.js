@@ -198,7 +198,7 @@ const TableRiwayatSIASN = ({ data, loading }) => {
     );
 };
 
-const FormJFU = ({ name }) => {
+const FormJFU = ({ name, help }) => {
     const [jfu, setJfu] = useState(undefined);
     const [debounceValue] = useDebouncedValue(jfu, 500);
 
@@ -213,9 +213,10 @@ const FormJFU = ({ name }) => {
     return (
         <>
             <Form.Item
-                label="Jabatan Fungsional Umum"
+                label={`Jabatan Fungsional Umum - (${help})`}
                 rules={[{ required: true }]}
                 name={name}
+                // help={help}
             >
                 <Select
                     showSearch
@@ -240,7 +241,7 @@ const FormJFU = ({ name }) => {
     );
 };
 
-const FormJFT = ({ name }) => {
+const FormJFT = ({ name, help }) => {
     const [jfu, setJfu] = useState(undefined);
     const [debounceValue] = useDebouncedValue(jfu, 500);
 
@@ -255,7 +256,7 @@ const FormJFT = ({ name }) => {
     return (
         <>
             <Form.Item
-                label="Jabatan Fungsional Tertentu"
+                label={`Jabatan Fungsional Tertentu - (${help})`}
                 rules={[{ required: true }]}
                 name={name}
             >
@@ -333,7 +334,9 @@ const DialogFormMaster = ({
 
     const { mutate: saveJabatan, isLoading: isLoadingSaveJabatan } =
         useMutation((data) => simpanJaban(data), {
-            onError: (e) => alert(e),
+            onError: (e) => {
+                message.error("Gagal ditambahkan");
+            },
             onSuccess: () => {
                 queryClient.invalidateQueries(["data-rw-jabatan"]);
                 message.success("Berhasil ditambahkan");
@@ -420,14 +423,6 @@ const DialogFormMaster = ({
             };
 
             saveJabatan(postDataSIASN);
-
-            // if (!data?.pegawai_id) {
-            //     message.error(
-            //         "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki."
-            //     );
-            // } else {
-            //     tambahImport(data);
-            // }
         } catch (error) {
             console.error(error);
         }
@@ -441,11 +436,11 @@ const DialogFormMaster = ({
             confirmLoading={isLoadingSaveJabatan}
             visible={visible}
             destroyOnClose
-            width={1200}
+            width={800}
             onCancel={handleCancel}
             onOk={handleSubmit}
         >
-            <Collapse>
+            {/* <Collapse>
                 <Collapse.Panel header="Data SIMASTER">
                     <Form layout="vertical">
                         <Form.Item label="Jenis Jabatan">
@@ -459,8 +454,8 @@ const DialogFormMaster = ({
                         </Form.Item>
                     </Form>
                 </Collapse.Panel>
-            </Collapse>
-            <Divider />
+            </Collapse> */}
+            {/* <Divider /> */}
             <Form
                 form={form}
                 initialValues={{
@@ -476,7 +471,7 @@ const DialogFormMaster = ({
                 <Form.Item
                     rules={[{ required: true }]}
                     name="jenis_jabatan"
-                    label="Jenis Jabatan"
+                    label={`Jenis Jabatan - (${userData?.jenis_jabatan})`}
                 >
                     <Select
                         onChange={() => {
@@ -496,8 +491,9 @@ const DialogFormMaster = ({
                 </Form.Item>
                 <Form.Item
                     name="unor_id"
-                    label="Unor"
+                    label={`Unor - (${user?.skpd})`}
                     rules={[{ required: true }]}
+                    // help={user?.skpd}
                 >
                     <TreeSelect
                         showSearch
@@ -513,9 +509,15 @@ const DialogFormMaster = ({
                 >
                     {({ getFieldValue }) =>
                         getFieldValue("jenis_jabatan") === "Fungsional" ? (
-                            <FormJFT name="fungsional_id" />
+                            <FormJFT
+                                help={userData?.jabatan}
+                                name="fungsional_id"
+                            />
                         ) : getFieldValue("jenis_jabatan") === "Pelaksana" ? (
-                            <FormJFU name="fungsional_umum_id" />
+                            <FormJFU
+                                help={userData?.jabatan}
+                                name="fungsional_umum_id"
+                            />
                         ) : null
                     }
                 </Form.Item>
