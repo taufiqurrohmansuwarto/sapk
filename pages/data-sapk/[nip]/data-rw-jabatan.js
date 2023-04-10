@@ -338,7 +338,10 @@ const DialogFormMaster = ({
                 message.error("Gagal ditambahkan");
             },
             onSuccess: () => {
-                queryClient.invalidateQueries(["data-rw-jabatan"]);
+                queryClient.invalidateQueries([
+                    "data-rw-jabatan-siasn",
+                    router?.query?.nip
+                ]);
                 message.success("Berhasil ditambahkan");
                 handleCancel();
             }
@@ -440,22 +443,6 @@ const DialogFormMaster = ({
             onCancel={handleCancel}
             onOk={handleSubmit}
         >
-            {/* <Collapse>
-                <Collapse.Panel header="Data SIMASTER">
-                    <Form layout="vertical">
-                        <Form.Item label="Jenis Jabatan">
-                            <Input readOnly value={userData?.jenis_jabatan} />
-                        </Form.Item>
-                        <Form.Item label="Jabatan">
-                            <Input readOnly value={userData?.jabatan} />
-                        </Form.Item>
-                        <Form.Item label="Unor SIMASTER">
-                            <Input readOnly value={user?.skpd} />
-                        </Form.Item>
-                    </Form>
-                </Collapse.Panel>
-            </Collapse> */}
-            {/* <Divider /> */}
             <Form
                 form={form}
                 initialValues={{

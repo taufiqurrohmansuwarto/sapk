@@ -16,6 +16,7 @@ import {
     Skeleton,
     Space,
     Table,
+    Tag,
     TreeSelect,
     Typography
 } from "antd";
@@ -25,6 +26,15 @@ import { useState } from "react";
 import AvatarNext from "src/components/AvatarNext";
 import Layout from "src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
+import { compareText } from "src/utils/util";
+
+const CheckJabatan = ({ jabatan, jabatanSiasn }) => {
+    if (compareText(jabatan, jabatanSiasn)) {
+        return <Tag color="green">Jabatan Sesuai</Tag>;
+    } else {
+        return <Tag color="red">Jabatan Mungkin Tidak Sesuai</Tag>;
+    }
+};
 
 function Pegawai() {
     const [query, setQuery] = useState({
@@ -101,6 +111,17 @@ function Pegawai() {
             dataIndex: "jabatan_siasn",
             render: (_, row) => <div>{row?.siasn?.nama_jabatan}</div>,
             width: 300
+        },
+
+        {
+            title: "Status",
+            datIndex: "status_jabatan",
+            render: (_, row) => (
+                <CheckJabatan
+                    jabatan={row?.jabatan}
+                    jabatanSiasn={row?.siasn?.nama_jabatan}
+                />
+            )
         },
 
         {
@@ -223,7 +244,7 @@ function Pegawai() {
                                 onChange: (page) =>
                                     setQuery({ ...query, page }),
                                 position: ["bottomRight", "topRight"],
-                                showTotal: (total, range) =>
+                                showTotal: (_, range) =>
                                     `${range[0]}-${range[1]} dari ${data?.meta?.total} data`,
                                 pageSize: data?.meta?.limit,
                                 total: data?.meta?.total,

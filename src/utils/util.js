@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import "dayjs/locale/id";
+import { lowerCase, trim } from "lodash";
 
 export const formatTime = (time) => {
     return dayjs(time).locale("id").format("DD MMM, YYYY HH:mm");
@@ -266,4 +267,20 @@ export const flattenTree = (tree) => {
     };
     tree.forEach(flatten);
     return flattened;
+};
+
+export const serializeDataTreeMap = (data) => {
+    return data?.map((item) => ({
+        name: item?.type,
+        value: item?.value
+    }));
+};
+
+// create text comparasion
+export const compareText = (text1, text2) => {
+    // simple diff
+    const firstText = trim(lowerCase(text1));
+    const secondText = trim(lowerCase(text2));
+
+    return firstText === secondText;
 };

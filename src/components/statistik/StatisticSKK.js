@@ -25,7 +25,7 @@ function StatisticSKK() {
     };
 
     return (
-        <Card loading={isLoading} title="Status Kedudukan Hukum">
+        <Card loading={isLoading} title="Status Usulan Kedudukan Hukum">
             <Bar {...config} />
         </Card>
     );
