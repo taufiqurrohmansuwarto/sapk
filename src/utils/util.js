@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import "dayjs/locale/id";
-import { lowerCase, trim } from "lodash";
+import { lowerCase, sortBy, trim } from "lodash";
+import moment from "moment";
 
 export const formatTime = (time) => {
     return dayjs(time).locale("id").format("DD MMM, YYYY HH:mm");
@@ -283,4 +284,31 @@ export const compareText = (text1, text2) => {
     const secondText = trim(lowerCase(text2));
 
     return firstText === secondText;
+};
+
+// input harus lebih dari tmt_jabatan terakhir di siasn
+export const verifyLastPositionsDate = (positions, inputDate) => {
+    if (!positions?.length) {
+        return true;
+    } else {
+        //   sorting by tmt_jabatan
+        const sortedPositions = sortBy(
+            positions,
+            (position) => position?.tmt_jabatan
+        );
+
+        const lastPosition = sortedPositions[sortedPositions.length - 1];
+
+        const lastPositionDate = moment(lastPosition?.tmt_jabatan).format(
+            "YYYY-MM-DD"
+        );
+
+        const inputDateMoment = moment(inputDate, "DD-MM-YYYY").format(
+            "YYYY-MM-DD"
+        );
+
+        const isAfter = moment(inputDateMoment).isAfter(lastPositionDate);
+
+        return isAfter;
+    }
 };

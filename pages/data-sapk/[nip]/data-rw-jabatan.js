@@ -5,24 +5,24 @@ import {
     Button,
     Card,
     Col,
-    Collapse,
     DatePicker,
-    Divider,
     Form,
     Input,
-    message,
     Modal,
     Row,
     Select,
     Skeleton,
     Spin,
     Table,
-    TreeSelect
+    TreeSelect,
+    message
 } from "antd";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { verifyLastPositionsDate } from "src/utils/util";
 import {
     addJabatanSapk,
     bypassJabatanSIASN,
@@ -40,7 +40,6 @@ import Checker from "../../../src/components/Checker";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
-import { useSession } from "next-auth/react";
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -167,25 +166,11 @@ const TableRiwayatSIASN = ({ data, loading }) => {
         },
         { title: "No. SK", dataIndex: "nomor_sk", key: "nomor_sk" },
         { title: "TMT Jab", dataIndex: "tmt_jabatan", key: "tmt_jabatan" },
-        { title: "Tgl SK", dataIndex: "tanggal_sk", key: "tanggal_sk" },
-        {
-            title: "Aksi",
-            key: "aksi",
-            render: (_, row) => {
-                return (
-                    <>
-                        <a onClick={() => handleRemove(row)}>Hapus</a>
-                        <Divider type="vertical" />
-                        <a>Update</a>
-                    </>
-                );
-            }
-        }
+        { title: "Tgl SK", dataIndex: "tanggal_sk", key: "tanggal_sk" }
     ];
 
     return (
         <>
-            {/* {JSON.stringify(data)} */}
             <Table
                 size="small"
                 dataSource={data}
@@ -284,6 +269,7 @@ const FormJFT = ({ name, help }) => {
 };
 
 const DialogFormMaster = ({
+    dataSiasn,
     visible,
     handleCancel,
     userData,
@@ -425,7 +411,18 @@ const DialogFormMaster = ({
                 instansiId: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            saveJabatan(postDataSIASN);
+            const isValidDate = verifyLastPositionsDate(
+                dataSiasn,
+                postDataSIASN?.tmtJabatan
+            );
+
+            if (!isValidDate) {
+                message.error(
+                    "TMT Jabatan yang dientri harus lebih besar dari TMT Jabatan terakhir di SIASN"
+                );
+            } else {
+                saveJabatan(postDataSIASN);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -546,6 +543,7 @@ const DialogFormMaster = ({
 };
 
 const TableRiwayatMaster = ({
+    dataSiasn,
     dataTerakhirSapk,
     data,
     loading,
@@ -602,11 +600,9 @@ const TableRiwayatMaster = ({
             render: (_, row) => {
                 return (
                     <>
-                        {currentUser?.user?.role === "ADMIN" && (
-                            <Button onClick={() => handleOpen(row)}>
-                                Transfer
-                            </Button>
-                        )}
+                        <Button onClick={() => handleOpen(row)}>
+                            Transfer
+                        </Button>
                     </>
                 );
             }
@@ -616,6 +612,7 @@ const TableRiwayatMaster = ({
     return (
         <>
             <DialogFormMaster
+                dataSiasn={dataSiasn}
                 dataTerakhirSapk={dataTerakhirSapk}
                 visible={visible}
                 handleOpen={handleOpen}
@@ -702,6 +699,7 @@ const RiwayatJabatan = () => {
                                                     ? data[data?.length - 1]
                                                     : null
                                             }
+                                            dataSiasn={dataSiasn}
                                             unor={dataUnor}
                                             data={dataMaster}
                                             user={currentUser}
