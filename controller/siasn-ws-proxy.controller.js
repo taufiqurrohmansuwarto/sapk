@@ -370,3 +370,18 @@ export const saveJabatan = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", code: 500 });
     }
 };
+
+// daftar riwayat diklat di siasn
+export const riwayatDiklatMaster = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(
+            `/master-ws/operator/employees/${nip}/rw-diklat`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};
