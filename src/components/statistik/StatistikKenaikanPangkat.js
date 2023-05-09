@@ -1,8 +1,9 @@
 import { statistikKenaikanPangkat } from "@/services/fasilitator.service";
 import { useQuery } from "@tanstack/react-query";
-import { Card } from "antd";
+import { Card, Row, Col } from "antd";
 import React from "react";
-import { Bar } from "@ant-design/plots";
+import { Treemap } from "@ant-design/plots";
+import { serializeDataTreeMap } from "src/utils/util";
 
 function StatistikKenaikanPangkat() {
     const { data, isLoading } = useQuery(
@@ -28,6 +29,22 @@ function StatistikKenaikanPangkat() {
         width: 800
     };
 
+    const treeMapConfig = {
+        data: {
+            name: "root",
+            children: serializeDataTreeMap(data?.status_usulan)
+        },
+        colorField: "name"
+    };
+
+    const treeMapConfig2 = {
+        data: {
+            name: "root",
+            children: serializeDataTreeMap(data?.jenis_kp)
+        },
+        colorField: "name"
+    };
+
     const config2 = {
         data: data?.status_usulan,
         xField: "value",
@@ -43,10 +60,21 @@ function StatistikKenaikanPangkat() {
     };
 
     return (
-        <Card loading={isLoading} title="Kenaikan Pangkat">
-            <Bar {...config} />
-            <Bar {...config2} />
-        </Card>
+        <Row gutter={[8, 16]}>
+            <Col xs={24} md={12}>
+                <Card
+                    title="Status Usulan Kenaikan Pangkat"
+                    loading={isLoading}
+                >
+                    {data && <Treemap {...treeMapConfig} />}
+                </Card>
+            </Col>
+            <Col xs={24} md={12}>
+                <Card title="Jenis Kenaikan Pangkat" loading={isLoading}>
+                    {data && <Treemap {...treeMapConfig2} />}
+                </Card>
+            </Col>
+        </Row>
     );
 }
 

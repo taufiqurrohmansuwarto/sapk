@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import "dayjs/locale/id";
+import { lowerCase, sortBy, trim } from "lodash";
+import moment from "moment";
 
 export const formatTime = (time) => {
     return dayjs(time).locale("id").format("DD MMM, YYYY HH:mm");
@@ -266,4 +268,47 @@ export const flattenTree = (tree) => {
     };
     tree.forEach(flatten);
     return flattened;
+};
+
+export const serializeDataTreeMap = (data) => {
+    return data?.map((item) => ({
+        name: item?.type,
+        value: item?.value
+    }));
+};
+
+// create text comparasion
+export const compareText = (text1, text2) => {
+    // simple diff
+    const firstText = trim(lowerCase(text1));
+    const secondText = trim(lowerCase(text2));
+
+    return firstText === secondText;
+};
+
+// input harus lebih dari tmt_jabatan terakhir di siasn
+export const verifyLastPositionsDate = (positions, inputDate) => {
+    if (!positions?.length) {
+        return true;
+    } else {
+        //   sorting by tmt_jabatan
+        const sortedPositions = sortBy(
+            positions,
+            (position) => position?.tmt_jabatan
+        );
+
+        const lastPosition = sortedPositions[sortedPositions.length - 1];
+
+        const lastPositionDate = moment(lastPosition?.tmt_jabatan).format(
+            "YYYY-MM-DD"
+        );
+
+        const inputDateMoment = moment(inputDate, "DD-MM-YYYY").format(
+            "YYYY-MM-DD"
+        );
+
+        const isAfter = moment(inputDateMoment).isAfter(lastPositionDate);
+
+        return isAfter;
+    }
 };

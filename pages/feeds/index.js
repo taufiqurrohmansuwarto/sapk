@@ -15,8 +15,11 @@ const Feeds = () => {
                 style={{ minHeight: "100vh" }}
             >
                 <Dashboard user={data} />
-                <Divider />
-                {data?.user?.role === "ADMIN" && <DashboarStatistik />}
+                {data?.user?.role === "ADMIN" && (
+                    <div style={{ marginTop: 10 }}>
+                        <DashboarStatistik />
+                    </div>
+                )}
             </PageContainer>
         </>
     );

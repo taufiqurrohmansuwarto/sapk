@@ -1,8 +1,8 @@
 import { statistikPindahInstansi } from "@/services/fasilitator.service";
 import { useQuery } from "@tanstack/react-query";
-import { Card } from "antd";
-import React from "react";
-import { Bar } from "@ant-design/plots";
+import { Card, Row, Col } from "antd";
+import { Treemap } from "@ant-design/plots";
+import { serializeDataTreeMap } from "src/utils/util";
 
 function StatisticPindahInstansi() {
     const { data, isLoading } = useQuery(
@@ -28,6 +28,22 @@ function StatisticPindahInstansi() {
         width: 800
     };
 
+    const treeMapConfig = {
+        data: {
+            name: "root",
+            children: serializeDataTreeMap(data?.status_usulan)
+        },
+        colorField: "name"
+    };
+
+    const treeMapConfig2 = {
+        data: {
+            name: "root",
+            children: serializeDataTreeMap(data?.instansi_asal)
+        },
+        colorField: "name"
+    };
+
     const config2 = {
         data: data?.instansi_asal,
         xField: "value",
@@ -43,10 +59,18 @@ function StatisticPindahInstansi() {
     };
 
     return (
-        <Card loading={isLoading} title="Pindah Instansi">
-            <Bar {...config} />
-            <Bar {...config2} />
-        </Card>
+        <Row gutter={[8, 16]}>
+            <Col xs={24} md={12}>
+                <Card title="Status Usulan Pindah Instansi" loading={isLoading}>
+                    {data && <Treemap {...treeMapConfig} />}
+                </Card>
+            </Col>
+            <Col xs={24} md={12}>
+                <Card title="Asal Instansi" loading={isLoading}>
+                    {data && <Treemap {...treeMapConfig2} />}
+                </Card>
+            </Col>
+        </Row>
     );
 }
 

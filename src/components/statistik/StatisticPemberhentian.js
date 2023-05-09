@@ -1,7 +1,8 @@
 import { statistikPemberhentian } from "@/services/fasilitator.service";
-import { Bar } from "@ant-design/plots";
+import { Treemap } from "@ant-design/plots";
 import { useQuery } from "@tanstack/react-query";
-import { Card } from "antd";
+import { Card, Col, Row } from "antd";
+import { serializeDataTreeMap } from "src/utils/util";
 
 function StatisticPemberhentian() {
     const { data, isLoading } = useQuery(
@@ -13,46 +14,35 @@ function StatisticPemberhentian() {
         }
     );
 
-    const config = {
-        data: data?.status_usulan,
-        xField: "value",
-        yField: "type",
-        seriesField: "type",
-        label: {
-            position: "middle"
+    const treeMapConfig = {
+        data: {
+            name: "root",
+            children: serializeDataTreeMap(data?.status_usulan)
         },
-        legend: {
-            position: "top-left"
-        },
-        width: 800
+        colorField: "name"
     };
 
-    const config2 = {
-        data: data?.sub_layanan,
-        xField: "value",
-        yField: "type",
-        seriesField: "type",
-        label: {
-            position: "middle"
+    const treeMapConfig2 = {
+        data: {
+            name: "root",
+            children: serializeDataTreeMap(data?.sub_layanan)
         },
-        legend: {
-            position: "top-left"
-        }
+        colorField: "name"
     };
 
     return (
-        <Card loading={isLoading} title="Pemberhentian">
-            {data && (
-                <div>
-                    <div>
-                        <Bar {...config} />
-                    </div>
-                    <div>
-                        <Bar {...config2} />
-                    </div>
-                </div>
-            )}
-        </Card>
+        <Row gutter={[8, 16]}>
+            <Col xs={24} md={12}>
+                <Card title="Status Usulan Pemberhentian" loading={isLoading}>
+                    {data && <Treemap {...treeMapConfig} />}
+                </Card>
+            </Col>
+            <Col xs={24} md={12}>
+                <Card title="Jenis Pemberhentian" loading={isLoading}>
+                    {data && <Treemap {...treeMapConfig2} />}
+                </Card>
+            </Col>
+        </Row>
     );
 }
 

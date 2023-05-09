@@ -5,24 +5,24 @@ import {
     Button,
     Card,
     Col,
-    Collapse,
     DatePicker,
-    Divider,
     Form,
     Input,
-    message,
     Modal,
     Row,
     Select,
     Skeleton,
     Spin,
     Table,
-    TreeSelect
+    TreeSelect,
+    message
 } from "antd";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { verifyLastPositionsDate } from "src/utils/util";
 import {
     addJabatanSapk,
     bypassJabatanSIASN,
@@ -40,7 +40,6 @@ import Checker from "../../../src/components/Checker";
 import DetailPegawai from "../../../src/components/DetailPegawai";
 import Layout from "../../../src/components/Layout";
 import PageContainer from "../../../src/components/PageContainer";
-import { useSession } from "next-auth/react";
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -167,25 +166,11 @@ const TableRiwayatSIASN = ({ data, loading }) => {
         },
         { title: "No. SK", dataIndex: "nomor_sk", key: "nomor_sk" },
         { title: "TMT Jab", dataIndex: "tmt_jabatan", key: "tmt_jabatan" },
-        { title: "Tgl SK", dataIndex: "tanggal_sk", key: "tanggal_sk" },
-        {
-            title: "Aksi",
-            key: "aksi",
-            render: (_, row) => {
-                return (
-                    <>
-                        <a onClick={() => handleRemove(row)}>Hapus</a>
-                        <Divider type="vertical" />
-                        <a>Update</a>
-                    </>
-                );
-            }
-        }
+        { title: "Tgl SK", dataIndex: "tanggal_sk", key: "tanggal_sk" }
     ];
 
     return (
         <>
-            {/* {JSON.stringify(data)} */}
             <Table
                 size="small"
                 dataSource={data}
@@ -198,7 +183,7 @@ const TableRiwayatSIASN = ({ data, loading }) => {
     );
 };
 
-const FormJFU = ({ name }) => {
+const FormJFU = ({ name, help }) => {
     const [jfu, setJfu] = useState(undefined);
     const [debounceValue] = useDebouncedValue(jfu, 500);
 
@@ -213,9 +198,10 @@ const FormJFU = ({ name }) => {
     return (
         <>
             <Form.Item
-                label="Jabatan Fungsional Umum"
+                label={`Jabatan Fungsional Umum - (${help})`}
                 rules={[{ required: true }]}
                 name={name}
+                // help={help}
             >
                 <Select
                     showSearch
@@ -240,7 +226,7 @@ const FormJFU = ({ name }) => {
     );
 };
 
-const FormJFT = ({ name }) => {
+const FormJFT = ({ name, help }) => {
     const [jfu, setJfu] = useState(undefined);
     const [debounceValue] = useDebouncedValue(jfu, 500);
 
@@ -255,7 +241,7 @@ const FormJFT = ({ name }) => {
     return (
         <>
             <Form.Item
-                label="Jabatan Fungsional Tertentu"
+                label={`Jabatan Fungsional Tertentu - (${help})`}
                 rules={[{ required: true }]}
                 name={name}
             >
@@ -283,6 +269,7 @@ const FormJFT = ({ name }) => {
 };
 
 const DialogFormMaster = ({
+    dataSiasn,
     visible,
     handleCancel,
     userData,
@@ -333,9 +320,14 @@ const DialogFormMaster = ({
 
     const { mutate: saveJabatan, isLoading: isLoadingSaveJabatan } =
         useMutation((data) => simpanJaban(data), {
-            onError: (e) => alert(e),
+            onError: (e) => {
+                message.error("Gagal ditambahkan");
+            },
             onSuccess: () => {
-                queryClient.invalidateQueries(["data-rw-jabatan"]);
+                queryClient.invalidateQueries([
+                    "data-rw-jabatan-siasn",
+                    router?.query?.nip
+                ]);
                 message.success("Berhasil ditambahkan");
                 handleCancel();
             }
@@ -419,15 +411,18 @@ const DialogFormMaster = ({
                 instansiId: "A5EB03E23CCCF6A0E040640A040252AD"
             };
 
-            saveJabatan(postDataSIASN);
+            const isValidDate = verifyLastPositionsDate(
+                dataSiasn,
+                postDataSIASN?.tmtJabatan
+            );
 
-            // if (!data?.pegawai_id) {
-            //     message.error(
-            //         "Sepertinya id pegawai tidak tertulis, access token sapk tidak dapat diakses, hubungi haris fuady untuk memperbaiki."
-            //     );
-            // } else {
-            //     tambahImport(data);
-            // }
+            if (!isValidDate) {
+                message.error(
+                    "TMT Jabatan yang dientri harus lebih besar dari TMT Jabatan terakhir di SIASN"
+                );
+            } else {
+                saveJabatan(postDataSIASN);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -441,26 +436,10 @@ const DialogFormMaster = ({
             confirmLoading={isLoadingSaveJabatan}
             visible={visible}
             destroyOnClose
-            width={1200}
+            width={800}
             onCancel={handleCancel}
             onOk={handleSubmit}
         >
-            <Collapse>
-                <Collapse.Panel header="Data SIMASTER">
-                    <Form layout="vertical">
-                        <Form.Item label="Jenis Jabatan">
-                            <Input readOnly value={userData?.jenis_jabatan} />
-                        </Form.Item>
-                        <Form.Item label="Jabatan">
-                            <Input readOnly value={userData?.jabatan} />
-                        </Form.Item>
-                        <Form.Item label="Unor SIMASTER">
-                            <Input readOnly value={user?.skpd} />
-                        </Form.Item>
-                    </Form>
-                </Collapse.Panel>
-            </Collapse>
-            <Divider />
             <Form
                 form={form}
                 initialValues={{
@@ -476,7 +455,7 @@ const DialogFormMaster = ({
                 <Form.Item
                     rules={[{ required: true }]}
                     name="jenis_jabatan"
-                    label="Jenis Jabatan"
+                    label={`Jenis Jabatan - (${userData?.jenis_jabatan})`}
                 >
                     <Select
                         onChange={() => {
@@ -496,8 +475,9 @@ const DialogFormMaster = ({
                 </Form.Item>
                 <Form.Item
                     name="unor_id"
-                    label="Unor"
+                    label={`Unor - (${user?.skpd})`}
                     rules={[{ required: true }]}
+                    // help={user?.skpd}
                 >
                     <TreeSelect
                         showSearch
@@ -513,9 +493,15 @@ const DialogFormMaster = ({
                 >
                     {({ getFieldValue }) =>
                         getFieldValue("jenis_jabatan") === "Fungsional" ? (
-                            <FormJFT name="fungsional_id" />
+                            <FormJFT
+                                help={userData?.jabatan}
+                                name="fungsional_id"
+                            />
                         ) : getFieldValue("jenis_jabatan") === "Pelaksana" ? (
-                            <FormJFU name="fungsional_umum_id" />
+                            <FormJFU
+                                help={userData?.jabatan}
+                                name="fungsional_umum_id"
+                            />
                         ) : null
                     }
                 </Form.Item>
@@ -557,6 +543,7 @@ const DialogFormMaster = ({
 };
 
 const TableRiwayatMaster = ({
+    dataSiasn,
     dataTerakhirSapk,
     data,
     loading,
@@ -613,11 +600,9 @@ const TableRiwayatMaster = ({
             render: (_, row) => {
                 return (
                     <>
-                        {currentUser?.user?.role === "ADMIN" && (
-                            <Button onClick={() => handleOpen(row)}>
-                                Transfer
-                            </Button>
-                        )}
+                        <Button onClick={() => handleOpen(row)}>
+                            Transfer
+                        </Button>
                     </>
                 );
             }
@@ -627,6 +612,7 @@ const TableRiwayatMaster = ({
     return (
         <>
             <DialogFormMaster
+                dataSiasn={dataSiasn}
                 dataTerakhirSapk={dataTerakhirSapk}
                 visible={visible}
                 handleOpen={handleOpen}
@@ -713,6 +699,7 @@ const RiwayatJabatan = () => {
                                                     ? data[data?.length - 1]
                                                     : null
                                             }
+                                            dataSiasn={dataSiasn}
                                             unor={dataUnor}
                                             data={dataMaster}
                                             user={currentUser}
