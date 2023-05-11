@@ -324,3 +324,9 @@ export const statistikSKK = () => {
 export const simpanJaban = (data) => {
     return fetcher.post(`/siasn/jabatan`, data).then((res) => res?.data);
 };
+
+export const riwayatDiklatMaster = (nip) => {
+    return fetcher
+        .get(`/data-master/${nip}/rw-diklat`)
+        .then((res) => res?.data);
+};
