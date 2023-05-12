@@ -1,12 +1,12 @@
 import { riwayatDiklatMaster, rwDiklat } from "@/services/fasilitator.service";
-import { useQuery } from "@tanstack/react-query";
-import { Divider, Table } from "antd";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button, Divider, Table } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
 import PegawaiLayout from "../../../src/components/PegawaiLayout";
 import moment from "moment";
 
-const diklat = [
+const jenis_kursus_id = [
     {
         id: "1",
         jenis_diklat: "Diklat Struktural"
@@ -49,7 +49,7 @@ const diklat = [
     }
 ];
 
-const struktural = [
+const latihan_struktural_id = [
     {
         id: "1",
         nama: "SEPADA",
@@ -119,6 +119,10 @@ const renderTanggal = (date) => {
 };
 
 const RiwayatDiklatMaster = () => {
+    const queryClient = useQueryClient();
+
+    const handleTransferDiklat = () => {};
+
     const columns = [
         {
             title: "Nama diklat",
@@ -163,6 +167,11 @@ const RiwayatDiklatMaster = () => {
             title: "Tanggal Selesai",
             dataIndex: "tanggal_selesai",
             key: "tanggal_selesai"
+        },
+        {
+            title: "Aksi",
+            key: "aksi",
+            render: (text, record) => <Button>Transfer</Button>
         }
     ];
 
