@@ -1,12 +1,14 @@
 import { riwayatDiklatMaster, rwDiklat } from "@/services/fasilitator.service";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Divider, Table } from "antd";
+import { Button, Divider, Form, Modal, Table, Transfer } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
 import PegawaiLayout from "../../../src/components/PegawaiLayout";
 import moment from "moment";
+import refDiklat from "../../../src/utils/diklat.json";
+import { useState } from "react";
 
-const jenis_kursus_id = [
+const kursus = [
     {
         id: "1",
         jenis_diklat: "Diklat Struktural"
@@ -49,7 +51,7 @@ const jenis_kursus_id = [
     }
 ];
 
-const latihan_struktural_id = [
+const diklatStruktural = [
     {
         id: "1",
         nama: "SEPADA",
@@ -118,10 +120,27 @@ const renderTanggal = (date) => {
     return moment(date).format("DD-MM-YYYY");
 };
 
-const RiwayatDiklatMaster = () => {
+const TransferModal = ({ open, onCancel, currentDiklat }) => {
     const queryClient = useQueryClient();
+    const [form] = Form.useForm();
 
-    const handleTransferDiklat = () => {};
+    return (
+        <Modal visible={open} onCancel={onCancel}>
+            <Form form={form}></Form>
+        </Modal>
+    );
+};
+
+const RiwayatDiklatMaster = () => {
+    const [open, setOpen] = useState(false);
+    const [currentDiklat, setCurrentDiklat] = useState(null);
+
+    const handleCloseModal = () => setOpen(false);
+
+    const handleTransferDiklat = (data) => {
+        setOpen(true);
+        setCurrentDiklat(data);
+    };
 
     const columns = [
         {
@@ -137,14 +156,14 @@ const RiwayatDiklatMaster = () => {
         {
             title: "Tahun",
             key: "tahun",
-            render: (text, record) => (
+            render: (_, record) => (
                 <span>{renderTahun(record?.tgl_sertifikat)}</span>
             )
         },
         {
             title: "Jenis Diklat",
             key: "jenis_diklat_nama",
-            render: (text, record) => <span>{record?.diklat?.name}</span>
+            render: (_, record) => <span>{record?.diklat?.name}</span>
         },
         {
             title: "Jumlah Jam",
@@ -159,7 +178,7 @@ const RiwayatDiklatMaster = () => {
         {
             title: "Tanggal Kursus",
             key: "tanggal_kursus",
-            render: (text, record) => (
+            render: (_, record) => (
                 <span>{renderTanggal(record?.tgl_sertifikat)}</span>
             )
         },
@@ -171,7 +190,11 @@ const RiwayatDiklatMaster = () => {
         {
             title: "Aksi",
             key: "aksi",
-            render: (text, record) => <Button>Transfer</Button>
+            render: (_, record) => (
+                <Button onClick={() => handleTransferDiklat(record)}>
+                    Transfer
+                </Button>
+            )
         }
     ];
 
@@ -191,6 +214,11 @@ const RiwayatDiklatMaster = () => {
                 pagination={false}
                 dataSource={data}
                 columns={columns}
+            />
+            <TransferModal
+                open={open}
+                currentDiklat={currentDiklat}
+                onCancel={handleCloseModal}
             />
         </div>
     );

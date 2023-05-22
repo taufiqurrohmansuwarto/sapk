@@ -1,0 +1,1460 @@
+[
+    {
+        "id": "1",
+        "pId": "0",
+        "name": "Diklat",
+        "url": null,
+        "open": "true",
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "11",
+        "pId": "1",
+        "name": "Diklat Prajabatan",
+        "url": null,
+        "open": "true",
+        "jenis_kursus_id": "3",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "111",
+        "pId": "11",
+        "name": "Diklat Prajabatan Golongan I ",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "3",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "112",
+        "pId": "11",
+        "name": "Diklat Prajabatan Golongan II ",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "3",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "113",
+        "pId": "11",
+        "name": "Diklat Prajabatan Golongan III ",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "3",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "12",
+        "pId": "1",
+        "name": "Diklat Dalam Jabatan",
+        "url": null,
+        "open": "true",
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "121",
+        "pId": "12",
+        "name": "Diklat Kepemimpinan",
+        "url": null,
+        "open": "true",
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1211",
+        "pId": "121",
+        "name": "Diklat PIM Tingkat I (SPATI/SESPANAS)",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "1",
+        "latihan_struktural_id": "5"
+    },
+    {
+        "id": "1212",
+        "pId": "121",
+        "name": "Diklat PIM Tingkat II (SPAMEN/SESPA)",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "1",
+        "latihan_struktural_id": "4"
+    },
+    {
+        "id": "1213",
+        "pId": "121",
+        "name": "Diklat PIM Tingkat III (SPAMA/SPADYA)",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "1",
+        "latihan_struktural_id": "3"
+    },
+    {
+        "id": "1214",
+        "pId": "121",
+        "name": "Diklat PIM Tingkat IV (ADUM/ADUMLA/SEPALA/SEPADA)",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "1",
+        "latihan_struktural_id": "2"
+    },
+    {
+        "id": "1215",
+        "pId": "121",
+        "name": "Diklat LEMHANAS",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122",
+        "pId": "12",
+        "name": "Diklat Fungsional",
+        "url": null,
+        "open": "true",
+        "jenis_kursus_id": "2",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122001",
+        "pId": "122",
+        "name": "Adikara siaran",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122002",
+        "pId": "122",
+        "name": "Administrator Kesehatan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122003",
+        "pId": "122",
+        "name": "Agen",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122004",
+        "pId": "122",
+        "name": "Analis APBN",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122005",
+        "pId": "122",
+        "name": "Analis Kebijakan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122006",
+        "pId": "122",
+        "name": "Analis Keimigrasian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122007",
+        "pId": "122",
+        "name": "Analis Kepegawaian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "2",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122008",
+        "pId": "122",
+        "name": "Analis Ketahanan Pangan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122009",
+        "pId": "122",
+        "name": "Analis Keuangan Pemerintah Pusat dan Daerah",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122010",
+        "pId": "122",
+        "name": "Analis Manajemen Mutu Industri",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122011",
+        "pId": "122",
+        "name": "Analis Pasar Hasil Perikanan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122012",
+        "pId": "122",
+        "name": "Analis Pasar Hasil Pertanian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122013",
+        "pId": "122",
+        "name": "Andalan Siaran",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122014",
+        "pId": "122",
+        "name": "Apoteker",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122015",
+        "pId": "122",
+        "name": "Arsiparis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122016",
+        "pId": "122",
+        "name": "Asisten Apoteker",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122017",
+        "pId": "122",
+        "name": "Asisten Pelatih Olahraga",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122018",
+        "pId": "122",
+        "name": "Assessor SDM Aparatur",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122019",
+        "pId": "122",
+        "name": "Auditor",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122020",
+        "pId": "122",
+        "name": "Auditor Kepegawaian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122021",
+        "pId": "122",
+        "name": "Bidan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122022",
+        "pId": "122",
+        "name": "Diplomat",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122023",
+        "pId": "122",
+        "name": "Dokter",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122024",
+        "pId": "122",
+        "name": "Dokter Gigi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122025",
+        "pId": "122",
+        "name": "Dokter Pendidik Klinis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122026",
+        "pId": "122",
+        "name": "Dosen",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122027",
+        "pId": "122",
+        "name": "Entomolog Kesehatan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122028",
+        "pId": "122",
+        "name": "Epidemiolog Kesehatan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122029",
+        "pId": "122",
+        "name": "Fisikawan Medis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122030",
+        "pId": "122",
+        "name": "Fisioterapis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122031",
+        "pId": "122",
+        "name": "Guru",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122032",
+        "pId": "122",
+        "name": "Inspektur Ketenagalistrikan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122033",
+        "pId": "122",
+        "name": "Inspektur Minyak dan Gas Bumi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122034",
+        "pId": "122",
+        "name": "Inspektur Tambang",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122035",
+        "pId": "122",
+        "name": "Instruktur",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122036",
+        "pId": "122",
+        "name": "Jaksa",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122037",
+        "pId": "122",
+        "name": "Kataloger",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122038",
+        "pId": "122",
+        "name": "Mediator Hubungan Industrial",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122039",
+        "pId": "122",
+        "name": "Medik Veteriner",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122040",
+        "pId": "122",
+        "name": "Nutrisionis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122041",
+        "pId": "122",
+        "name": "Okupasi Terapis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122042",
+        "pId": "122",
+        "name": "Operator Transmisi Sandi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122043",
+        "pId": "122",
+        "name": "Ortosis Prostetis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122044",
+        "pId": "122",
+        "name": "Pamong Belajar",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122045",
+        "pId": "122",
+        "name": "Pamong Budaya",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122046",
+        "pId": "122",
+        "name": "Paramedik Veteriner",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122047",
+        "pId": "122",
+        "name": "Pegawas Mutu Hasil Pertanian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122048",
+        "pId": "122",
+        "name": "Pekerja Sosial",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122049",
+        "pId": "122",
+        "name": "Pelatih Olahraga",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122050",
+        "pId": "122",
+        "name": "Pelelang",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122051",
+        "pId": "122",
+        "name": "Pembimbing Kesehatan Kerja",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122052",
+        "pId": "122",
+        "name": "Pembina Jasa Konstruksi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122053",
+        "pId": "122",
+        "name": "Pemeriksa",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122054",
+        "pId": "122",
+        "name": "Pemeriksa Bea dan Cukai",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122055",
+        "pId": "122",
+        "name": "Pemeriksa Desain Industri",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122056",
+        "pId": "122",
+        "name": "Pemeriksa Keimigrasian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122057",
+        "pId": "122",
+        "name": "Pemeriksa Merek",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122058",
+        "pId": "122",
+        "name": "Pemeriksa Pajak",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122059",
+        "pId": "122",
+        "name": "Pemeriksa Paten",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122060",
+        "pId": "122",
+        "name": "Pemeriksa Perlindungan Varietas Tanaman",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122061",
+        "pId": "122",
+        "name": "Penata Ruang",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122062",
+        "pId": "122",
+        "name": "Peneliti",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122063",
+        "pId": "122",
+        "name": "Penera",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122064",
+        "pId": "122",
+        "name": "Penerjemah",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122065",
+        "pId": "122",
+        "name": "Pengadaan Barang/Jasa",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122066",
+        "pId": "122",
+        "name": "Pengamat Gunung Api",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122067",
+        "pId": "122",
+        "name": "Pengamat Meteorologi dan Geofisika",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122068",
+        "pId": "122",
+        "name": "Pengamat Tera",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122069",
+        "pId": "122",
+        "name": "Pengantar Kerja",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122070",
+        "pId": "122",
+        "name": "Pengawas Benih Tanaman",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122071",
+        "pId": "122",
+        "name": "Pengawas Bibit Ternak",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122072",
+        "pId": "122",
+        "name": "Pengawas Farmasi dan Makanan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122073",
+        "pId": "122",
+        "name": "Pengawas Kemetrologian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122074",
+        "pId": "122",
+        "name": "Pengawas Keselamatan Pelayaran",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122075",
+        "pId": "122",
+        "name": "Pengawas Ketenagakerjaan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122076",
+        "pId": "122",
+        "name": "Pengawas Lingkungan Hidup",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122077",
+        "pId": "122",
+        "name": "Pengawas Mutu Pakan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122078",
+        "pId": "122",
+        "name": "Pengawas Penyelenggaraan Urusan Pemerintahan di Daerah",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122079",
+        "pId": "122",
+        "name": "Pengawas Perikanan (penggabungan dengan Pengawas Benih Ikan )",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122080",
+        "pId": "122",
+        "name": "Pengawas Radiasi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122081",
+        "pId": "122",
+        "name": "Pengawas Sekolah",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122082",
+        "pId": "122",
+        "name": "Pengelola Ekosistem Laut dan Pesisir",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122083",
+        "pId": "122",
+        "name": "Pengembangan Teknologi Pembelajaran",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122084",
+        "pId": "122",
+        "name": "Pengendali Dampak Lingkungan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122085",
+        "pId": "122",
+        "name": "Pengendali Ekosistem Hutan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122086",
+        "pId": "122",
+        "name": "Pengendali Frekuensi Radio",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122087",
+        "pId": "122",
+        "name": "Pengendali Hama dan Penyakit Ikan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122088",
+        "pId": "122",
+        "name": "Pengendali Organisme Penggangu Tumbuhan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122089",
+        "pId": "122",
+        "name": "Penggerak Swadaya Masyarakat",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122090",
+        "pId": "122",
+        "name": "Penghulu",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122091",
+        "pId": "122",
+        "name": "Penguji Kendaraan Bermotor",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122092",
+        "pId": "122",
+        "name": "Penguji Keselamatan dan Kesehatan Kerja",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122093",
+        "pId": "122",
+        "name": "Penguji Mutu Barang",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122094",
+        "pId": "122",
+        "name": "Penilai Pajak Bumi dan Bangunan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122095",
+        "pId": "122",
+        "name": "Penilik",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122096",
+        "pId": "122",
+        "name": "Penyelidik Bumi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122097",
+        "pId": "122",
+        "name": "Penyuluh Agama",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122098",
+        "pId": "122",
+        "name": "Penyuluh Hukum",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122099",
+        "pId": "122",
+        "name": "Penyuluh Kehutanan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122100",
+        "pId": "122",
+        "name": "Penyuluh Keluarga Berencana",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122101",
+        "pId": "122",
+        "name": "Penyuluh Kesehatan Masyarakat",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122102",
+        "pId": "122",
+        "name": "Penyuluh Narkoba",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122103",
+        "pId": "122",
+        "name": "Penyuluh Pajak",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122104",
+        "pId": "122",
+        "name": "Penyuluh Perikanan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122105",
+        "pId": "122",
+        "name": "Penyuluh Perindustrian dan Perdagangan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122106",
+        "pId": "122",
+        "name": "Penyuluh Pertanian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122107",
+        "pId": "122",
+        "name": "Penyuluh Sosial",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122108",
+        "pId": "122",
+        "name": "Perancang Peraturan Perundang - undangan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122109",
+        "pId": "122",
+        "name": "Perawat",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122110",
+        "pId": "122",
+        "name": "Perawat Gigi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122111",
+        "pId": "122",
+        "name": "Perekam Medis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122112",
+        "pId": "122",
+        "name": "Perekayasa",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122113",
+        "pId": "122",
+        "name": "Perencana",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122114",
+        "pId": "122",
+        "name": "Polisi Kehutanan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122115",
+        "pId": "122",
+        "name": "Polisi Pamong Praja",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122116",
+        "pId": "122",
+        "name": "Pranata Hubungan Masyarakat",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122117",
+        "pId": "122",
+        "name": "Pranata Komputer",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122118",
+        "pId": "122",
+        "name": "Pranata Laboratorium Kemetrologian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122119",
+        "pId": "122",
+        "name": "Pranata Laboratorium Kesehatan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122120",
+        "pId": "122",
+        "name": "Pranata Laboratorium Pendidilkan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122121",
+        "pId": "122",
+        "name": "Pranata Nuklir",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122122",
+        "pId": "122",
+        "name": "Psikolog Klinis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122123",
+        "pId": "122",
+        "name": "Pustakawan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122124",
+        "pId": "122",
+        "name": "Radiografer",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122125",
+        "pId": "122",
+        "name": "Refraksionis Optisien",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122126",
+        "pId": "122",
+        "name": "Rescuer",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122127",
+        "pId": "122",
+        "name": "Sandiman",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122128",
+        "pId": "122",
+        "name": "Sanitarian",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122129",
+        "pId": "122",
+        "name": "Statistisi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122130",
+        "pId": "122",
+        "name": "Surveyor Pemetaan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122131",
+        "pId": "122",
+        "name": "Teknik Jalan dan Jembatan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122132",
+        "pId": "122",
+        "name": "Teknik Pengairan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122133",
+        "pId": "122",
+        "name": "Teknik Penyehatan Lingkungan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122134",
+        "pId": "122",
+        "name": "Teknik Tata Bangunan dan Perumahan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122135",
+        "pId": "122",
+        "name": "Teknisi Elekromedis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122136",
+        "pId": "122",
+        "name": "Teknisi Gigi",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122137",
+        "pId": "122",
+        "name": "Teknisi Penelitian dan Perekayasaan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122138",
+        "pId": "122",
+        "name": "Teknisi Penerbangan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122139",
+        "pId": "122",
+        "name": "Teknisi Siran",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122140",
+        "pId": "122",
+        "name": "Terapis Transfusi Darah",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122141",
+        "pId": "122",
+        "name": "Terapis Wicara",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "122142",
+        "pId": "122",
+        "name": "Widyaiswara",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "123",
+        "pId": "12",
+        "name": "Diklat Teknis",
+        "url": null,
+        "open": "true",
+        "jenis_kursus_id": "3",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1231",
+        "pId": "123",
+        "name": "Diklat",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1232",
+        "pId": "123",
+        "name": "Seminar",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "9",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1233",
+        "pId": "123",
+        "name": "Workshop",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "4",
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1234",
+        "pId": "123",
+        "name": "Bimbingan Teknis",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1235",
+        "pId": "123",
+        "name": "Pelatihan",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": null,
+        "latihan_struktural_id": null
+    },
+    {
+        "id": "1236",
+        "pId": "123",
+        "name": "In House Training",
+        "url": null,
+        "open": null,
+        "jenis_kursus_id": "4",
+        "latihan_struktural_id": null
+    }
+]
