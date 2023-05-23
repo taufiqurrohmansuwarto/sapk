@@ -7,6 +7,8 @@ import PegawaiLayout from "../../../src/components/PegawaiLayout";
 import moment from "moment";
 import refDiklat from "../../../src/utils/diklat.json";
 import { useState } from "react";
+import { addHourToDate } from "src/utils/util";
+import { compact } from "lodash";
 
 const kursus = [
     {
@@ -137,10 +139,7 @@ const RiwayatDiklatMaster = () => {
 
     const handleCloseModal = () => setOpen(false);
 
-    const handleTransferDiklat = (data) => {
-        setOpen(true);
-        setCurrentDiklat(data);
-    };
+    const [selection, setSelection] = useState([]);
 
     const columns = [
         {
@@ -186,15 +185,6 @@ const RiwayatDiklatMaster = () => {
             title: "Tanggal Selesai",
             dataIndex: "tanggal_selesai",
             key: "tanggal_selesai"
-        },
-        {
-            title: "Aksi",
-            key: "aksi",
-            render: (_, record) => (
-                <Button onClick={() => handleTransferDiklat(record)}>
-                    Transfer
-                </Button>
-            )
         }
     ];
 
@@ -207,13 +197,101 @@ const RiwayatDiklatMaster = () => {
             refetchOnWindowFocus: false
         }
     );
+
+    const handleTransfer = () => {
+        const result = selection.map((item) => {
+            const currentFilter = refDiklat.find(
+                (diklat) => diklat.id === item.jenis_diklat_id
+            );
+
+            if (
+                currentFilter?.latihan_struktural_id ||
+                currentFilter?.jenis_kursus_id
+            ) {
+                let propertyPost = {};
+                let postTo = null;
+
+                if (
+                    currentFilter?.latihan_struktural_id &&
+                    currentFilter?.jenis_kursus_id
+                ) {
+                    postTo = "diklat";
+                    const dataPost = {
+                        institusiPenyelenggara: item?.penyelenggara,
+                        jenisKompetensi: item?.nama_diklat,
+                        jumlahJam: item?.jml,
+                        latihanStrukturalId:
+                            currentFilter?.latihan_struktural_id,
+                        nomor: item?.no_sertifikat,
+                        pnsOrangId: "",
+                        tahun: renderTahun(item?.tgl_sertifikat),
+                        tanggal: renderTanggal(item?.tgl_sertifikat),
+                        tanggalSelesai: addHourToDate(
+                            item?.tgl_sertifikat,
+                            item?.jml
+                        )
+                    };
+
+                    propertyPost = {
+                        ...dataPost,
+                        post_to: postTo
+                    };
+                } else {
+                    postTo = "kursus";
+                    const dataPost = {
+                        instansiId: "",
+                        institusiPenyelenggara: item?.penyelenggara,
+                        jenisDiklatId: currentFilter?.jenis_kursus_id,
+                        jenisKursus: item?.nama_diklat,
+                        jenisKursuSertipikat: item?.no_sertifikat,
+                        jumlahJam: item?.jml,
+                        lokasiId: "",
+                        namaKursus: item?.nama_diklat,
+                        nomorSertipikat: item?.no_sertifikat,
+                        tahunKursus: renderTahun(item?.tgl_sertifikat),
+                        tanggalKursus: renderTanggal(item?.tgl_sertifikat),
+                        tanggalSelesai: addHourToDate(
+                            item?.tgl_sertifikat,
+                            item?.jml
+                        )
+                    };
+
+                    propertyPost = {
+                        ...dataPost,
+                        post_to: postTo
+                    };
+                }
+
+                return propertyPost;
+            } else {
+                return;
+            }
+        });
+
+        // using lodash to check falsy value in array
+        const hasil = compact(result);
+
+        alert(JSON.stringify(hasil));
+    };
+
     return (
         <div>
+            {JSON.stringify(selection)}
+            {selection.length > 0 && (
+                <Button onClick={handleTransfer}>Transfer</Button>
+            )}
             <Table
                 loading={isLoading}
                 pagination={false}
                 dataSource={data}
+                rowKey={(row) => row?.diklat_id}
                 columns={columns}
+                rowSelection={{
+                    type: "checkbox",
+                    onChange: (_, selectedRows) => {
+                        setSelection(selectedRows);
+                    }
+                }}
             />
             <TransferModal
                 open={open}

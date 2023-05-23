@@ -312,3 +312,11 @@ export const verifyLastPositionsDate = (positions, inputDate) => {
         return isAfter;
     }
 };
+
+// create function to add hour to date
+export const addHourToDate = (date, hour = 0) => {
+    const dateMoment = moment(date);
+    const newDate = dateMoment.add(parseInt(hour), "hour").format("DD-MM-YYYY");
+
+    return newDate;
+};

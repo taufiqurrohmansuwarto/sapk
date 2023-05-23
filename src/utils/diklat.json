@@ -1436,7 +1436,7 @@
         "name": "Bimbingan Teknis",
         "url": null,
         "open": null,
-        "jenis_kursus_id": null,
+        "jenis_kursus_id": "8",
         "latihan_struktural_id": null
     },
     {
