@@ -363,6 +363,52 @@ export const saveJabatan = async (req, res) => {
     }
 };
 
+export const saveDiklat = async (req, res) => {
+    try {
+        const body = req?.body;
+        const { fetcher } = req;
+
+        const postToDiklat = body?.filter((item) => item?.post_to === "diklat");
+        const postToKursus = body?.filter((item) => item?.post_to === "kursus");
+
+        if (postToDiklat?.length) {
+            await Promise.allSettled(
+                postToDiklat?.map(async (item) => {
+                    await fetcher.post(
+                        `/siasn-ws/proxy/pns/rw-diklat/${req?.query?.nip}`,
+                        item
+                    );
+                })
+            );
+            res.json({
+                message: "success",
+                code: 200
+            });
+        } else if (postToKursus?.length) {
+            await Promise.allSettled(
+                postToKursus?.map(async (item) => {
+                    await fetcher.post(
+                        `/siasn-ws/proxy/pns/rw-kursus/${req?.query?.nip}`,
+                        item
+                    );
+                })
+            );
+            res.json({
+                message: "success",
+                code: 200
+            });
+        } else {
+            res.json({
+                message: "success",
+                code: 200
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};
+
 // daftar riwayat diklat di siasn
 export const riwayatDiklatMaster = async (req, res) => {
     try {

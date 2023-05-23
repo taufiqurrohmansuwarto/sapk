@@ -330,3 +330,10 @@ export const riwayatDiklatMaster = (nip) => {
         .get(`/data-master/${nip}/rw-diklat`)
         .then((res) => res?.data);
 };
+
+export const saveDiklatService = ({ nip, data }) => {
+    console.log(data);
+    return fetcher
+        .post(`/siasn/${nip}/rw-diklat`, data)
+        .then((res) => res?.data);
+};

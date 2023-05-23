@@ -1,6 +1,10 @@
-import { riwayatDiklatMaster, rwDiklat } from "@/services/fasilitator.service";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Divider, Form, Modal, Table, Transfer } from "antd";
+import {
+    riwayatDiklatMaster,
+    rwDiklat,
+    saveDiklatService
+} from "@/services/fasilitator.service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button, Divider, Form, Modal, Table, Transfer, message } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../../../src/components/Layout";
 import PegawaiLayout from "../../../src/components/PegawaiLayout";
@@ -122,24 +126,25 @@ const renderTanggal = (date) => {
     return moment(date).format("DD-MM-YYYY");
 };
 
-const TransferModal = ({ open, onCancel, currentDiklat }) => {
-    const queryClient = useQueryClient();
-    const [form] = Form.useForm();
-
-    return (
-        <Modal visible={open} onCancel={onCancel}>
-            <Form form={form}></Form>
-        </Modal>
-    );
-};
-
 const RiwayatDiklatMaster = () => {
-    const [open, setOpen] = useState(false);
-    const [currentDiklat, setCurrentDiklat] = useState(null);
+    const router = useRouter();
+    const { id: nip } = router?.query;
 
-    const handleCloseModal = () => setOpen(false);
-
+    const queryClient = useQueryClient();
     const [selection, setSelection] = useState([]);
+
+    const { mutate: saveDiklat, isLoading: isLoadingPostDiklat } = useMutation(
+        (data) => saveDiklatService(data),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries(["riwayat-diklat", nip]);
+                message.success("Berhasil menyimpan data");
+            },
+            onError: (error) => {
+                message.error(error?.response?.data?.message);
+            }
+        }
+    );
 
     const columns = [
         {
@@ -155,9 +160,7 @@ const RiwayatDiklatMaster = () => {
         {
             title: "Tahun",
             key: "tahun",
-            render: (_, record) => (
-                <span>{renderTahun(record?.tgl_sertifikat)}</span>
-            )
+            dataIndex: "tahun"
         },
         {
             title: "Jenis Diklat",
@@ -176,10 +179,11 @@ const RiwayatDiklatMaster = () => {
         },
         {
             title: "Tanggal Kursus",
-            key: "tanggal_kursus",
-            render: (_, record) => (
-                <span>{renderTanggal(record?.tgl_sertifikat)}</span>
-            )
+            key: "tanggal_mulai",
+            dataIndex: "tanggal_mulai"
+            // render: (_, record) => (
+            //     <span>{renderTanggal(record?.tgl_sertifikat)}</span>
+            // )
         },
         {
             title: "Tanggal Selesai",
@@ -188,8 +192,6 @@ const RiwayatDiklatMaster = () => {
         }
     ];
 
-    const router = useRouter();
-    const { id: nip } = router?.query;
     const { data, isLoading } = useQuery(
         ["riwayat-diklat-master", nip],
         () => riwayatDiklatMaster(nip),
@@ -224,7 +226,7 @@ const RiwayatDiklatMaster = () => {
                             currentFilter?.latihan_struktural_id,
                         nomor: item?.no_sertifikat,
                         pnsOrangId: "",
-                        tahun: renderTahun(item?.tgl_sertifikat),
+                        tahun: item?.tahun,
                         tanggal: renderTanggal(item?.tgl_sertifikat),
                         tanggalSelesai: addHourToDate(
                             item?.tgl_sertifikat,
@@ -248,7 +250,7 @@ const RiwayatDiklatMaster = () => {
                         lokasiId: "",
                         namaKursus: item?.nama_diklat,
                         nomorSertipikat: item?.no_sertifikat,
-                        tahunKursus: renderTahun(item?.tgl_sertifikat),
+                        tahunKursus: item?.tahun,
                         tanggalKursus: renderTanggal(item?.tgl_sertifikat),
                         tanggalSelesai: addHourToDate(
                             item?.tgl_sertifikat,
@@ -264,21 +266,26 @@ const RiwayatDiklatMaster = () => {
 
                 return propertyPost;
             } else {
-                return;
             }
         });
 
         // using lodash to check falsy value in array
         const hasil = compact(result);
 
-        alert(JSON.stringify(hasil));
+        saveDiklat({ nip, data: hasil });
     };
 
     return (
         <div>
-            {JSON.stringify(selection)}
+            {/* {JSON.stringify(selection)} */}
             {selection.length > 0 && (
-                <Button onClick={handleTransfer}>Transfer</Button>
+                <Button
+                    loading={isLoadingPostDiklat}
+                    disabled={isLoadingPostDiklat}
+                    onClick={handleTransfer}
+                >
+                    Transfer
+                </Button>
             )}
             <Table
                 loading={isLoading}
@@ -292,11 +299,6 @@ const RiwayatDiklatMaster = () => {
                         setSelection(selectedRows);
                     }
                 }}
-            />
-            <TransferModal
-                open={open}
-                currentDiklat={currentDiklat}
-                onCancel={handleCloseModal}
             />
         </div>
     );
@@ -370,11 +372,6 @@ function RiwayatDiklat() {
         </PegawaiLayout>
     );
 }
-
-RiwayatDiklat.Auth = {
-    roles: ["FASILITATOR", "ADMIN"],
-    groups: ["MASTER"]
-};
 
 RiwayatDiklat.getLayout = function getLayout(page) {
     return <Layout title="Riwayat Diklat">{page}</Layout>;
