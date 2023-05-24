@@ -373,6 +373,11 @@ function RiwayatDiklat() {
     );
 }
 
+RiwayatDiklat.Auth = {
+    roles: ["FASILITATOR", "ADMIN"],
+    groups: ["MASTER"]
+};
+
 RiwayatDiklat.getLayout = function getLayout(page) {
     return <Layout title="Riwayat Diklat">{page}</Layout>;
 };
