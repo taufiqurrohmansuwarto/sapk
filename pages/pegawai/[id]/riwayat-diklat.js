@@ -227,7 +227,7 @@ const RiwayatDiklatMaster = () => {
                         nomor: item?.no_sertifikat,
                         pnsOrangId: "",
                         tahun: item?.tahun,
-                        tanggal: renderTanggal(item?.tgl_mulai),
+                        tanggal: renderTanggal(item?.tanggal),
                         tanggalSelesai: addHourToDate(
                             item?.tgl_mulai,
                             item?.jml
@@ -251,7 +251,7 @@ const RiwayatDiklatMaster = () => {
                         namaKursus: item?.nama_diklat,
                         nomorSertipikat: item?.no_sertifikat,
                         tahunKursus: item?.tahun,
-                        tanggalKursus: renderTanggal(item?.tgl_mulai),
+                        tanggalKursus: item?.tanggal_mulai,
                         tanggalSelesai: addHourToDate(
                             item?.tgl_mulai,
                             item?.jml

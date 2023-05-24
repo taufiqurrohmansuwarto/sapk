@@ -1409,7 +1409,7 @@
         "name": "Diklat",
         "url": null,
         "open": null,
-        "jenis_kursus_id": null,
+        "jenis_kursus_id": "3",
         "latihan_struktural_id": null
     },
     {
