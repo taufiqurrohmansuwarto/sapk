@@ -227,9 +227,9 @@ const RiwayatDiklatMaster = () => {
                         nomor: item?.no_sertifikat,
                         pnsOrangId: "",
                         tahun: item?.tahun,
-                        tanggal: renderTanggal(item?.tgl_sertifikat),
+                        tanggal: renderTanggal(item?.tgl_mulai),
                         tanggalSelesai: addHourToDate(
-                            item?.tgl_sertifikat,
+                            item?.tgl_mulai,
                             item?.jml
                         )
                     };
@@ -251,9 +251,9 @@ const RiwayatDiklatMaster = () => {
                         namaKursus: item?.nama_diklat,
                         nomorSertipikat: item?.no_sertifikat,
                         tahunKursus: item?.tahun,
-                        tanggalKursus: renderTanggal(item?.tgl_sertifikat),
+                        tanggalKursus: renderTanggal(item?.tgl_mulai),
                         tanggalSelesai: addHourToDate(
-                            item?.tgl_sertifikat,
+                            item?.tgl_mulai,
                             item?.jml
                         )
                     };
@@ -271,8 +271,9 @@ const RiwayatDiklatMaster = () => {
 
         // using lodash to check falsy value in array
         const hasil = compact(result);
+        const dataSend = { nip, data: hasil };
 
-        saveDiklat({ nip, data: hasil });
+        saveDiklat(dataSend);
     };
 
     return (
