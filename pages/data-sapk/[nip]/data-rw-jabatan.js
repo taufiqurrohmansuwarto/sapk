@@ -453,7 +453,7 @@ const DialogFormMaster = ({
                 layout="vertical"
             >
                 <Form.Item
-                    rules={[{ required: true }]}
+                    rules={[{ required: true, message: "Tidak boleh kosong" }]}
                     name="jenis_jabatan"
                     label={`Jenis Jabatan - (${userData?.jenis_jabatan})`}
                 >
@@ -506,14 +506,24 @@ const DialogFormMaster = ({
                     }
                 </Form.Item>
                 <Form.Item
-                    rules={[{ required: true }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "'Nomer SK Tidak boleh kosong"
+                        }
+                    ]}
                     name="nomor_sk"
                     label="Nomor SK"
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    rules={[{ required: true }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "TMT Jabatan Tidak boleh kosong"
+                        }
+                    ]}
                     name="tmt_jabatan"
                     label="TMT Jabatan"
                 >
@@ -527,7 +537,12 @@ const DialogFormMaster = ({
                     <DatePicker format={format} />
                 </Form.Item>
                 <Form.Item
-                    rules={[{ required: true }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Tanggal SK Tidak boleh kosong"
+                        }
+                    ]}
                     name="tgl_sk"
                     label="Tanggal SK"
                 >
