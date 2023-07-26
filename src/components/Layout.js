@@ -97,6 +97,11 @@ const changeRoutes = (user) => {
                 icon: <DatabaseOutlined />
             },
             {
+                path: "/pangkat",
+                name: "Pangkat",
+                icon: <UserOutlined />
+            },
+            {
                 path: "/data-import-personal",
                 name: " Import Personal",
                 icon: <FileExclamationOutlined />

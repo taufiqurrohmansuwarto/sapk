@@ -1,4 +1,5 @@
 const arrayToTree = require("array-to-tree");
+const moment = require("moment");
 
 const getTreeRef = async (req, res) => {
     try {
@@ -40,7 +41,7 @@ const getSkp2022 = async (req, res) => {
         const { siasnRequest: request } = req;
         const { nip } = req?.query;
         const result = await request.get(`/pns/rw-skp22/${nip}`);
-        res.json(result?.data);
+        res.json(result?.data?.data);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "error" });
@@ -63,7 +64,96 @@ const getAngkaKredit = async (req, res) => {
         const { nip } = req?.query;
 
         const result = await request.get(`/pns/rw-angkakredit/${nip}`);
+        res.json(result?.data?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const daftarKenaikanPangkat = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+
+        const periode = req?.query?.periode || moment().format("YYYY-MM-DD");
+
+        const result = await request.get(
+            `/pns/list-kp-instansi?periode=${periode}`
+        );
+
+        res.json(result?.data?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const getDiklat = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+        const { nip } = req?.query;
+
+        const result = await request.get(`/pns/rw-diklat/${nip}`);
         res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const getDataUtamPns = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+        const { nip } = req?.query;
+        const result = await request.get(`/pns/data-utama/${nip}`);
+        res.json(result?.data?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const downloadDokumen = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+        const { filePath } = req?.query;
+        const result = await request.get(`/download-dok?filePath=${filePath}`, {
+            responseType: "arrayBuffer"
+        });
+
+        res.writeHead(200, {
+            "Content-Type": "application/pdf",
+            "Content-Length": result?.data?.length
+        });
+
+        res.end(Buffer.from(result?.data, "binary"));
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const getHukdis = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+        const { nip } = req?.query;
+
+        const result = await request.get(`/pns/rw-hukdis/${nip}`);
+        res.json(result?.data?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const getJabatan = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+
+        const { nip } = req?.query;
+
+        const result = await request.get(`/pns/rw-jabatan/${nip}`);
+        res.json(result?.data?.data);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "error" });
@@ -74,5 +164,11 @@ module.exports = {
     getTreeRef,
     getSkp,
     getSkp2022,
-    getAngkaKredit
+    getAngkaKredit,
+    daftarKenaikanPangkat,
+    getDiklat,
+    getDataUtamPns,
+    downloadDokumen,
+    getHukdis,
+    getJabatan
 };
