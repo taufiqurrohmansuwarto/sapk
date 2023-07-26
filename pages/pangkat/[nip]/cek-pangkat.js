@@ -34,16 +34,16 @@ const Index = () => {
                 <div>{JSON.stringify(data)}</div>
                 <Tabs defaultActiveKey="1">
                     <Tabs.TabPane tab="Angka Kredit" key="1">
-                        <AngkaKredit nip={nip} />
+                        <AngkaKredit nip={nip} id={data?.id} />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Hukuman Disiplin" key="2">
-                        <Hukdis nip={nip} />
+                        <Hukdis nip={nip} id={data?.id} />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Jabatan" key="3">
-                        <Jabatan nip={nip} />
+                        <Jabatan nip={nip} id={data?.id} />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="SKP 22" key="4">
-                        <Skp22 nip={nip} />
+                        <Skp22 nip={nip} id={data?.id} />
                     </Tabs.TabPane>
                 </Tabs>
             </Card>

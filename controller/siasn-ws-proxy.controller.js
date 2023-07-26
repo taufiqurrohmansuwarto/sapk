@@ -423,3 +423,45 @@ export const riwayatDiklatMaster = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error", code: 500 });
     }
 };
+
+export const riwayatSkpMaster = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(
+            `/master-ws/operator/employees/${nip}/rw-skp`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};
+
+export const riwayatHukdisMaster = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(
+            `/master-ws/operator/employees/${nip}/rw-hukdis`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};
+
+export const riwayatAngkakreditMaster = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(
+            `/master-ws/operator/employees/${nip}/rw-angkakredit`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", code: 500 });
+    }
+};

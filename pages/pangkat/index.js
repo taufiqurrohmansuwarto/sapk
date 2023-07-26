@@ -37,15 +37,9 @@ const Index = () => {
         () => listKenaikanPangkat(periode),
         {
             refetchOnWindowFocus: false,
-            enabled: !!periode,
-            keepPreviousData: true
+            enabled: !!periode
         }
     );
-
-    const download = async (path) => {
-        const result = await downloadDokumen(path);
-        FileSaver.saveAs(result, path);
-    };
 
     const columns = [
         {

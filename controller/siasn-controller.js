@@ -1,4 +1,5 @@
 const arrayToTree = require("array-to-tree");
+const { default: axios } = require("axios");
 const moment = require("moment");
 
 const getTreeRef = async (req, res) => {
@@ -8,6 +9,7 @@ const getTreeRef = async (req, res) => {
         const data = result?.data?.data;
         const dataFlat = data?.map((d) => ({
             id: d?.Id,
+            key: d?.Id,
             parentId: d?.DiatasanId,
             name: d?.NamaUnor,
             value: d?.Id,
@@ -160,6 +162,32 @@ const getJabatan = async (req, res) => {
     }
 };
 
+const getRefJfu = async (req, res) => {
+    try {
+        const { jabatan } = req?.query;
+        const result = await axios.get(
+            `https://siasn.bkd.jatimprov.go.id/pemprov-api/vendor/reference/ref-jfu/${jabatan}`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const getRefJft = async (req, res) => {
+    try {
+        const { jabatan } = req?.query;
+        const result = await axios.get(
+            `https://siasn.bkd.jatimprov.go.id/pemprov-api/vendor/reference/ref-jft/${jabatan}`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
 module.exports = {
     getTreeRef,
     getSkp,
@@ -170,5 +198,7 @@ module.exports = {
     getDataUtamPns,
     downloadDokumen,
     getHukdis,
-    getJabatan
+    getJabatan,
+    getRefJfu,
+    getRefJft
 };

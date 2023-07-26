@@ -331,6 +331,22 @@ export const riwayatDiklatMaster = (nip) => {
         .then((res) => res?.data);
 };
 
+export const riwayatSkpMaster = (nip) => {
+    return fetcher.get(`/data-master/${nip}/rw-skp`).then((res) => res?.data);
+};
+
+export const riwayatAngkakreditMaster = (nip) => {
+    return fetcher
+        .get(`/data-master/${nip}/rw-angkakredit`)
+        .then((res) => res?.data);
+};
+
+export const riwayatHukdis = (nip) => {
+    return fetcher
+        .get(`/data-master/${nip}/rw-hukdis`)
+        .then((res) => res?.data);
+};
+
 export const saveDiklatService = ({ nip, data }) => {
     console.log(data);
     return fetcher

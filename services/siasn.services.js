@@ -38,3 +38,15 @@ export const dataJabatan = (nip) => {
 export const dataSkp22 = (nip) => {
     return fetcher.get(`/pns/${nip}/rw-skp22`).then((res) => res?.data);
 };
+
+export const referensiUnor = () => {
+    return fetcher.get("ref/unor").then((res) => res?.data);
+};
+
+export const referensiJfu = (jabatan) => {
+    return fetcher.get(`ref/jfu?jabatan=${jabatan}`).then((res) => res?.data);
+};
+
+export const referensiJft = (jabatan) => {
+    return fetcher.get(`ref/jft?jabatan=${jabatan}`).then((res) => res?.data);
+};
