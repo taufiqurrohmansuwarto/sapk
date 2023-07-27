@@ -13,7 +13,8 @@ const getTreeRef = async (req, res) => {
             parentId: d?.DiatasanId,
             name: d?.NamaUnor,
             value: d?.Id,
-            label: d?.NamaUnor
+            label: d?.NamaUnor,
+            title: d?.NamaUnor
         }));
 
         const tree = arrayToTree(dataFlat, {

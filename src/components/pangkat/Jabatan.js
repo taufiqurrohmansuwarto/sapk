@@ -83,6 +83,7 @@ function Jabatan({ nip }) {
 
     return (
         <div>
+            {JSON.stringify(data)}
             <Table
                 columns={columns}
                 dataSource={data}

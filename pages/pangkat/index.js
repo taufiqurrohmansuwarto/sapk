@@ -11,8 +11,9 @@ import Layout from "../../src/components/Layout";
 import PageContainer from "../../src/components/PageContainer";
 import { Stack } from "@mantine/core";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-const dateFormat = "YYYY-MM-DD";
+const dateFormat = "YYYY-MM";
 
 const Index = () => {
     const [periode, setPeriode] = useState(moment().format(dateFormat));
@@ -34,7 +35,10 @@ const Index = () => {
 
     const { data, isLoading } = useQuery(
         ["kenaikan-pangkat", periode],
-        () => listKenaikanPangkat(periode),
+        () => {
+            const tanggal = moment(periode, dateFormat).format("YYYY-MM-DD");
+            return listKenaikanPangkat(tanggal);
+        },
         {
             refetchOnWindowFocus: false,
             enabled: !!periode
@@ -83,6 +87,17 @@ const Index = () => {
                     </>
                 );
             }
+        },
+        {
+            title: "Lihat Detail",
+            key: "detail",
+            render: (_, record) => {
+                return (
+                    <Link href={`/pangkat/${record?.nipBaru}/cek-pangkat`}>
+                        Detail
+                    </Link>
+                );
+            }
         }
     ];
 
@@ -98,6 +113,7 @@ const Index = () => {
                     <DatePicker
                         value={moment(periode, dateFormat)}
                         onChange={onChange}
+                        picker="month"
                     />
                 </Stack>
                 <Divider />
