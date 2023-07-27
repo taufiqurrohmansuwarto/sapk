@@ -5,6 +5,7 @@ import { Stack } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Form, Input, InputNumber, Modal, Table } from "antd";
 import { useState } from "react";
+import FormCariPegawai from "./FormCariPegawai";
 
 // const data = {
 //     hasilKinerjaNilai: 0,
@@ -63,27 +64,7 @@ const FormSKP22 = ({ visible, onCancel, id, unor }) => {
                 >
                     <InputNumber />
                 </Form.Item>
-                <Form.Item name="penilaiGolongan" label="Penilai Golongan">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="penilaiJabatan" label="Penilai Jabatan">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="penilaiNama" label="Penilai Nama">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="penilaiNipNrp" label="Penilai NIP/NRP">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="penilaiUnorNama" label="Penilai Unor Nama">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="pnsDinilaiOrang" label="PNS dinilai Orang">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="statusPenilai" label="Status Penilai">
-                    <Input />
-                </Form.Item>
+                <FormCariPegawai name="penilai" />
             </Form>
         </Modal>
     );

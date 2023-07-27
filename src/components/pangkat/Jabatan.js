@@ -1,6 +1,7 @@
 import { dataJabatan } from "@/services/siasn.services";
+import { FileAddFilled, FileOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -83,8 +84,8 @@ function Jabatan({ nip }) {
 
     return (
         <div>
-            {JSON.stringify(data)}
             <Table
+                title={() => <Button icon={<FileAddFilled />}>Jabatan</Button>}
                 columns={columns}
                 dataSource={data}
                 loading={isLoading}
