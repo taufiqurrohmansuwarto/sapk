@@ -1,7 +1,22 @@
 import { dataJabatan } from "@/services/siasn.services";
 import { FileAddFilled, FileOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Table } from "antd";
+import { Button, Form, Modal, Table } from "antd";
+import { useState } from "react";
+import FormUnitOrganisasi from "./FormUnitOrganisasi";
+
+const FormEntri = ({ visible, onCancel }) => {
+    const [form] = Form.useForm();
+    const handleFinish = async () => {};
+
+    return (
+        <Modal visible={visible} onCancel={onCancel}>
+            <Form form={form} onFinish={handleFinish}>
+                <FormUnitOrganisasi name="unorId" />
+            </Form>
+        </Modal>
+    );
+};
 
 const checkJenisJabatan = (data) => {
     let result = "";
@@ -52,6 +67,10 @@ const jenisJabatanSiasn = (data) => {
 };
 
 function Jabatan({ nip }) {
+    const [visible, setVisible] = useState(false);
+    const handleOpen = () => setVisible(true);
+    const handleClose = () => setVisible(false);
+
     const { data, isLoading } = useQuery(
         ["data-jabatan", nip],
         () => dataJabatan(nip),
@@ -84,8 +103,13 @@ function Jabatan({ nip }) {
 
     return (
         <div>
+            <FormEntri onCancel={handleClose} visible={visible} />
             <Table
-                title={() => <Button icon={<FileAddFilled />}>Jabatan</Button>}
+                title={() => (
+                    <Button onClick={handleOpen} icon={<FileAddFilled />}>
+                        Jabatan
+                    </Button>
+                )}
                 columns={columns}
                 dataSource={data}
                 loading={isLoading}
