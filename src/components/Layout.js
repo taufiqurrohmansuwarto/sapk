@@ -4,8 +4,8 @@ import {
     DatabaseOutlined,
     FileExclamationOutlined,
     LogoutOutlined,
+    MehOutlined,
     MoneyCollectOutlined,
-    QqOutlined,
     ReadOutlined,
     RestOutlined,
     UserOutlined
@@ -99,7 +99,7 @@ const changeRoutes = (user) => {
             {
                 path: "/pangkat",
                 name: "Pangkat",
-                icon: <UserOutlined />
+                icon: <MehOutlined />
             },
             {
                 path: "/data-import-personal",

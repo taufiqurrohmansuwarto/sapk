@@ -14,6 +14,7 @@ import {
 } from "antd";
 import { useState } from "react";
 import FormRiwayatJabatan from "./FormRiwayatJabatan";
+import { FileAddOutlined } from "@ant-design/icons";
 
 // const data = {
 //     bulanMulaiPenilaian: "string",
@@ -134,6 +135,26 @@ function AngkaKredit({ nip }) {
 
     const columns = [
         {
+            title: "File",
+            key: "path",
+            render: (_, record) => {
+                return (
+                    <>
+                        {record?.path && (
+                            <div>
+                                <a
+                                    href={`/sapk/api/fasilitator/siasn/download?file_path=${record?.path?.[879]?.dok_uri}`}
+                                    target="_blank"
+                                >
+                                    File
+                                </a>
+                            </div>
+                        )}
+                    </>
+                );
+            }
+        },
+        {
             title: "Nomor SK",
             dataIndex: "nomorSk"
         },
@@ -164,26 +185,6 @@ function AngkaKredit({ nip }) {
         {
             title: "Nama Jabatan",
             dataIndex: "namaJabatan"
-        },
-        {
-            title: "File",
-            key: "path",
-            render: (_, record) => {
-                return (
-                    <>
-                        {record?.path && (
-                            <div>
-                                <a
-                                    href={`/sapk/api/fasilitator/siasn/download?file_path=${record?.path?.[879]?.dok_uri}`}
-                                    target="_blank"
-                                >
-                                    Download
-                                </a>
-                            </div>
-                        )}
-                    </>
-                );
-            }
         }
     ];
 
@@ -222,7 +223,13 @@ function AngkaKredit({ nip }) {
             />
             <Table
                 title={() => (
-                    <Button onClick={handleVisible}>Tambah Angka Kredit</Button>
+                    <Button
+                        onClick={handleVisible}
+                        icon={<FileAddOutlined />}
+                        type="primary"
+                    >
+                        Angka Kredit
+                    </Button>
                 )}
                 columns={columns}
                 rowKey={(record) => record.id}
