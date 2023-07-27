@@ -15,3 +15,7 @@ export const rwSkp = (nip) => {
 export const rwHukdis = (nip) => {
     return fetcher.get(`/${nip}/rw-hukdis`).then((res) => res?.data);
 };
+
+export const kenaikanPangkatService = (nip) => {
+    return fetcher.get(`/${nip}/kenaikan-pangkat`).then((res) => res?.data);
+};

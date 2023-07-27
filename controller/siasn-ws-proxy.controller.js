@@ -424,6 +424,20 @@ export const riwayatDiklatMaster = async (req, res) => {
     }
 };
 
+export const kenaikanPangkat = async (req, res) => {
+    try {
+        const { fetcher } = req;
+        const { nip } = req?.query;
+        const result = await fetcher.get(
+            `/master-ws/operator/employees/${nip}/kenaikan_pangkat`
+        );
+        res.json(result?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 export const riwayatSkpMaster = async (req, res) => {
     try {
         const { fetcher } = req;
