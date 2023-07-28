@@ -130,6 +130,7 @@ const FormSKP22 = ({ visible, onCancel, nip }) => {
             width={1000}
         >
             <Upload
+                beforeUpload={() => false}
                 maxCount={1}
                 accept=".pdf"
                 onChange={handleChange}

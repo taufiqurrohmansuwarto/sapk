@@ -60,7 +60,8 @@ const FormEntri = ({ visible, onCancel, nip }) => {
                 fungsional_id,
                 fungsional_umum_id,
                 unor_id,
-                nomor_sk
+                nomor_sk,
+                jenis_jabatan
             } = await form.validateFields();
 
             let jenis_jabatan_id = jenis_jabatan === "Fungsional" ? "2" : "4";
@@ -124,7 +125,6 @@ const FormEntri = ({ visible, onCancel, nip }) => {
                     nip,
                     data
                 });
-
                 onCancel();
                 form.resetFields();
                 setFileList([]);
@@ -149,6 +149,7 @@ const FormEntri = ({ visible, onCancel, nip }) => {
         >
             <Form form={form} layout="vertical" onFinish={handleFinish}>
                 <Upload
+                    beforeUpload={() => false}
                     maxCount={1}
                     accept=".pdf"
                     onChange={handleChange}

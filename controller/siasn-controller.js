@@ -260,7 +260,8 @@ const postRiwayatJabatan = async (req, res) => {
             pnsId: id
         };
 
-        await request.post(`/jabatan/save`, data);
+        console.log(data);
+        const result = await request.post(`/jabatan/save`, data);
 
         res.json({ success: true });
     } catch (error) {

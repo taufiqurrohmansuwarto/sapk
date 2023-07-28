@@ -158,6 +158,7 @@ const FormAngkaKredit = ({ visible, onCancel, nip }) => {
         >
             <Form form={form} layout="vertical">
                 <Upload
+                    beforeUpload={() => false}
                     maxCount={1}
                     accept=".pdf"
                     onChange={handleChange}
