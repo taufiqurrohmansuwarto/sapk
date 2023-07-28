@@ -23,12 +23,17 @@ export const dataUtamaService = (nip) => {
 };
 
 export const dataHukdis = (nip) => {
-    console.log(nip);
     return fetcher.get(`/pns/${nip}/rw-hukdis`).then((res) => res?.data);
 };
 
 export const dataAngkaKredit = (nip) => {
     return fetcher.get(`/pns/${nip}/rw-angkakredit`).then((res) => res?.data);
+};
+
+export const postAngkaKreditService = ({ nip, data }) => {
+    return fetcher
+        .post(`/pns/${nip}/rw-angkakredit`, data)
+        .then((res) => res?.data);
 };
 
 // jabatan
@@ -44,6 +49,10 @@ export const postJabatan = ({ nip, data }) => {
 
 export const dataSkp22 = (nip) => {
     return fetcher.get(`/pns/${nip}/rw-skp22`).then((res) => res?.data);
+};
+
+export const postSkp22Service = ({ nip, data }) => {
+    return fetcher.post(`/pns/${nip}/rw-skp22`, data).then((res) => res?.data);
 };
 
 export const referensiUnor = () => {

@@ -93,7 +93,6 @@ const FormEntri = ({ visible, onCancel, nip }) => {
 
                 formData.append("file", currentFile);
                 formData.append("id_ref_dokumen", "872");
-
                 const hasil = await axios.post(
                     `${API_URL}/upload-dok`,
                     formData,

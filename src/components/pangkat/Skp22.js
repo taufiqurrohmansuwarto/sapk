@@ -2,16 +2,17 @@ import { rwSkp } from "@/services/master.service";
 import {
     dataSkp22,
     getTokenSIASNService,
+    postSkp22Service,
     referensiUnor
 } from "@/services/siasn.services";
 import { FileAddOutlined } from "@ant-design/icons";
 import { Stack } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Form, InputNumber, Modal, Table, Upload } from "antd";
-import { useState } from "react";
-import FormCariPegawai from "./FormCariPegawai";
+import { Button, Form, Modal, Select, Table, Upload, message } from "antd";
 import axios from "axios";
+import { useState } from "react";
 import { API_URL } from "src/utils/util";
+import FormCariPegawai from "./FormCariPegawai";
 
 // const data = {
 //     hasilKinerjaNilai: 0,
@@ -37,7 +38,7 @@ import { API_URL } from "src/utils/util";
 //     tahun: 0
 // };
 
-const FormSKP22 = ({ visible, onCancel, id, unor }) => {
+const FormSKP22 = ({ visible, onCancel, nip }) => {
     const [form] = Form.useForm();
     const [fileList, setFileList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -60,7 +61,7 @@ const FormSKP22 = ({ visible, onCancel, id, unor }) => {
     const handleFinish = async () => {
         try {
             setLoading(true);
-            const result = await form.validateFields();
+            const data = await form.validateFields();
 
             const currentFile = fileList[0]?.originFileObj;
 
@@ -87,6 +88,29 @@ const FormSKP22 = ({ visible, onCancel, id, unor }) => {
                     }
                 );
 
+                const hasilAkhir = {
+                    ...data,
+                    path: [hasil?.data?.data]
+                };
+
+                await postSkp22Service({
+                    nip,
+                    data: hasilAkhir
+                });
+
+                message.success("Berhasil menambahkan SKP 22");
+                setFileList([]);
+                onCancel();
+                setLoading(false);
+            } else {
+                await postSkp22Service({
+                    nip,
+                    data
+                });
+
+                message.success("Berhasil menambahkan SKP 22");
+                setFileList([]);
+                onCancel();
                 setLoading(false);
             }
         } catch (error) {
@@ -114,20 +138,39 @@ const FormSKP22 = ({ visible, onCancel, id, unor }) => {
                 <Button icon={<FileAddOutlined />}>Upload</Button>
             </Upload>
             <Form layout="vertical" form={form}>
-                <Form.Item name="hasilKinerjaNilai" label="Hasil Kinerja Nilai">
-                    <InputNumber />
+                <Form.Item
+                    name="hasilKinerjaNilai"
+                    label="Hasil Kerja Nilai"
+                    required
+                >
+                    <Select>
+                        <Select.Option value="1">
+                            DIATAS EKSPETASI
+                        </Select.Option>
+                        <Select.Option value="2">
+                            SESUAI EKSPETASI
+                        </Select.Option>
+                        <Select.Option value="3">
+                            DIBAWAH EKSPETASI
+                        </Select.Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item
-                    name="kuadranKinerjaNilai"
-                    label="Kuadran Kinerja Nilai"
+                    name="perilakuKerjaNilai"
+                    label="Perilaku Kerja Nilai"
+                    required
                 >
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item
-                    name="perilakuKinerjaNilai"
-                    label="Perilaku Kinerja Nilai"
-                >
-                    <InputNumber />
+                    <Select>
+                        <Select.Option value="1">
+                            DIATAS EKSPETASI
+                        </Select.Option>
+                        <Select.Option value="2">
+                            SESUAI EKSPETASI
+                        </Select.Option>
+                        <Select.Option value="3">
+                            DIBAWAH EKSPETASI
+                        </Select.Option>
+                    </Select>
                 </Form.Item>
                 <FormCariPegawai name="penilai" />
             </Form>
@@ -237,11 +280,10 @@ function Skp22({ nip, id }) {
         <Stack>
             <FormSKP22
                 unor={tree}
-                id={id}
+                nip={nip}
                 visible={visible}
                 onCancel={handleCancel}
             />
-            {JSON.stringify(data)}
             <Table
                 title={() => (
                     <Button
@@ -262,7 +304,7 @@ function Skp22({ nip, id }) {
                 pagination={false}
                 columns={columnMaster}
                 loading={isLoadingMaster}
-                rowKey={(row) => row?.id}
+                rowKey={(row) => row?.skp_id}
                 dataSource={dataMaster}
             />
         </Stack>

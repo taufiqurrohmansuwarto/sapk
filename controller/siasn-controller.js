@@ -2,6 +2,7 @@ const arrayToTree = require("array-to-tree");
 const { default: axios } = require("axios");
 const { loginSso, loginWso2 } = require("fetcher/siasn");
 const moment = require("moment");
+const { default: siasn } = require("pages/api/test/siasn");
 
 const getTreeRef = async (req, res) => {
     try {
@@ -52,6 +53,60 @@ const getSkp2022 = async (req, res) => {
     }
 };
 
+function getKuadran(a, b) {
+    if (a === b) {
+        if (a === 1) {
+            return 1;
+        } else if (a === 2) {
+            return 2;
+        } else if (a === 3) {
+            return 5;
+        }
+    } else {
+        return Math.max(a, b);
+    }
+}
+
+const postSkp2022 = async (req, res) => {
+    try {
+        const { siasnRequest } = req;
+        const { penilain, ...body } = req?.body;
+        const { nip } = req?.query;
+
+        const dataCurrent = await siasnRequest.get(`/pns/data-utama/${nip}`);
+        const dataPenilai = await siasnRequest.get(
+            `/pns/data-utama/${body?.penilai}`
+        );
+
+        const penilai = dataPenilai?.data?.data;
+        const currentPns = dataCurrent?.data?.data;
+
+        const data = {
+            ...body,
+            hasilKinerjaNilai: parseInt(body?.hasilKinerjaNilai),
+            perilakuKerjaNilai: parseInt(body?.perilakuKerjaNilai),
+            kuadranKinerjaNilai: getKuadran(
+                parseInt(body?.hasilKinerjaNilai),
+                parseInt(body?.perilakuKerjaNilai)
+            ),
+            penilaiGolongan: penilai?.golRuangAkhirId,
+            penilaiJabatan: penilai?.jabatanNama,
+            penilaiNama: penilai?.nama,
+            penilaiNipNrp: penilai?.nipBaru,
+            penilaiUnorNama: penilai?.unorNama,
+            pnsDinilaiOrang: currentPns?.id,
+            statusPenilai: "ASN",
+            tahun: 2022
+        };
+
+        await siasnRequest.post("/skp22/save", data);
+        res.json({ code: 200 });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
 const detailSkp2022 = async (req, res) => {
     try {
         const { siasnRequest: request } = req;
@@ -69,6 +124,33 @@ const getAngkaKredit = async (req, res) => {
 
         const result = await request.get(`/pns/rw-angkakredit/${nip}`);
         res.json(result?.data?.data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
+const postAngkaKredit = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+        const { nip } = req?.query;
+        const body = req?.body;
+
+        const currentPns = await request.get(`/pns/data-utama/${nip}`);
+
+        const data = {
+            ...body,
+            pnsId: currentPns?.data?.data?.id,
+            kreditUtamaBaru: body?.kreditUtamaBaru?.toString(),
+            kreditPenunjangBaru: body?.kreditPenunjangBaru?.toString(),
+            kreditBaruTotal: body?.kreditBaruTotal?.toString()
+        };
+
+        await request.post(`/angkakredit/save`, data);
+
+        res.json({
+            code: 200
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "error" });
@@ -243,5 +325,7 @@ module.exports = {
     getRefJfu,
     getRefJft,
     getTokenSIASN,
-    postRiwayatJabatan
+    postRiwayatJabatan,
+    postSkp2022,
+    postAngkaKredit
 };

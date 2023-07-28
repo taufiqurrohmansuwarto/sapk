@@ -34,7 +34,7 @@ const FormCariPegawai = ({ name, help }) => {
                     }
                     onSearch={(value) => setNip(value)}
                 >
-                    <Select.Option key={data?.id} value={data?.id}>
+                    <Select.Option key={data?.nipBaru} value={data?.nipBaru}>
                         {data?.nama} - {data?.unorNama}
                     </Select.Option>
                 </Select>
