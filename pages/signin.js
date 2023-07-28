@@ -52,14 +52,7 @@ const SignInPages = ({ providers }) => {
                     </Space>
                 </div>
                 <Space direction="vertical" size="small">
-                    <span>&#169; 2023 BKD Provinsi Jawa Timur</span>
-                    <Link
-                        href="https://github.com/taufiqurrohmansuwarto/sapk"
-                        passHref
-                        target="_blank"
-                    >
-                        This code available on github
-                    </Link>
+                    <span>&#169; 2023 BKD Provinsi Jawa Timur | update</span>
                 </Space>
             </Col>
             <Col span={6}>

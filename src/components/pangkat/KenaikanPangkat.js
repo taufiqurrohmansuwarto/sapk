@@ -23,25 +23,28 @@ function KenaikanPangkatOktober2023({ nip }) {
         },
         {
             title: "Jenis Dokumen",
-            key: "jenis_dokumen",
-            render: (_, record) => {
-                return <div>{record?.jenis_dokumen?.nama_dokumen}</div>;
-            }
+            dataIndex: "nama"
         }
     ];
 
     return (
-        <Collapse>
-            <Collapse.Panel header="File Pangkat">
-                <Table
-                    columns={columns}
-                    dataSource={data?.file_pangkat}
-                    pagination={false}
-                    rowKey={(row) => row?.file_pangkat_id}
-                    loading={isLoading}
-                />
-            </Collapse.Panel>
-        </Collapse>
+        <>
+            {data && (
+                <Collapse>
+                    <Collapse.Panel
+                        header={`File Kenaikan Pangkat ${data?.kualifikasi?.nama_service}`}
+                    >
+                        <Table
+                            columns={columns}
+                            dataSource={data?.syarat_dokumen}
+                            pagination={false}
+                            rowKey={(row) => row?.file_pangkat_id}
+                            loading={isLoading}
+                        />
+                    </Collapse.Panel>
+                </Collapse>
+            )}
+        </>
     );
 }
 
