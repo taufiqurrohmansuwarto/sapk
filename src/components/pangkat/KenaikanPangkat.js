@@ -32,8 +32,7 @@ function KenaikanPangkatOktober2023({ nip }) {
 
     return (
         <Collapse>
-            <Collapse.Panel header="File Kenaikan Pangkat">
-                {JSON.stringify(data)}
+            <Collapse.Panel header="File Pangkat">
                 <Table
                     columns={columns}
                     dataSource={data?.file_pangkat}

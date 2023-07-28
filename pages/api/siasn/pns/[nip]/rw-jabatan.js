@@ -1,6 +1,9 @@
-import { getJabatan } from "@/controller/siasn-controller";
+import { getJabatan, postRiwayatJabatan } from "@/controller/siasn-controller";
 import siasnMiddleware from "@/middleware/siasn.middleware.js";
 import nc from "next-connect";
 const handler = nc();
 
-export default handler.use(siasnMiddleware).get(getJabatan);
+export default handler
+    .use(siasnMiddleware)
+    .get(getJabatan)
+    .post(postRiwayatJabatan);

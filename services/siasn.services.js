@@ -31,8 +31,15 @@ export const dataAngkaKredit = (nip) => {
     return fetcher.get(`/pns/${nip}/rw-angkakredit`).then((res) => res?.data);
 };
 
+// jabatan
 export const dataJabatan = (nip) => {
     return fetcher.get(`/pns/${nip}/rw-jabatan`).then((res) => res?.data);
+};
+
+export const postJabatan = ({ nip, data }) => {
+    return fetcher
+        .post(`/pns/${nip}/rw-jabatan`, data)
+        .then((res) => res?.data);
 };
 
 export const dataSkp22 = (nip) => {
@@ -49,4 +56,8 @@ export const referensiJfu = (jabatan) => {
 
 export const referensiJft = (jabatan) => {
     return fetcher.get(`ref/jft?jabatan=${jabatan}`).then((res) => res?.data);
+};
+
+export const getTokenSIASNService = () => {
+    return fetcher.get("/token").then((res) => res?.data);
 };

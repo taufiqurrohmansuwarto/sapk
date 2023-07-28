@@ -1,11 +1,17 @@
 import { rwSkp } from "@/services/master.service";
-import { dataSkp22, referensiUnor } from "@/services/siasn.services";
+import {
+    dataSkp22,
+    getTokenSIASNService,
+    referensiUnor
+} from "@/services/siasn.services";
 import { FileAddOutlined } from "@ant-design/icons";
 import { Stack } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Form, Input, InputNumber, Modal, Table } from "antd";
+import { Button, Form, InputNumber, Modal, Table, Upload } from "antd";
 import { useState } from "react";
 import FormCariPegawai from "./FormCariPegawai";
+import axios from "axios";
+import { API_URL } from "src/utils/util";
 
 // const data = {
 //     hasilKinerjaNilai: 0,
@@ -33,10 +39,60 @@ import FormCariPegawai from "./FormCariPegawai";
 
 const FormSKP22 = ({ visible, onCancel, id, unor }) => {
     const [form] = Form.useForm();
+    const [fileList, setFileList] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (info) => {
+        let fileList = [...info.fileList];
+
+        fileList = fileList.slice(-1);
+
+        fileList = fileList.map((file) => {
+            if (file.response) {
+                file.url = file.response.url;
+            }
+            return file;
+        });
+
+        setFileList(fileList);
+    };
 
     const handleFinish = async () => {
-        const result = await form.validateFields();
-        console.log(result);
+        try {
+            setLoading(true);
+            const result = await form.validateFields();
+
+            const currentFile = fileList[0]?.originFileObj;
+
+            if (currentFile) {
+                const result = await getTokenSIASNService();
+
+                const wso2 = result?.accessToken?.wso2;
+                const sso = result?.accessToken?.sso;
+
+                const formData = new FormData();
+
+                formData.append("file", currentFile);
+                formData.append("id_ref_dokumen", "873");
+
+                const hasil = await axios.post(
+                    `${API_URL}/upload-dok`,
+                    formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            Authorization: `Bearer ${wso2}`,
+                            Auth: `bearer ${sso}`
+                        }
+                    }
+                );
+
+                setLoading(false);
+            }
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
     };
 
     return (
@@ -44,10 +100,19 @@ const FormSKP22 = ({ visible, onCancel, id, unor }) => {
             title="Tambah SKP 22 SIASN"
             centered
             visible={visible}
+            confirmLoading={loading}
             onCancel={onCancel}
             onOk={handleFinish}
             width={1000}
         >
+            <Upload
+                maxCount={1}
+                accept=".pdf"
+                onChange={handleChange}
+                fileList={fileList}
+            >
+                <Button icon={<FileAddOutlined />}>Upload</Button>
+            </Upload>
             <Form layout="vertical" form={form}>
                 <Form.Item name="hasilKinerjaNilai" label="Hasil Kinerja Nilai">
                     <InputNumber />

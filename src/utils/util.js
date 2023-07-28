@@ -320,3 +320,5 @@ export const addHourToDate = (date, hour = 0) => {
 
     return newDate;
 };
+
+export const API_URL = "https://apimws.bkn.go.id:8243/apisiasn/1.0";

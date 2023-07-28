@@ -1,5 +1,6 @@
 const arrayToTree = require("array-to-tree");
 const { default: axios } = require("axios");
+const { loginSso, loginWso2 } = require("fetcher/siasn");
 const moment = require("moment");
 
 const getTreeRef = async (req, res) => {
@@ -163,6 +164,29 @@ const getJabatan = async (req, res) => {
     }
 };
 
+const postRiwayatJabatan = async (req, res) => {
+    try {
+        const { siasnRequest: request } = req;
+        const { nip } = req?.query;
+        const body = req?.body;
+
+        // cekId
+        const dataUtama = await request.get(`/pns/data-utama/${nip}`);
+        const id = dataUtama?.data?.data?.id;
+        const data = {
+            ...body,
+            pnsId: id
+        };
+
+        await request.post(`/jabatan/save`, data);
+
+        res.json({ success: true });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
 const getRefJfu = async (req, res) => {
     try {
         const { jabatan } = req?.query;
@@ -189,6 +213,22 @@ const getRefJft = async (req, res) => {
     }
 };
 
+const getTokenSIASN = async (req, res) => {
+    try {
+        const firstToken = await loginSso();
+        const secondToken = await loginWso2();
+        res.json({
+            accessToken: {
+                sso: firstToken,
+                wso2: secondToken
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "error" });
+    }
+};
+
 module.exports = {
     getTreeRef,
     getSkp,
@@ -201,5 +241,7 @@ module.exports = {
     getHukdis,
     getJabatan,
     getRefJfu,
-    getRefJft
+    getRefJft,
+    getTokenSIASN,
+    postRiwayatJabatan
 };

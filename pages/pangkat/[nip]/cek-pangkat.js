@@ -35,7 +35,7 @@ const Index = () => {
             <Card loading={isLoading}>
                 <Stack>
                     <KenaikanPangkatOktober2023 nip={nip} />
-                    <Tabs defaultActiveKey="1">
+                    <Tabs defaultActiveKey="3">
                         <Tabs.TabPane tab="Jabatan" key="3">
                             <Jabatan nip={nip} id={data?.id} />
                         </Tabs.TabPane>

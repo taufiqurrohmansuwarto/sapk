@@ -2,6 +2,7 @@ import { referensiJfu } from "@/services/siasn.services";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Form, Select, Spin } from "antd";
 
 const FormJFU = ({ name }) => {
     const [jfu, setJfu] = useState(undefined);
@@ -18,7 +19,7 @@ const FormJFU = ({ name }) => {
     return (
         <>
             <Form.Item
-                label={`Jabatan Fungsional Umum - (${help})`}
+                label={`Jabatan Fungsional Umum `}
                 rules={[{ required: true }]}
                 name={name}
                 // help={help}
