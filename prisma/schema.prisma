@@ -51,3 +51,9 @@ model data_import {
   created_at               DateTime? @default(now()) @db.Timestamp()
   tambah_riwayat_unor_saja Boolean   @default(false)
 }
+
+model skpd {
+  id   String @id
+  pId  String
+  name String
+}
